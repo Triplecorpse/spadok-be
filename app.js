@@ -2,6 +2,7 @@ const http         = require('http'),
       fs           = require('fs'),
       path         = require('path'),
       express      = require('express'),
+      app          = express(),
       contentTypes = require('./utils/content-types'),
       sysInfo      = require('./utils/sys-info'),
       env          = process.env;
