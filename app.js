@@ -16,10 +16,10 @@ let server = http.createServer(function (req, res) {
   // IMPORTANT: Your application HAS to respond to GET /health with status 200
   //            for OpenShift health monitoring
 
-  // if (url == '/health') {
-  //   res.writeHead(200);
-  //   res.end();
-  /*} else*/ if (url == '/info/gen' || url == '/info/poll') {
+  if (url == '/health') {
+    res.writeHead(200);
+    res.end();
+  } else if (url == '/info/gen' || url == '/info/poll') {
     res.setHeader('Content-Type', 'application/json');
     res.setHeader('Cache-Control', 'no-cache, no-store');
     res.end(JSON.stringify(sysInfo[url.slice(6)]()));
@@ -48,11 +48,16 @@ let server = http.createServer(function (req, res) {
 //   res.send('Hello World!');
 // });
 //
-app.get('/health', function (req, res) {
-    res.writeHead(200);
-    res.end('1');
-});
+// app.get('/health', function (req, res) {
+//     res.writeHead(200);
+//     res.end('1');
+// });
 //
+
+app.get('/health2', function (req, res) {
+    res.writeHead(200);
+    res.end('Healthy');
+});
 app.listen(env.NODE_PORT || 3000, () => {
   console.log(`Example app listening on port ${env.NODE_PORT || 3000}!`);
   console.log(`Application worker ${process.pid} started...`);
