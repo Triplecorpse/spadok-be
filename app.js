@@ -54,10 +54,10 @@ let server = http.createServer(function (req, res) {
 // });
 //
 
-app.get('/health2', function (req, res) {
-    res.writeHead(200);
-    res.end('Healthy');
-});
+// app.get('/health2', function (req, res) {
+//     res.writeHead(200);
+//     res.end('Healthy');
+// });
 app.listen(env.NODE_PORT || 3000, () => {
   console.log(`Example app listening on port ${env.NODE_PORT || 3000}!`);
   console.log(`Application worker ${process.pid} started...`);
