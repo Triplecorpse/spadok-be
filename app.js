@@ -5,8 +5,8 @@ const http         = require('http'),
       app          = express(),
       contentTypes = require('./utils/content-types'),
       sysInfo      = require('./utils/sys-info'),
-      env          = process.env,
-      mongoose     = require('mongoose');
+      env          = process.env;
+      // mongoose     = require('mongoose');
 
 // mongoose.connect(env.OPENSHIFT_MONGODB_DB_URL || 'mongodb://localhost/test');
 // var db = mongoose.connection;
