@@ -89,7 +89,12 @@ const http         = require('http'),
 // // })
 //
 app.get('/', function (req, res) {
-  res.send('Hello World!');
+  // res.send('Hello World!');
+    fs.readFile('./static/index.html', 'UTF8', (err, data) => {
+        if (err) throw err;
+        console.log(data);
+        res.send(data);
+    })
 });
 
 app.get('/health', function (req, res) {
