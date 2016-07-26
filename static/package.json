@@ -1,0 +1,26 @@
+{
+  "name": "static",
+  "version": "0.0.1",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Eldar Khaitov",
+  "license": "ISC",
+  "dependencies": {
+    "babel-plugin-transform-react-jsx": "^6.8.0",
+    "babel-preset-es2015": "^6.9.0",
+    "bower": "^1.7.9",
+    "gulp": "^3.9.1",
+    "gulp-babel": "^6.1.2",
+    "gulp-batch": "^1.0.5",
+    "gulp-concat": "^2.6.0",
+    "gulp-copy": "0.0.2",
+    "gulp-sass": "^2.3.1",
+    "gulp-sourcemaps": "^1.6.0",
+    "iso-639-1": "^1.2.1",
+    "normalize.css": "^4.2.0",
+    "run-sequence": "^1.2.1"
+  }
+}

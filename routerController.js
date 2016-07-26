@@ -1,9 +1,11 @@
 var routerController = (app) => {
     const fs = require('fs');
+    const express = require('express');
     const database = require('./databaseController.js');
 
+    app.use(express.static('static/dist'));
     app.get('/', function (req, res) {
-        fs.readFile('./static/index.html', 'UTF8', (err, data) => {
+        fs.readFile('./static/dist/index.html', 'UTF8', (err, data) => {
             if (err) throw err;
             res.send(data);
         })
@@ -15,7 +17,6 @@ var routerController = (app) => {
     });
 
     app.get('/save', function (req, res) {
-        console.log("I AM SAVE FUNCTION, READ ME!!!11");
         var promise = database().save({
             name: 'testProject',
             description: 'description of testProject',

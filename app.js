@@ -11,11 +11,8 @@ const http         = require('http'),
 
 const routes = require('./routerController.js');
 
-// database().connect();
-// database().registerShemaAndModule();
 routes(app);
 
 app.listen(env.NODE_PORT || 3000, env.NODE_IP || 'localhost', () => {
-  // console.log(`Example app listening on port ${env.NODE_PORT || 3000}!`);
   console.log(`Application worker ${process.pid} started...`);
 });

@@ -1,2 +1,4 @@
 /.idea
-/node_modulesghbr
+/node_modules
+/static
+!/static/dist
