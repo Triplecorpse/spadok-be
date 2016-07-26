@@ -14,13 +14,12 @@ var paths = {
         './bower_components/lodash/dist/lodash.core.min.js',
         './src/js/bootstrap.min.js',
         './src/config.js', './src/main.js', './src/states/**/*.js', './src/blocks/**/*.js', './src/services/**/*.js'],
-    styles: [/*'./node_modules/normalize.css/normalize.css',*/
-        './src/css/bootstrap.min.css',
+    styles: ['./src/css/bootstrap.min.css',
         './src/css/general.scss', './src/states/**/*.scss', './src/blocks/**/*.scss'],
     fonts: ['./bower_components/bootstrap/dist/fonts/**/*.*', './src/font/**/*.*'],
     htmls: ['./src/index.html', './src/**/*.html'],
     media: ['./src/media/**/*.*'],
-    jsxs: ['./src/**/*.jsx']
+    robots:['./src/robots.txt']
 };
 
 gulp.task('scripts:concat', () => {
@@ -44,14 +43,8 @@ gulp.task('styles:concat', () => {
         .pipe(gulp.dest('./dist/styles'));
 });
 
-// gulp.task('styles:compile', () => {
-//     return gulp.src('./styles.scss')
-//         .pipe(sass().on('error', sass.logError))
-//         .pipe(gulp.dest('./dist/styles'));
-// });
-
 gulp.task('build', () => {
-    runSequence(['scripts:concat', 'styles:concat'/*, 'styles:compile'*/, 'copy:fonts', 'copy:html', 'copy:media']);
+    runSequence(['scripts:concat', 'styles:concat'/*, 'styles:compile'*/, 'copy:fonts', 'copy:html', 'copy:media', 'copy:robots']);
 });
 
 gulp.task('watch', () => {
@@ -73,6 +66,11 @@ gulp.task('copy:html', () => {
         .pipe(gulp.dest('./dist/'));
 });
 
+gulp.task('copy:robots', () => {
+    return gulp.src(paths.robots)
+        .pipe(gulp.dest('./dist/'));
+});
+
 gulp.task('default', () => {
-    runSequence(['scripts:concat', 'styles:concat', /*'styles:compile',*/ 'copy:fonts', 'copy:media', 'copy:html', 'watch'])
+    runSequence(['scripts:concat', 'styles:concat', /*'styles:compile',*/ 'copy:fonts', 'copy:media', 'copy:html', 'copy:robots', 'watch'])
 });
