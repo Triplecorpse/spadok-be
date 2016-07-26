@@ -1,0 +1,12 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="app" ng-controller="appController as app">
+<head>
+    <meta charset="UTF-8">
+    <title>{{app.title}}</title>
+    <link rel="stylesheet" href="./admin/style/style.css">
+    <script src="./admin/script/script.js"></script>
+</head>
+<body>
+    <spda-login-form ng-if="app.isLoggedIn"></spda-login-form>
+</body>
+</html>

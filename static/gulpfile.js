@@ -22,11 +22,20 @@ var paths = {
     robots:['./src/robots.txt']
 };
 
+var admin = {
+    scripts: ['./bower_components/jquery/dist/jquery.min.js',
+        './bower_components/angular/angular.min.js',
+        './src/admin/js/bootstrap.min.js',
+        './src/admin/js/index.js',
+        './src/admin/blocks/**/*.js'],
+    styles: ['./src/admin/css/bootstrap.min.scss',
+        './src/admin/blocks/**/*.scss']
+};
+
 gulp.task('scripts:concat', () => {
     return gulp.src(paths.scripts)
         .pipe(sourcemaps.init())
         .pipe(babel({
-            plugins: ['transform-react-jsx'],
             presets: ['es2015']
         }))
         .pipe(concat('script.js'))
@@ -34,7 +43,7 @@ gulp.task('scripts:concat', () => {
         .pipe(gulp.dest('./dist/scripts'));
 });
 
-gulp.task('styles:concat', () => {
+gulp.task('styles:build', () => {
     return gulp.src(paths.styles)
         .pipe(sourcemaps.init())
         .pipe(concat('styles.scss'))
@@ -44,11 +53,11 @@ gulp.task('styles:concat', () => {
 });
 
 gulp.task('build', () => {
-    runSequence(['scripts:concat', 'styles:concat'/*, 'styles:compile'*/, 'copy:fonts', 'copy:html', 'copy:media', 'copy:robots']);
+    runSequence(['scripts:concat', 'styles:build', 'copy:fonts', 'copy:html', 'copy:media', 'copy:robots']);
 });
 
 gulp.task('watch', () => {
-    return gulp.watch('src/**', ['build']);
+    return gulp.watch('src/**', ['build', 'admin:build']);
 });
 
 gulp.task('copy:fonts', () => {
@@ -71,6 +80,30 @@ gulp.task('copy:robots', () => {
         .pipe(gulp.dest('./dist/'));
 });
 
+gulp.task('admin:build', () => {
+    runSequence(['admin:styles', 'admin:scripts']);
+});
+
+gulp.task('admin:styles', () => {
+    return gulp.src(admin.styles)
+        .pipe(sourcemaps.init())
+        .pipe(concat('style.scss'))
+        .pipe(sass().on('error', sass.logError))
+        .pipe(sourcemaps.write())
+        .pipe(gulp.dest('./dist/admin/style/'));
+});
+
+gulp.task('admin:scripts', () => {
+    return gulp.src(admin.scripts)
+        .pipe(sourcemaps.init())
+        .pipe(babel({
+            presets: ['es2015']
+        }))
+        .pipe(concat('script.js'))
+        .pipe(sourcemaps.write())
+        .pipe(gulp.dest('./dist/admin/script'));
+});
+
 gulp.task('default', () => {
-    runSequence(['scripts:concat', 'styles:concat', /*'styles:compile',*/ 'copy:fonts', 'copy:media', 'copy:html', 'copy:robots', 'watch'])
+    runSequence(['build', 'admin:build', 'watch'])
 });

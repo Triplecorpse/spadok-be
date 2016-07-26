@@ -9,7 +9,7 @@ var databaseController = () => {
     var db = mongoose.connection;
     db.on('error', console.error.bind(console, 'connection error:'));
     db.once('open', function() {
-        console.log(`Connected to ${env.OPENSHIFT_MONGODB_DB_URL || local}`);
+        console.log(`Connected to ${env.OPENSHIFT_MONGODB_DB_URL || local} to handle projects`);
     });
 
     ProjectSchema = mongoose.Schema({
@@ -41,7 +41,7 @@ var databaseController = () => {
     function resolve(product) {
         delete mongoose.connection.models['Project'];
         mongoose.connection.close();
-        console.log(`Closed connection to ${env.OPENSHIFT_MONGODB_DB_URL || local}`);
+        console.log(`Closed connection to ${env.OPENSHIFT_MONGODB_DB_URL || local}. Initiator: projects`);
         return product;
     }
 
