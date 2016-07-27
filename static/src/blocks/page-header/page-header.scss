@@ -1,0 +1,37 @@
+.page-header {
+  &-logo {
+    height: 96px;
+    margin: 25px;
+    &-image {
+      display: inline-block;
+      width: 88px;
+      height: 96px;
+      margin-right: 12px;
+    }
+    &-text-wrapper {
+      display: inline-block;
+      position: relative;
+      height: 96px;
+      vertical-align: middle;
+      &-text {
+        display: inline-block;
+        position: absolute;
+        top: 50%;
+        transform: translate(0, -50%);
+        margin: 0;
+      }
+    }
+  }
+
+  &-main-navigation {
+    margin: 25px;
+    &-list {
+      list-style: none;
+      &-item {
+        display: inline-block;
+        margin: 0 45px 0 0;
+        font-weight: normal;
+      }
+    }
+  }
+}

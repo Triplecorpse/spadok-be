@@ -1,74 +1,16 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" ng-app="app" ng-controller="appController as app">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>{{app.title}}</title>
     <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,600,300&subset=latin,cyrillic-ext,cyrillic' rel='stylesheet' type='text/css'>
     <link rel="stylesheet" href="./styles/styles.css">
     <script src="./scripts/script.js"></script>
 </head>
 <body>
-<div class="page-header">
-    <header>
-        <div class="container">
-            <div class="row">
-                <div class="col-md-8">
-                    <div class="pull-left logo">
-                        <img src="media/logo_image.png" class="logo-image" />
-                        <div class="logo-text-wrapper">
-                            <p class="logo-text-wrapper-text">Благодійний<br>Фонд<br>"Спадок"</p>
-                        </div>
-                    </div>
-                    <select class="pull-right language-select">
-                        <option value="ua" class="language-select-item">укр</option>
-                        <option value="ru" class="language-select-item">рус</option>
-                        <option value="en" class="language-select-item">eng</option>
-                    </select>
-                    <nav class="pull-right main-navigation">
-                        <ul class="main-navigation-list">
-                            <li class="main-navigation-list-item"><a href="">Про нас</a></li>
-                            <li class="main-navigation-list-item"><a href="">Проекти</a></li>
-                            <li class="main-navigation-list-item"><a href="">Партнери</a></li>
-                            <li class="main-navigation-list-item"><a href="">Контакти</a></li>
-                        </ul>
-                    </nav>
-                </div>
-            </div>
-        </div>
-    </header>
-    <div class="project-carousel">
-        <div class="container">
-            <div class="row">
-                <div class="col-md-8">
-                    <div class="project-carousel-slide">
-                        <h3 class="project-carousel-slide-header">Дитячий ігровий майданчик у Пущі Водиці</h3>
-                        <p class="project-carousel-slide-description">У центрі Киві майже у кожному дворі присутній
-                            ігровий майданчик. На жаль, про мальовничу Пущу Водицю це важко сказати. Так не повинно
-                            бути, тому що кодна дитина повинна кудись спрямовувати свою енергію, а ігровий дитячий
-                            майданчик з перешкодами, гірками і годалками - найбільш вдале для того місце.</p>
-                        <div class="project-carousel-slide-icons clearfix">
-                            <div class="project-carousel-slide-icons-item">
-                                <img src="media/multiple-users-silhouette.png" alt="people" class="project-carousel-slide-icons-item-image">
-                                <p class="project-carousel-slide-icons-item-text-header">9 осіб</p>
-                                <p class="project-carousel-slide-icons-item-text">внесли кошти</p>
-                            </div>
-                            <div class="project-carousel-slide-icons-item">
-                                <img src="media/piggy-bank-with-coin.png" alt="people" class="project-carousel-slide-icons-item-image">
-                                <p class="project-carousel-slide-icons-item-text-header">1,225 грн.</p>
-                                <p class="project-carousel-slide-icons-item-text">залишилось зібрати</p>
-                            </div>
-                            <div class="project-carousel-slide-icons-item">
-                                <img src="media/calendar.png" alt="people" class="project-carousel-slide-icons-item-image">
-                                <p class="project-carousel-slide-icons-item-text-header">13 днів</p>
-                                <p class="project-carousel-slide-icons-item-text">до початку проекту</p>
-                            </div>
-                        </div>
-                        <button class="project-carousel-slide-about-project">Про проект</button>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
+<div class="page-top">
+    <spd-page-header></spd-page-header>
+    <spd-project-carousel></spd-project-carousel>
 </div>
 </body>
 </html>

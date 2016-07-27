@@ -4,7 +4,7 @@ $header-height: 146px;
 html, body {
   font-family: "Open Sans", sans-serif;
 }
-.page-header {
+.page-top {
   background-image: url('../media/children-playground.png');
   background-repeat: no-repeat;
   background-position: 50% 50%;
@@ -15,108 +15,11 @@ html, body {
   font-size: 1.6rem;
   font-weight: bold;
 }
-.logo {
-  height: 96px;
-  margin: 25px;
-  &-image {
-    display: inline-block;
-    width: 88px;
-    height: 96px;
-    margin-right: 12px;
-  }
-  &-text-wrapper {
-    display: inline-block;
-    position: relative;
-    height: 96px;
-    vertical-align: middle;
-    &-text {
-      display: inline-block;
-      position: absolute;
-      top: 50%;
-      transform: translate(0, -50%);
-      margin: 0;
-    }
-  }
-}
-.main-navigation {
-  &-list {
-    list-style: none;
-    margin: 45px 0;
-    &-item {
-      display: inline-block;
-      margin: 0 45px 0 0;
-      font-weight: normal;
-    }
-  }
-}
-.language-select {
-  margin: 38px 0;
-  font-weight: normal;
-  background: none;
-  padding: 5px;
-  border: 1px solid gray;
-  border-radius: 3px;
-  &-item {
-    background: none;
-    color: #000;
-  }
-}
-a, a:hover {
+
+a, a:hover, a:active, a:visited {
   color: #fff;
 }
-.project-carousel {
-  height: $header-image-height - $header-height;
-  &-slide {
-    font-weight: 100;
-    text-align: center;
-    &-header {
-      font-size: 4.8rem;
-      font-weight: 100;
-      width: 60%;
-      margin: auto;
-      margin-top: 65px;
-    }
-    &-description {
-      font-size: 1.6rem;
-      font-weight: 100;
-      width: 60%;
-      margin: auto;
-      margin-top: 50px;
-    }
-    &-icons {
-      width: 390px;
-      font-size: 1.2rem;
-      font-weight: 100;
-      margin: auto;
-      margin-top: 30px;
-      &-item {
-        float: left;
-        width: 130px;
-        &-image {
-          margin: 0;
-        }
-        &-text-header {
-          font-weight: bold;
-          margin: 0;
-          margin-top: 10px;
-        }
-        &-text {
-          font-weight: 100;
-          margin: 0;
-        }
-      }
-    }
-    &-about-project {
-      width: 150px;
-      height: 40px;
-      border: none;
-      border-radius: 20px;
-      text-transform: uppercase;
-      background-color: #5e88c2;
-      margin-top: 70px;
-      font-size: 1.2rem;
-      font-weight: bold;
-      cursor: default;
-    }
-  }
+
+a:visited, a:active {
+  text-decoration: none;
 }
