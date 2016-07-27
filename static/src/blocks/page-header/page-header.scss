@@ -25,12 +25,16 @@
 
   &-main-navigation {
     margin: 25px;
+    margin-right: 0;
     &-list {
       list-style: none;
       &-item {
         display: inline-block;
         margin: 0 45px 0 0;
         font-weight: normal;
+        &:last-child {
+          margin-right: 0;
+        }
       }
     }
   }
