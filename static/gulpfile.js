@@ -21,7 +21,7 @@ var paths = {
         './src/css/general.scss', './src/states/**/*.scss', './src/blocks/**/*.scss'],
     fonts: ['./bower_components/bootstrap/dist/fonts/**/*.*', './src/font/**/*.*'],
     htmls: ['./src/index.html', './src/**/*.html'],
-    media: ['./src/media/**/*.*'],
+    media: ['./src/media/**/*.*', './src/favicon.ico'],
     robots:['./src/robots.txt']
 };
 

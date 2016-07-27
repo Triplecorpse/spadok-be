@@ -23,3 +23,17 @@ a, a:hover, a:active, a:visited {
 a:visited, a:active {
   text-decoration: none;
 }
+
+button {
+  width: 150px;
+  height: 40px;
+  border: none;
+  border-radius: 20px;
+  text-transform: uppercase;
+  background-color: #5e88c2;
+  margin-top: 70px;
+  font-size: 1.2rem;
+  font-weight: bold;
+  cursor: default;
+  color: #fff;
+}
