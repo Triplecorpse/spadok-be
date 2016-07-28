@@ -16,7 +16,7 @@ var paths = {
         './bower_components/angular-swiper/dist/angular-swiper.js',
         './src/js/bootstrap.min.js',
         './src/config.js', './src/index.js', './src/states/**/*.js', './src/blocks/**/*.js', './src/services/**/*.js'],
-    styles: ['./src/css/bootstrap.min.css',
+    styles: ['./src/css/bootstrap.css',
         './src/css/swiper.css',
         './src/css/general.scss', './src/states/**/*.scss', './src/blocks/**/*.scss'],
     fonts: ['./bower_components/bootstrap/dist/fonts/**/*.*', './src/font/**/*.*'],

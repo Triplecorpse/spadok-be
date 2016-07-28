@@ -1,0 +1,73 @@
+@mixin placeholder($opacity) {
+  font-size: 1.3rem;
+  color: #fff;
+  opacity: $opacity;
+  transition: opacity 0.3s ease;
+}
+.subscription {
+  background-image: url('../media/E-mail-images.png');
+  background-repeat: no-repeat;
+  background-position: 50% 50%;
+  background-size: cover;
+  background-color: #245598;
+  color: #fff;
+  height: 355px;
+  width: 100%;
+  &-wrapper {
+    width: 100%;
+  }
+  &-header {
+    font-size: 2.4rem;
+    font-weight: normal;
+    text-align: center;
+    margin: 70px auto 0;
+    &:after {
+      content: '';
+      display: block;
+      border: none;
+      background-color: #fff;
+      margin: 25px auto 30px;
+      width: 65px;
+      height: 1px;
+    }
+  }
+
+  &-input {
+    font-size: 1.3rem;
+    border: 1px solid #fff;
+    width: 100%;
+    height: 50px;
+    background: none;
+    padding: 18.5px 30px;
+    &::-webkit-input-placeholder       {@include placeholder(1)}
+    &::-moz-placeholder                {@include placeholder(1)}
+    &:-ms-input-placeholder            {@include placeholder(1)}
+    &:focus::-webkit-input-placeholder {@include placeholder(0)}
+    &:focus::-moz-placeholder          {@include placeholder(0)}
+    &:focus:-ms-input-placeholder      {@include placeholder(0)}
+
+  }
+
+  &-text {
+    font-size: 1.1rem;
+    font-weight: normal;
+  }
+
+  &-submit {
+    background-color: transparent;
+    background-image: url("data:img/png;base64,iVBORw0KGgoAAAANSUhEUgAAABcAAAAPCAQAAAClppzdAAAABGdBTUEAALGPC/xhBQAAACBjSFJNAAB6JgAAgIQAAPoAAACA6AAAdTAAAOpgAAA6mAAAF3CculE8AAAAAmJLR0QAAKqNIzIAAAAJcEhZcwAACxIAAAsSAdLdfvwAAAAHdElNRQfgBxwVMTZhdXalAAAAZklEQVQoz2P4z4AXuv9nQ+YzMeAH7xn2MLAh8f8Tgub/DyFsIKwcRQMxypE0EKccroFY5VANjP/nMygyEAfkGd4Rb3r0/93/uUhSTKzboYqJUw5XTIxyJMWElYcgKyasXBdZ8X8GAELyOp0HVR+CAAAAAElFTkSuQmCC");
+    border: none;
+    width: 23px;
+    height: 15px;
+    position: absolute;
+    top: 50%;
+    right: 15px;
+    transform: translate(0, -50%);
+  }
+
+  &-input-group {
+    position: relative;
+    width: 100%;
+    height: 50px;
+  }
+}
