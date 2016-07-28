@@ -1,0 +1,24 @@
+<div class="video-carousel">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-8">
+                <h3 class="video-carousel-header">Відео з Проектів</h3>
+                <div class="video-carousel-container">
+                    <ks-swiper-container id="video-swiper"  show-nav-buttons="false" pagination-clickable="true" direction="horizontal" slides-per-view="3" pagination-is-active="true" space-between="0" initial-slide="1"
+                                         override-parameters="{'centeredSlides':'true'}"
+                                         swiper="swiper" on-ready="onReadyVideoSwiper(swiper)">
+                        <ks-swiper-slide class="swiper-slide video-carousel-slide" ng-repeat="slide in videos track by $index">
+                                <figure class="video-carousel-slide">
+                                    <img ng-src="{{slide.url}}" class="video-carousel-slide-preview" />
+                                    <figcaption class="video-carousel-slide-header">{{slide.header}}</figcaption>
+                                    <div class="video-carousel-slide-date">{{slide.date}}</div>
+                                </figure>
+                            </ks-swiper-slide>
+                    </ks-swiper-container>
+                </div>
+                <div class="video-carousel-button-prev" ng-click="video.prev()"></div>
+                <div class="video-carousel-button-next" ng-click="video.next()"></div>
+            </div>
+        </div>
+    </div>
+</div>

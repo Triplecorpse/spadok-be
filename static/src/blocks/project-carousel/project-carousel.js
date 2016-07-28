@@ -47,7 +47,7 @@
                 ];
                 // projectSwiper.update(true);
             }, 1000);
-            vm.onReadyProjectSwiper = (swiper) => {
+            $scope.onReadyProjectSwiper = (swiper) => {
                 console.log('ready.log', swiper);
             }
 
