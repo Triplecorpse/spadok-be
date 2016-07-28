@@ -40,11 +40,20 @@
     }
   }
   &-bullet {
+    display: inline-block;
+    margin: 0 4px;
+    height: 9px;
+    width: 9px;
+    border-radius: 100%;
     background-color: #cbcaca;
     border: none;
+    cursor: pointer;
     &-active {
       border: 2px solid #cbcaca;
       background: none;
+    }
+    &-wrapper {
+      text-align: center;
     }
   }
 

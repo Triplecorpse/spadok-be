@@ -41,15 +41,18 @@
             $scope.onReadyVideoSwiper = (swiper) => {
                 vm.prev = swiper.slidePrev;
                 vm.next = swiper.slideNext;
+                vm.goto = (index) => {
+                    swiper.slideTo(index);
+                    $('.video-carousel-bullet').removeClass('video-carousel-bullet-active');
+                    $('.video-carousel-bullet').eq(index).addClass('video-carousel-bullet-active');
+                };
 
-                $timeout(() => {
-                    console.log(':::: VIDEO SWIPER WITH CRUTCHES WAS INITIALIZED ::::');
-                    $('.swiper-pagination-bullet').addClass('video-carousel-bullet');
-                    $('.swiper-pagination-bullet-active').addClass('video-carousel-bullet-active');
-                }, 1000);
+                console.log(':::: VIDEO SWIPER WITH CRUTCHES WAS INITIALIZED ::::');
+
                 swiper.on('onSlideChangeStart', () => {
-                    $('.swiper-pagination-bullet').removeClass('video-carousel-bullet-active');
-                    $('.swiper-pagination-bullet-active').addClass('video-carousel-bullet-active');
+                    $('.video-carousel-bullet').removeClass('video-carousel-bullet-active');
+                    $('.video-carousel-bullet').eq(swiper.activeIndex).addClass('video-carousel-bullet-active');
+
                 });
             };
 
