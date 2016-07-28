@@ -19,7 +19,7 @@
                 <div class="video-carousel-button-prev" ng-click="video.prev()"></div>
                 <div class="video-carousel-button-next" ng-click="video.next()"></div>
                 <div class="video-carousel-bullet-wrapper">
-                    <div ng-class="'video-carousel-bullet ' + ($index === 0 ? 'video-carousel-bullet-active' : '')" ng-repeat="bullet in videos track by $index" ng-click="video.goto($index)"></div>
+                    <div ng-class="'video-carousel-bullet ' + ($index === 1 ? 'video-carousel-bullet-active' : '')" ng-repeat="bullet in videos track by $index" ng-click="video.goto($index)"></div>
                 </div>
             </div>
         </div>

@@ -1,0 +1,12 @@
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-8">
+            <h3 class="partners-header">Наші партнери</h3>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-1" ng-style="" ng-repeat="partner in partners.partners">
+            <div class="partners-logo" style="background-image: url('{{partner.greydLogo}}');" ng-mouseenter="partners.color($index)" ng-mouseleave="partners.decolor($index)"></div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,61 @@
+@mixin placeholder-feedback($opacity) {
+  font-size: 1.3rem;
+  color: #6f6f6f;
+  opacity: $opacity;
+  transition: opacity 0.3s ease;
+}
+.feedback {
+  &-wrapper {
+    width: 100%;
+  }
+  &-header {
+    font-size: 2.4rem;
+    font-weight: normal;
+    text-align: center;
+    margin: 70px auto 0;
+    &:after {
+      content: '';
+      display: block;
+      border: none;
+      background-color: #6f6f6f;
+      margin: 25px auto 30px;
+      width: 65px;
+      height: 1px;
+    }
+  }
+
+  &-input {
+    font-size: 1.3rem;
+    border: 1px solid #6f6f6f;
+    width: 100%;
+    height: 50px;
+    background: none;
+    padding: 18.5px 30px;
+    margin-bottom: 30px;
+    &::-webkit-input-placeholder       {@include placeholder-feedback(1)}
+    &::-moz-placeholder                {@include placeholder-feedback(1)}
+    &:-ms-input-placeholder            {@include placeholder-feedback(1)}
+    &:focus::-webkit-input-placeholder {@include placeholder-feedback(0)}
+    &:focus::-moz-placeholder          {@include placeholder-feedback(0)}
+    &:focus:-ms-input-placeholder      {@include placeholder-feedback(0)}
+    &-textarea {
+      resize: none;
+      overflow: hidden;
+      height: 165px;
+    }
+  }
+
+  &-text {
+    font-size: 1.1rem;
+    font-weight: normal;
+  }
+
+  &-submit {
+    margin: 0 auto 85px;
+    display: block;
+  }
+
+  &-input-group {
+    width: 100%;
+  }
+}

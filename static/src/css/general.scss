@@ -16,8 +16,14 @@ html, body {
   font-weight: bold;
 }
 
-a, a:hover, a:active, a:visited {
+a, a:active, a:visited {
   color: #fff;
+  text-decoration: none;
+}
+
+a:hover {
+  color: #5e88c2;
+  text-decoration: none;
 }
 
 a:visited, a:active {
