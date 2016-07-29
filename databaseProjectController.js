@@ -44,16 +44,26 @@ var databaseProjectController = () => {
             .then(resolve, resolve);
     }
 
+    function remove(projectId) {
+        return ProjectModel.find({_id: projectId.id}).remove((err, projectId) => {
+            if (err) console.error("Error in database.save", err);
+        })
+            .then(resolve, resolve);
+    }
+
     function resolve(product) {
+        // console.log('FROM RESOLVE', product);
         delete mongoose.connection.models['Project'];
         mongoose.connection.close();
         console.log(`Closed connection to ${env.OPENSHIFT_MONGODB_DB_URL || local}. Initiator: projects`);
         return product;
     }
 
+
     return {
         find,
-        save
+        save,
+        remove
     }
 };
 

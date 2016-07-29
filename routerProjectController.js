@@ -22,6 +22,17 @@ var routerProjectController = (app) => {
             res.sendStatus(401);
         }
     });
+
+    app.post('/adminium/removeproject', (req, res) => {
+        if(req.session.isLoggedIn){
+            databaseProjectController().remove(req.body)
+                .then((data) => {
+                    res.status(200).json(data);
+                });
+        } else {
+            res.sendStatus(401);
+        }
+    });
 };
 
 module.exports = routerProjectController;

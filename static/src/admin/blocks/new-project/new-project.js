@@ -46,7 +46,10 @@
                     isDaysShown: $scope.isDaysShown,
                     isPublished: $scope.isPublished
                 })
-                    .then(success, fail);
+                    .then(success, fail)
+                    .finally(() => {
+                        // $("#new-project").addClass("active");
+                    });
 
                 function success(data) {
                     $scope.statusText = "Congrats! Your project was successfully saved! :)";
@@ -70,6 +73,17 @@
                     return data;
                 }
             };
+
+            $scope.delete = () => {
+                $http.post('/adminium/removeproject', {
+                    id: $scope.init._id
+                })
+                    .finally(() => {
+                        viewService.updateProjects();
+                        $scope.canDelete = false;
+                        // $("#new-project").addClass("active")
+                    })
+            }
         }
     }
 })();

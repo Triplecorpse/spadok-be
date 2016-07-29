@@ -21,9 +21,9 @@
                 $scope.state = viewService.pmState;
             });
 
-            $scope.addProject = () => {
+            $scope.addProject = (event) => {
                 $(".list-group-item").removeClass('active');
-                event.currentTarget.className += ' active';
+                $("#new-project").addClass("active");
                 viewService.pmState = $scope.state = 'new-project';
                 $scope.activeProject = undefined;
             };
@@ -39,8 +39,10 @@
                 $http.get('/adminium/getprojects')
                     .then((response) => {
                         $scope.projects = response.data;
+                        $scope.addProject();
                     })
             };
+
             viewService.updateProjects = update.bind(this);
             viewService.updateProjects();
         }
