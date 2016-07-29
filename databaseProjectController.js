@@ -19,9 +19,9 @@ var databaseProjectController = () => {
         people: Number,
         money: Number,
         date: Date,
-        isShownPeople: Boolean,
-        isShownMoney: Boolean,
-        isShownDate: Boolean,
+        isPeopleShown: Boolean,
+        isMoneyShown: Boolean,
+        isDaysShown: Boolean,
         isPublished: Boolean,
         extension: String
     });
@@ -37,7 +37,6 @@ var databaseProjectController = () => {
     }
 
     function save(project) {
-        console.log('Saving project...');
         let newProject = new ProjectModel(project);
         return newProject.save((err, proj) => {
             if (err) console.error("Error in database.save", err);

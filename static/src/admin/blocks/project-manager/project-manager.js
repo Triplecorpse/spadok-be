@@ -35,10 +35,14 @@
                 $scope.activeProject = $scope.projects[index];
             };
 
-            $http.get('/adminium/getprojects')
-                .then((response) => {
-                    $scope.projects = response.data;
-                })
+            var update = () => {
+                $http.get('/adminium/getprojects')
+                    .then((response) => {
+                        $scope.projects = response.data;
+                    })
+            };
+            viewService.updateProjects = update.bind(this);
+            viewService.updateProjects();
         }
 
         function link(scope) {

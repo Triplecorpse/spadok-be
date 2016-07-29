@@ -7,7 +7,8 @@
 
         return {
             state: 'login',
-            pmState: 'none'
+            pmState: 'none',
+            updateProjects: undefined
         };
 
     }

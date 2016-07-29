@@ -52,6 +52,8 @@
                     $scope.statusText = "Congrats! Your project was successfully saved! :)";
                     $scope.statusClassName = "label label-success";
                     $scope.isQueriing = false;
+                    $scope.name = $scope.description = $scope.people = $scope.money = $scope.days = $scope.isPeopleShown = $scope.isMoneyShown = $scope.isDaysShown = $scope.isPublished = null;
+                    viewService.updateProjects();
                     return data;
                 }
 

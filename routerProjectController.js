@@ -5,7 +5,7 @@ var routerProjectController = (app) => {
         if(req.session.isLoggedIn){
             databaseProjectController().save(req.body)
                 .then(() => {
-                    res.send(200);
+                    res.sendStatus(200);
                 });
         } else {
             res.send(401);
@@ -19,7 +19,7 @@ var routerProjectController = (app) => {
                     res.status(200).json(data);
                 });
         } else {
-            res.send(401);
+            res.sendStatus(401);
         }
     });
 };
