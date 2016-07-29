@@ -1,8 +1,18 @@
 angular.module('app', []);
-angular.module('app').controller('appController', appController);
 
-function appController() {
+angular.module('app').controller('appController', ['$scope', 'viewService', '$http', appController]);
+
+function appController($scope, viewService, $http) {
     var vm = this;
-    vm.title = "Adminium - spadok";
-    vm.isLoggedIn = true;
+    vm.title = "Spadok - adminium";
+    $http.get('/isloggedin')
+        .then(() => {
+            vm.isLoggedIn = true;
+            viewService.state = vm.state = 'projectManager';
+        }, () => {
+            viewService.state = vm.state = 'login';
+        });
+    $scope.$watch(() => viewService.state, () => {
+        vm.state = viewService.state;
+    })
 }

@@ -30,7 +30,7 @@ var admin = {
         './bower_components/angular/angular.min.js',
         './src/admin/js/bootstrap.min.js',
         './src/admin/js/index.js',
-        './src/admin/blocks/**/*.js'],
+        './src/admin/blocks/**/*.js', './src/admin/services/**/*.js'],
     styles: ['./src/admin/css/bootstrap.min.scss',
         './src/admin/blocks/**/*.scss']
 };

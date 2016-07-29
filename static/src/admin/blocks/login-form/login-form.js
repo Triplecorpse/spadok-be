@@ -1,9 +1,9 @@
 (function() {
     angular
         .module('app')
-        .directive('spdaLoginForm', ['$http', loginForm]);
+        .directive('spdaLoginForm', ['$http', 'viewService', loginForm]);
 
-    function loginForm ($http) {
+    function loginForm ($http, viewService) {
 
         return {
             restrict: "E",
@@ -23,6 +23,7 @@
                     })
                     .then((response) => {
                         scope.status = ` ${response.status} ${response.statusText}. Welcome,  ${response.data.name}`;
+                        viewService.state = "projectManager";
                     }, (reason) => {
                         if(reason.status === 401) {
                             scope.status = `Sorry, but you are not supposed to be here. ${reason.status} ${reason.statusText}.`;

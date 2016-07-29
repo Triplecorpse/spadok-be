@@ -1,0 +1,38 @@
+(function() {
+    angular
+        .module('app')
+        .directive('spdaPorjectManager', ['$http', 'viewService', projecManager]);
+
+    function projecManager ($http, viewService) {
+
+        return {
+            restrict: "E",
+            templateUrl: "./admin/blocks/project-manager/project-manager.html",
+            controller: ['$scope', controller],
+            link: link
+        };
+
+        function controller($scope) {
+            var vm = this;
+
+            $scope.$watch(() => viewService.pmState, () => {
+                $scope.state = viewService.pmState;
+
+                $scope.addProject = () => {
+                    $(".list-group-item").removeClass('active');
+                    event.currentTarget.className += ' active';
+                    viewService.pmState = vm.state = 'new-project'
+                };
+
+                $scope.editProject = (event, index) => {
+                    $(".list-group-item").removeClass('active');
+                    event.currentTarget.className += ' active';
+                };
+            })
+        }
+
+        function link(scope) {
+            // viewService.state = "projectManager"
+        }
+    }
+})();

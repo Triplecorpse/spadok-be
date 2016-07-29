@@ -7,6 +7,23 @@
     <script src="./admin/script/script.js"></script>
 </head>
 <body>
-    <spda-login-form ng-if="app.isLoggedIn"></spda-login-form>
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-10">
+            <h1>Spadok - Adminium</h1>
+        </div>
+        <div class="col-md-2">
+            <a href="/logout">Logout</a>
+        </div>
+        <div ng-switch="app.state">
+            <div ng-switch-when="projectManager">
+                <spda-porject-manager></spda-porject-manager>
+            </div>
+            <div ng-switch-default>
+                <spda-login-form></spda-login-form>
+            </div>
+        </div>
+    </div>
+</div>
 </body>
 </html>

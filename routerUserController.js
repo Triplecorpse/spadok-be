@@ -6,51 +6,44 @@ var routerLoginController = (app) => {
     const session = require('express-session');
     const cookieParser = require('cookie-parser');
     var sess;
+    var newSession = session({
+        secret: 'spadokproject',
+        resave: true,
+        saveUninitialized: true,
+        cookie: {
+            secure: false,
+            maxAge: 86400000,
+            httpOnly: true
+        }
+    });
 
     app.use(bodyParser.json());
     app.use(cookieParser());
-    app.use(session({
-            secret: 'spadokproject',
-            resave: true,
-            saveUninitialized: true,
-            cookie: {
-                secure: false,
-                maxAge: 86400000,
-                httpOnly: true
-            }
-        }
-    ));
+    app.use(newSession);
 
     app.get('/adminium', function (req, res) {
-        app.use(session({
-            resave: true,
-            saveUninitialized: true,
-            cookie: {
-                secure: false,
-                maxAge: 86400000,
-                httpOnly: true
-            },
-            genid: function(req) {
-                return genuuid(); // use UUIDs for session IDs
-            },
-            secret: 'spadokproject'
-        }));
-        sess = req.session;
-        console.log(sess);
         fs.readFile('./static/dist/admin/index.html', 'UTF8', (err, data) => {
             if (err) throw err;
             res.send(data);
         });
     });
 
-    app.get('isloggedin', (req, res) => {
-        if(req.session._expires < new Date()) {
-            res.send(200).json({});
+    app.get('/isloggedin', (req, res) => {
+        if ((req.session.cookie._expires > new Date()) && (req.session.isLoggedIn)) {
+            req.session.touch();
+            res.status(200).json({});
+        } else {
+            req.session.isLoggedIn = false;
+            req.session.destroy(function(err) {
+                if (err) {
+                    console.log(err);
+                }
+            });
+            res.status(401).json({});
         }
     });
 
     app.post('/login', function (req, res) {
-        console.log(req.cookies);
         userDatabaseController().find({name: req.body.name})
             .then((data) => {
                 if (!data) {
@@ -72,6 +65,8 @@ var routerLoginController = (app) => {
         function success(user) {
             if(req.body.password === user.password) {
                 user.password = undefined;
+                req.session.isLoggedIn = true;
+
                 res.status(200).json(user);
             } else {
                 fail();
@@ -93,6 +88,7 @@ var routerLoginController = (app) => {
     });
 
     app.get('/logout', (req, res) => {
+        req.session.isLoggedIn = false;
         req.session.destroy(function(err) {
             if (err) {
                 console.log(err);
