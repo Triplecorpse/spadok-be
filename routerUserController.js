@@ -5,7 +5,7 @@ var routerLoginController = (app) => {
     const bodyParser = require('body-parser');
     const session = require('express-session');
     const cookieParser = require('cookie-parser');
-    var sess;
+
     var newSession = session({
         secret: 'spadokproject',
         resave: true,

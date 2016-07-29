@@ -15,20 +15,30 @@
         function controller($scope) {
             var vm = this;
 
+            viewService.pmState = $scope.state = 'new-project';
+
             $scope.$watch(() => viewService.pmState, () => {
                 $scope.state = viewService.pmState;
+            });
 
-                $scope.addProject = () => {
-                    $(".list-group-item").removeClass('active');
-                    event.currentTarget.className += ' active';
-                    viewService.pmState = vm.state = 'new-project'
-                };
+            $scope.addProject = () => {
+                $(".list-group-item").removeClass('active');
+                event.currentTarget.className += ' active';
+                viewService.pmState = $scope.state = 'new-project';
+                $scope.activeProject = undefined;
+            };
 
-                $scope.editProject = (event, index) => {
-                    $(".list-group-item").removeClass('active');
-                    event.currentTarget.className += ' active';
-                };
-            })
+            $scope.editProject = (event, index) => {
+                $(".list-group-item").removeClass('active');
+                event.currentTarget.className += ' active';
+                viewService.pmState = $scope.state = 'edit-project';
+                $scope.activeProject = $scope.projects[index];
+            };
+
+            $http.get('/adminium/getprojects')
+                .then((response) => {
+                    $scope.projects = response.data;
+                })
         }
 
         function link(scope) {

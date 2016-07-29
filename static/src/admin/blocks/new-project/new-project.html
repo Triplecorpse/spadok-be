@@ -1,56 +1,82 @@
-<form>
+<form ng-submit="submit()">
     <div class="row">
         <div class="col-md-12">
             <div class="form-group">
-                <label for="exampleInputEmail1">Name</label>
-                <input type="text" class="form-control" id="exampleInputEmail1" placeholder="Name">
+                <label for="project-name">Name</label>
+                <input type="text" class="form-control" id="project-name" placeholder="Name" ng-model="name">
             </div>
             <div class="form-group">
-                <label for="comment">Description</label>
-                <textarea class="form-control" rows="5" id="comment" placeholder="Description"></textarea>
+                <label for="project-description">Description</label>
+                <textarea class="form-control" rows="5" id="project-description" placeholder="Description" ng-model="description"></textarea>
             </div>
             <div class="form-group">
-                <label for="exampleInputFile">Picture</label>
-                <input type="file" id="exampleInputFile">
-                <p class="help-block">Upload a picture related to this project.</p>
+                <label for="project-picture">Picture</label>
+                <input type="file" id="project-picture">
+                <p class="help-block">Upload a picture related to this project. Note: not working yet</p>
             </div>
         </div>
     </div>
     <div class="row">
         <div class="col-md-4">
             <div class="form-group">
-                <input type="text" class="form-control" id="exampleInputEmail2" placeholder="People">
+                <input type="number" class="form-control" placeholder="People" ng-model="peolple">
             </div>
             <div class="checkbox">
                 <label>
-                    <input type="checkbox"> Show quantity of <strong>people</strong> collected money
+                    <input type="checkbox" ng-model="isPeopleShown"> Show quantity of <strong>people</strong> collected money
                 </label>
             </div>
         </div>
         <div class="col-md-4">
             <div class="form-group">
-                <input type="text" class="form-control" id="exampleInputEmail3" placeholder="Money">
+                <input type="number" class="form-control" placeholder="Money" ng-model="money">
             </div>
             <div class="checkbox">
                 <label>
-                    <input type="checkbox"> Show quantity of <strong>money</strong> collected
+                    <input type="checkbox" ng-model="isMoneyShown"> Show quantity of <strong>money</strong> collected
                 </label>
             </div>
         </div>
         <div class="col-md-4">
             <div class="form-group">
-                <input type="text" class="form-control" id="exampleInputEmail4" placeholder="Days">
+                <input type="date" class="form-control" placeholder="Date Starting" ng-model="days">
             </div>
             <div class="checkbox">
                 <label>
-                    <input type="checkbox"> Show <strong>days</strong> to beginning
+                    <input type="checkbox" ng-model="isDaysShown"> Show <strong>days</strong> to beginning
                 </label>
             </div>
         </div>
     </div>
     <div class="row">
         <div class="col-md-12">
-            <button type="submit" class="btn btn-default">Submit</button>
+            <div class="checkbox">
+                <label>
+                    <input type="checkbox" ng-model="isPublished"> Publish project
+                </label>
+            </div>
+        </div>
+    </div>
+    <div class="row project-footer">
+        <div class="col-md-4">
+            <div ng-switch="view">
+                <div ng-switch-when="new-project">
+                    <button type="submit" class="btn btn-default project-add" value="Add" ng-disabled="isQueriing">Add</button>
+                </div>
+                <div ng-switch-when="edit-project">
+                    <div class="checkbox">
+                        <label>
+                            <input type="checkbox" ng-model="canDelete"> Really delete project
+                        </label>
+                    </div>
+                    <button type="button" class="btn btn-danger" value="Delete" ng-disabled="!canDelete">Delete</button>
+                    <button type="submit" class="btn btn-default" value="Update" ng-disabled="isQueriing">Update</button>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-10">
+            <span class="label label-info" ng-if="isQueriing">Saving...</span>
+            <span ng-class="statusClassName" ng-if="!isQueriing">{{statusText}}</span>
         </div>
     </div>
 </form>

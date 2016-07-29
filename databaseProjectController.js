@@ -1,4 +1,4 @@
-var databaseController = () => {
+var databaseProjectController = () => {
     const mongoose = require('mongoose');
     const env = process.env;
     const local = 'mongodb://localhost/spadok';
@@ -15,9 +15,15 @@ var databaseController = () => {
     ProjectSchema = mongoose.Schema({
         name: String,
         description: String,
-        dateRegistered: Date,
-        dateStarting: Date,
-        dateExpires: Date
+        picture: String,
+        people: Number,
+        money: Number,
+        date: Date,
+        isShownPeople: Boolean,
+        isShownMoney: Boolean,
+        isShownDate: Boolean,
+        isPublished: Boolean,
+        extension: String
     });
 
     ProjectModel = mongoose.model('Project', ProjectSchema);
@@ -31,6 +37,7 @@ var databaseController = () => {
     }
 
     function save(project) {
+        console.log('Saving project...');
         let newProject = new ProjectModel(project);
         return newProject.save((err, proj) => {
             if (err) console.error("Error in database.save", err);
@@ -51,4 +58,4 @@ var databaseController = () => {
     }
 };
 
-module.exports = databaseController;
+module.exports = databaseProjectController;

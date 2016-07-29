@@ -1,35 +1,73 @@
 (function() {
     angular
         .module('app')
-        .directive('spdaNewProject', ['$http', 'viewService', directive]);
+        .directive('spdaNewProject', ['$http', 'viewService', '$interval', directive]);
 
-    function directive ($http, viewService) {
+    function directive ($http, viewService, $interval) {
 
         return {
             restrict: "E",
             templateUrl: "./admin/blocks/new-project/new-project.html",
-            controller: ['$scope', controller],
-            link: link
+            scope: {
+                init: "=",
+                view: "="
+            },
+            controller: ['$scope', controller]
         };
 
         function controller($scope) {
             var vm = this;
+            $scope.$watch(() => $scope.init, (newVal) => {
+                if(newVal) {
+                    $scope.name = newVal.name;
+                    $scope.description = newVal.description;
+                    $scope.people = newVal.people;
+                    $scope.money = newVal.money;
+                    $scope.days = newVal.days;
+                    $scope.isPeopleShown = newVal.isPeopleShown;
+                    $scope.isMoneyShown = newVal.isMoneyShown;
+                    $scope.isDaysShown = newVal.isDaysShown;
+                    $scope.isPublished = newVal.isPublished;
+                } else {
+                    $scope.name = $scope.description = $scope.people = $scope.money = $scope.days = $scope.isPeopleShown = $scope.isMoneyShown = $scope.isDaysShown = $scope.isPublished = null;
+                }
+            }, true);
 
-            $scope.$watch(() => viewService.pmState, () => {
-                vm.state = viewService.pmState;
+            $scope.submit = (form) => {
+                $scope.isQueriing = true;
+                $http.post('/adminium/addproject', {
+                    name: $scope.name,
+                    description: $scope.description,
+                    people: $scope.people,
+                    money: $scope.money,
+                    days: $scope.days,
+                    isPeopleShown: $scope.isPeopleShown,
+                    isMoneyShown: $scope.isMoneyShown,
+                    isDaysShown: $scope.isDaysShown,
+                    isPublished: $scope.isPublished
+                })
+                    .then(success, fail);
 
-                vm.addProject = () => {
+                function success(data) {
+                    $scope.statusText = "Congrats! Your project was successfully saved! :)";
+                    $scope.statusClassName = "label label-success";
+                    $scope.isQueriing = false;
+                    return data;
+                }
 
-                };
-
-                vm.editProject = (index) => {
-
-                };
-            })
-        }
-
-        function link(scope) {
-            // viewService.state = "projectManager"
+                function fail(data) {
+                    if(data.status === 401) {
+                        $scope.statusText = "Sorry, something was happened with your session. Please, reenter your credentials :(";
+                    } else if(data.status === 500) {
+                        $scope.statusText = "Sorry, something was happened with server. Wait a few minutes or contact your administrator :(";
+                    } else {
+                        $scope.statusText = "Sorry, unhandled error occurred. Wait a few minutes or contact your administrator :(";
+                    }
+                    $scope.statusClassName = "label label-danger";
+                    $scope.isQueriing = false;
+                    return data;
+                }
+            };
         }
     }
 })();

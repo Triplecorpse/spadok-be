@@ -14,26 +14,6 @@ var routerController = (app) => {
         res.writeHead(200);
         res.end('1');
     });
-
-    // app.get('/save', function (req, res) {
-    //     var promise = database().save({
-    //         name: 'testProject',
-    //         description: 'description of testProject',
-    //         dateRegistered: new Date(),
-    //         dateStarting: new Date(),
-    //         dateExpires: new Date()
-    //     });
-    //     promise.then((product)=>{
-    //         res.send(`Product ${JSON.stringify(product)} successfully saved`);
-    //     })
-    // });
-    //
-    // app.get('/find', function (req, res) {
-    //     var promise = database().find();
-    //     promise.then((data) => {
-    //         res.send(data);
-    //     })
-    // });
 };
 
 module.exports = routerController;
