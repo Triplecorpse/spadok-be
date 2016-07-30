@@ -67,9 +67,11 @@ var databaseProjectController = () => {
     }
 
     function update(project) {
+        let id = project._id;
+        project._id = undefined;
         return new Promise((resolve, reject) => {
             let updatedProject = new ProjectModel(project);
-            ProjectModel.findByIdAndUpdate(project._id, updatedProject, (err, data) => {
+            ProjectModel.findByIdAndUpdate(id, updatedProject, (err, data) => {
                 if (err) {
                     reject(err, "Error in database.update");
                 } else {
