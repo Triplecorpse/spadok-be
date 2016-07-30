@@ -9,16 +9,17 @@
             restrict: "E",
             templateUrl: "./blocks/footer/footer.html",
             controller: [footerController],
-            controllerAs: 'footer',
-            link: link
+            controllerAs: 'footer'
         };
 
         function footerController() {
+            var vm = this;
 
-        }
-
-        function link() {
-
+            if(new Date().getYear() > 2016) {
+                vm.copyright = ` - ${new Date().getYear()}`;
+            } else {
+                vm.copyright = "";
+            }
         }
     }
 })();
