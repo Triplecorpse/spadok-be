@@ -2,8 +2,6 @@ var databaseProjectController = () => {
     const mongoose = require('mongoose');
     const env = process.env;
     const local = 'mongodb://localhost/spadok';
-    var ProjectSchema;
-    var ProjectModel;
 
     mongoose.connect(env.OPENSHIFT_MONGODB_DB_URL || local);
     var db = mongoose.connection;
@@ -12,7 +10,7 @@ var databaseProjectController = () => {
         console.log(`Connected to ${env.OPENSHIFT_MONGODB_DB_URL || local} to handle projects`);
     });
 
-    ProjectSchema = mongoose.Schema({
+    var ProjectSchema = mongoose.Schema({
         name: String,
         description: String,
         picture: String,
@@ -26,44 +24,74 @@ var databaseProjectController = () => {
         extension: String
     });
 
-    ProjectModel = mongoose.model('Project', ProjectSchema);
+    var ProjectModel = mongoose.model('Project', ProjectSchema);
 
     function find(query) {
-        return ProjectModel.find(query, (err, proj) => {
-            if (err)
-                return console.error("Error in database.find", err);
-        })
-            .then(resolve, resolve);
+        return new Promise((resolve, reject) => {
+            ProjectModel.find(query, (err, data) => {
+                if (err) {
+                    reject(err, "Error in database.find");
+                } else {
+                    resolve(data);
+                }
+                endQuery();
+            })
+        });
     }
 
     function save(project) {
-        let newProject = new ProjectModel(project);
-        return newProject.save((err, proj) => {
-            if (err) console.error("Error in database.save", err);
+        return new Promise((resolve, reject) => {
+            let newProject = new ProjectModel(project);
+            newProject.save((err, data) => {
+                if (err) {
+                    reject(err, "Error in database.save");
+                } else {
+                    resolve(data);
+                }
+                endQuery();
+            })
         })
-            .then(resolve, resolve);
     }
 
     function remove(projectId) {
-        return ProjectModel.find({_id: projectId.id}).remove((err, projectId) => {
-            if (err) console.error("Error in database.save", err);
-        })
-            .then(resolve, resolve);
+        return new Promise((resolve, reject) => {
+            ProjectModel.find({_id: projectId.id}).remove((err, data) => {
+                if (err) {
+                    reject(err, "Error in database.remove");
+                } else {
+                    resolve(data);
+                }
+                endQuery();
+            })
+        });
     }
 
-    function resolve(product) {
-        // console.log('FROM RESOLVE', product);
+    function update(project) {
+        return new Promise((resolve, reject) => {
+            let updatedProject = new ProjectModel(project);
+            ProjectModel.findByIdAndUpdate(project._id, updatedProject, (err, data) => {
+                if (err) {
+                    reject(err, "Error in database.update");
+                } else {
+                    resolve(data);
+                }
+                endQuery();
+            });
+        });
+    }
+
+    function endQuery() {
         delete mongoose.connection.models['Project'];
         mongoose.connection.close();
         console.log(`Closed connection to ${env.OPENSHIFT_MONGODB_DB_URL || local}. Initiator: projects`);
-        return product;
     }
 
 
     return {
         find,
         save,
-        remove
+        remove,
+        update
     }
 };
 

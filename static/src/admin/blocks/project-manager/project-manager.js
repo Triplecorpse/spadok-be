@@ -8,8 +8,7 @@
         return {
             restrict: "E",
             templateUrl: "./admin/blocks/project-manager/project-manager.html",
-            controller: ['$scope', controller],
-            link: link
+            controller: ['$scope', controller]
         };
 
         function controller($scope) {
@@ -45,10 +44,6 @@
 
             viewService.updateProjects = update.bind(this);
             viewService.updateProjects();
-        }
-
-        function link(scope) {
-            // viewService.state = "projectManager"
         }
     }
 })();
