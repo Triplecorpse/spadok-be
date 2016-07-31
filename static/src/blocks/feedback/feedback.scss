@@ -9,19 +9,7 @@
     width: 100%;
   }
   &-header {
-    font-size: 2.4rem;
-    font-weight: normal;
-    text-align: center;
-    margin: 70px auto 0;
-    &:after {
-      content: '';
-      display: block;
-      border: none;
-      background-color: #6f6f6f;
-      margin: 25px auto 30px;
-      width: 65px;
-      height: 1px;
-    }
+    @include block-header(#000);
   }
 
   &-input {

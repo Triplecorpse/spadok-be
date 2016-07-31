@@ -1,18 +1,6 @@
 .partners {
   &-header {
-    font-size: 2.4rem;
-    font-weight: normal;
-    text-align: center;
-    margin: 70px auto 0;
-    &:after {
-      content: '';
-      display: block;
-      border: none;
-      background-color: #000;
-      margin: 25px auto 30px;
-      width: 65px;
-      height: 1px;
-    }
+    @include block-header(#fff);
   }
   &-logo {
     width: 33.3%;
