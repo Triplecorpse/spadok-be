@@ -12,7 +12,13 @@
         };
 
         function link(scope) {
-
+            $(window).scroll(() => {
+                if($(window).scrollTop() > 0) {
+                    $('#page-header').addClass('page-header-sticky');
+                } else {
+                    $('#page-header').removeClass('page-header-sticky');
+                }
+            });
         }
     }
 })();

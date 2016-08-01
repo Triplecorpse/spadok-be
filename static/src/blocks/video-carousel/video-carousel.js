@@ -47,7 +47,7 @@
                     $('.video-carousel-bullet').eq(index).addClass('video-carousel-bullet-active');
                 };
 
-                console.log(':::: VIDEO SWIPER WITH CRUTCHES WAS INITIALIZED ::::');
+                console.log(':::: VIDEO WAS INITIALIZED ::::');
 
                 swiper.on('onSlideChangeStart', () => {
                     $('.video-carousel-bullet').removeClass('video-carousel-bullet-active');

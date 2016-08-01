@@ -1,33 +1,35 @@
-<div class="project-carousel" ng-if="carousel.projects.length > 0">
-    <div class="container-fluid">
-        <div class="row">
-            <div class="col-md-8">
-                <ks-swiper-container loop="true" show-nav-buttons="true" pagination-clickable="true" direction="horizontal" slides-per-view="1" pagination-is-active="true"
-                                     swiper="swiper" on-ready="onReadyProjectSwiper(swiper)" class="swiper-container" autoplay="3000">
-                    <ks-swiper-slide class="swiper-slide project-carousel-slide" ng-repeat="project in carousel.projects">
-                        <h3 class="project-carousel-slide-header">{{project.name}}</h3>
-                        <p class="project-carousel-slide-description">{{project.description}}</p>
-                        <div class="project-carousel-slide-icons clearfix" style="{{'width: ' + 130 * (project.showPeople + project.showCollected + project.showDateFinished) + 'px'}}">
-                            <div class="project-carousel-slide-icons-item" ng-if="project.showPeople">
-                                <img src="media/multiple-users-silhouette.png" alt="people" class="project-carousel-slide-icons-item-image">
-                                <p class="project-carousel-slide-icons-item-text-header">{{project.people}} осіб</p>
-                                <p class="project-carousel-slide-icons-item-text">внесли кошти</p>
-                            </div>
-                            <div class="project-carousel-slide-icons-item" ng-if="project.showCollected">
-                                <img src="media/piggy-bank-with-coin.png" alt="people" class="project-carousel-slide-icons-item-image">
-                                <p class="project-carousel-slide-icons-item-text-header">{{project.collected}} грн.</p>
-                                <p class="project-carousel-slide-icons-item-text">залишилось зібрати</p>
-                            </div>
-                            <div class="project-carousel-slide-icons-item" ng-if="project.showDateFinished">
-                                <img src="media/calendar.png" alt="people" class="project-carousel-slide-icons-item-image">
-                                <p class="project-carousel-slide-icons-item-text-header">{{project.daysStarted}} днів</p>
-                                <p class="project-carousel-slide-icons-item-text">до початку проекту</p>
-                            </div>
-                        </div>
-                        <button class="project-carousel-slide-about-project">Про проект</button>
-                    </ks-swiper-slide>
-                </ks-swiper-container>
+<div class="project-carousel" ng-if="projects.projects.length > 0">
+    <ks-swiper-container loop="true" direction="horizontal" slides-per-view="1"
+                         swiper="swiper" on-ready="onReadyProjectSwiper(swiper)" class="swiper-container">
+        <ks-swiper-slide class="swiper-slide project-carousel-slide" ng-repeat="project in projects.projects">
+            <div class="project-carousel-slide-wrapper">
+                <!--<img class="project-carousel-slide-wrapper" ng-src="{{project.image}}" alt="Project Image">-->
+                <h3 class="project-carousel-slide-header">{{project.name}}</h3>
+                <p class="project-carousel-slide-description">{{project.description}}</p>
+                <div class="project-carousel-slide-icons clearfix" style="width: 390px">
+                    <div class="project-carousel-slide-icons-item">
+                        <img src="media/multiple-users-silhouette.png" alt="people" class="project-carousel-slide-icons-item-image">
+                        <p class="project-carousel-slide-icons-item-text-header">{{project.people}} осіб</p>
+                        <p class="project-carousel-slide-icons-item-text">внесли кошти</p>
+                    </div>
+                    <div class="project-carousel-slide-icons-item">
+                        <img src="media/piggy-bank-with-coin.png" alt="people" class="project-carousel-slide-icons-item-image">
+                        <p class="project-carousel-slide-icons-item-text-header">{{project.collected}} грн.</p>
+                        <p class="project-carousel-slide-icons-item-text">залишилось зібрати</p>
+                    </div>
+                    <div class="project-carousel-slide-icons-item">
+                        <img src="media/calendar.png" alt="people" class="project-carousel-slide-icons-item-image">
+                        <p class="project-carousel-slide-icons-item-text-header">{{project.daysStarted}} днів</p>
+                        <p class="project-carousel-slide-icons-item-text">до початку проекту</p>
+                    </div>
+                </div>
             </div>
-        </div>
+        </ks-swiper-slide>
+    </ks-swiper-container>
+    <div class="project-carousel-button-prev" ng-click="projects.prev()"></div>
+    <div class="project-carousel-button-next" ng-click="projects.next()"></div>
+    <button type="button" class="project-carousel-button">Про проект</button>
+    <div class="project-carousel-bullet-wrapper">
+        <div ng-class="'project-carousel-bullet ' + ($index === 0 ? 'project-carousel-bullet-active' : '')" ng-repeat="bullet in projects.projects track by $index" ng-click="projects.goto($index)"></div>
     </div>
 </div>
