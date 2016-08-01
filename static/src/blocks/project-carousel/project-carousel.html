@@ -8,17 +8,19 @@
                 <p class="project-carousel-slide-description">{{project.description}}</p>
                 <div class="project-carousel-slide-icons clearfix" style="width: 390px">
                     <div class="project-carousel-slide-icons-item">
-                        <img src="media/multiple-users-silhouette.png" alt="people" class="project-carousel-slide-icons-item-image">
+                        <div class="people"></div>
                         <p class="project-carousel-slide-icons-item-text-header">{{project.people}} осіб</p>
                         <p class="project-carousel-slide-icons-item-text">внесли кошти</p>
                     </div>
                     <div class="project-carousel-slide-icons-item">
-                        <img src="media/piggy-bank-with-coin.png" alt="people" class="project-carousel-slide-icons-item-image">
+                        <div class="money"></div>
                         <p class="project-carousel-slide-icons-item-text-header">{{project.collected}} грн.</p>
                         <p class="project-carousel-slide-icons-item-text">залишилось зібрати</p>
                     </div>
                     <div class="project-carousel-slide-icons-item">
-                        <img src="media/calendar.png" alt="people" class="project-carousel-slide-icons-item-image">
+                        <div class="calendar">
+                            <div class="calendar-days">{{project.daysStarted}}</div>
+                        </div>
                         <p class="project-carousel-slide-icons-item-text-header">{{project.daysStarted}} днів</p>
                         <p class="project-carousel-slide-icons-item-text">до початку проекту</p>
                     </div>

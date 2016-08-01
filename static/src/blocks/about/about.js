@@ -7,15 +7,7 @@
 
         return {
             restrict: "E",
-            templateUrl: "./blocks/about/about.html",
-            link: link
+            templateUrl: "./blocks/about/about.html"
         };
-
-        function link() {
-            // $('div#about-image').width($('div#about-block').offset().left);
-            // $(window).resize(() => {
-            //     $('div#about-image').width($('div#about-block').offset().left);
-            // });
-        }
     }
 })();

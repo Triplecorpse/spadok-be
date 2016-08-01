@@ -1,10 +1,10 @@
 <div class="video-carousel">
     <div class="container-fluid">
         <div class="row">
-            <div class="col-md-8">
+            <div class="col-md-8 no-padding">
                 <h3 class="video-carousel-header">Відео з Проектів</h3>
                 <div class="video-carousel-container">
-                    <ks-swiper-container id="video-swiper"  show-nav-buttons="false" pagination-clickable="false" direction="horizontal" slides-per-view="3" pagination-is-active="false" space-between="0" initial-slide="1"
+                    <ks-swiper-container id="video-swiper" direction="horizontal" slides-per-view="3" space-between="0" initial-slide="1"
                                          override-parameters="{'centeredSlides':'true'}"
                                          swiper="swiper" on-ready="onReadyVideoSwiper(swiper)">
                         <ks-swiper-slide class="swiper-slide video-carousel-slide" ng-repeat="slide in videos track by $index">
