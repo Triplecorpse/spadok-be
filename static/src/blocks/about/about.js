@@ -12,10 +12,10 @@
         };
 
         function link() {
-            $('div#about-image').width($('div#about-block').offset().left);
-            $(window).resize(() => {
-                $('div#about-image').width($('div#about-block').offset().left);
-            });
+            // $('div#about-image').width($('div#about-block').offset().left);
+            // $(window).resize(() => {
+            //     $('div#about-image').width($('div#about-block').offset().left);
+            // });
         }
     }
 })();

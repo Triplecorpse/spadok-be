@@ -1,9 +1,10 @@
-@mixin block-header($font-color: #000) {
+@mixin block-header($font-color: #000, $header-width: 100%) {
   font-size: 2.4rem;
   font-weight: normal;
   color: $font-color;
   margin: 35px auto;
   text-align: center;
+  width: $header-width;
   &:after {
     content: '';
     display: block;

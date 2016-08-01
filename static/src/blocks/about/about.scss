@@ -3,13 +3,13 @@
   height: 467px;
   margin-top: 85px;
   &-logo {
-    width: 50px;
-    height: 50px;
+    width: 49px;
+    height: 54px;
     margin: 0 auto;
     display: block;
   }
   &-header {
-    @include block-header(#000);
+    @include block-header(#000, 335px);
   }
   &-text {
     font-size: 1.4rem;
@@ -23,10 +23,10 @@
     background-position: 50% 50%;
     background-size: cover;
     background-color: #fff;
-    height: 552px;
-    position: absolute;
-    left: 0;
-    width: 50%;
+    min-height: 552px;
+    min-width: 780px;
+    position: relative;
+    margin-left: -50px;
   }
   &-button {
     margin: auto;
