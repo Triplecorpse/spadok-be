@@ -24,7 +24,6 @@
     background-size: cover;
     background-color: #fff;
     min-height: 552px;
-    min-width: 780px;
     position: relative;
     margin-left: -50px;
   }
@@ -34,13 +33,13 @@
   }
 }
 
-@media (min-width: 768px) {
+@media screen and (min-width: 768px) {
   .about-image {
     display: none;
   }
 }
 
-@media (min-width: 992px) {
+@media screen and (min-width: 992px) {
   .about-image {
     display: block;
   }

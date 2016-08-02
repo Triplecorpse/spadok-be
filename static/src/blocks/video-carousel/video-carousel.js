@@ -8,16 +8,21 @@
         return {
             restrict: "E",
             templateUrl: "./blocks/video-carousel/video-carousel.html",
-            controller: ['$scope', videoCarouselController],
+            controller: ['$scope', '$timeout', videoCarouselController],
             controllerAs: "video",
             link: link
         };
 
-
-
-        function videoCarouselController($scope) {
+        function videoCarouselController($scope, $timeout) {
 
             var vm = this;
+            vm.spw = window.innerWidth > 992 ?
+                3 :
+                window.innerWidth > 768 ?
+                2 :
+                1;
+            vm.centeredSlides = !Boolean(vm.spw % 2);
+            vm.if = true;
 
             class Video {
                 constructor(url, header, date) {
@@ -39,6 +44,7 @@
             ];
 
             $scope.onReadyVideoSwiper = (swiper) => {
+                console.log(swiper);
                 vm.prev = swiper.slidePrev;
                 vm.next = swiper.slideNext;
                 vm.goto = (index) => {
@@ -54,8 +60,20 @@
                     $('.video-carousel-bullet').eq(swiper.activeIndex).addClass('video-carousel-bullet-active');
 
                 });
-            };
 
+                // $(window).resize(() => {
+                // console.log($(window).width());
+                //     // if($(window).width() <= 992) {
+                //         // vm.if = false;
+                //         // $timeout(() => {
+                //         //     vm.if = true;
+                //         // }, 100);
+                //         // vm.spw = 2;
+                //         swiper.update();
+                //         $scope.$apply();
+                //     }
+                // })
+            };
         }
 
         function link(scope) {
