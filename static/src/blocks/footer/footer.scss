@@ -2,7 +2,7 @@
   display: inline-block;
   width: 27px;
   height: 27px;
-  margin: 0 0 0 5px;
+  margin: 0 5px 0 0;
   background: center center no-repeat;
   background-size: contain;
   cursor: pointer;
@@ -49,5 +49,11 @@
 @media screen and (max-width: 992px) {
   .footer {
     margin-top: 0;
+  }
+}
+
+@media screen and (max-width: 1130px) {
+  .footer {
+    font-size: 1rem;
   }
 }
