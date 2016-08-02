@@ -44,7 +44,6 @@
             ];
 
             $scope.onReadyVideoSwiper = (swiper) => {
-                console.log(swiper);
                 vm.prev = swiper.slidePrev;
                 vm.next = swiper.slideNext;
                 vm.goto = (index) => {
@@ -53,7 +52,7 @@
                     $('.video-carousel-bullet').eq(index).addClass('video-carousel-bullet-active');
                 };
 
-                console.log(':::: VIDEO WAS INITIALIZED ::::');
+                console.log(':::: VIDEO SWIPER WAS INITIALIZED ::::');
 
                 swiper.on('onSlideChangeStart', () => {
                     $('.video-carousel-bullet').removeClass('video-carousel-bullet-active');

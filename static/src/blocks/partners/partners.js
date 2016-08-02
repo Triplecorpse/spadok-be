@@ -26,14 +26,14 @@
             }
 
             vm.partners = [
-                new Partner("media/Lipton.png", "media/Lipton.png"),
-                new Partner("media/Philip-Morris-International-Logo-EPS-vector-image.png", "media/Philip-Morris-International-Logo-EPS-vector-image.png"),
-                new Partner("media/PGPhaseLogo.png", "media/PGPhaseLogo.png"),
-                new Partner("media/McDonalds.png", "media/McDonalds-gray.png"),
-                new Partner("media/nestle_chocolate.png", "media/nestle_chocolate.png"),
-                new Partner("media/Statbucks-logo-png.png", "media/Statbucks-logo-png.png"),
-                new Partner("media/Burger_King_Logo.png", "media/Burger_King_Logo.png"),
-                new Partner("media/Dell_Logo.png", "media/Dell_Logo.png"),
+                new Partner("media/Lipton.png", "media/Lipton2.png"),
+                new Partner("media/Philip-Morris-International-Logo-EPS-vector-image.png", "media/Philip-Morris2.png"),
+                new Partner("media/PGPhaseLogo.png", "media/PG2.png"),
+                new Partner("media/McDonalds.png", "media/McDonalds2.png"),
+                new Partner("media/nestle_chocolate.png", "media/nestle2.png"),
+                new Partner("media/Statbucks-logo-png.png", "media/Statbucks2.png"),
+                new Partner("media/Burger_King_Logo.svg.png", "media/Burger_King2.png"),
+                new Partner("media/Dell_Logo.png", "media/Dell2.png"),
             ];
 
             vm.color = (index) => {

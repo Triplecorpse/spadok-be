@@ -5,11 +5,8 @@
   transition: opacity 0.3s ease;
 }
 .subscription {
-  background-image: url('../media/E-mail-images.png');
-  background-repeat: no-repeat;
-  background-position: 50% 50%;
-  background-size: cover;
-  background-color: #245598;
+  background: url('../media/E-mail-images.png') no-repeat 50% 50% #245598;
+  background-size: contain;
   color: #fff;
   height: 355px;
   width: 100%;
@@ -42,8 +39,7 @@
   }
 
   &-submit {
-    background-color: transparent;
-    background-image: url("data:img/png;base64,iVBORw0KGgoAAAANSUhEUgAAABcAAAAPCAQAAAClppzdAAAABGdBTUEAALGPC/xhBQAAACBjSFJNAAB6JgAAgIQAAPoAAACA6AAAdTAAAOpgAAA6mAAAF3CculE8AAAAAmJLR0QAAKqNIzIAAAAJcEhZcwAACxIAAAsSAdLdfvwAAAAHdElNRQfgBxwVMTZhdXalAAAAZklEQVQoz2P4z4AXuv9nQ+YzMeAH7xn2MLAh8f8Tgub/DyFsIKwcRQMxypE0EKccroFY5VANjP/nMygyEAfkGd4Rb3r0/93/uUhSTKzboYqJUw5XTIxyJMWElYcgKyasXBdZ8X8GAELyOp0HVR+CAAAAAElFTkSuQmCC");
+    background: url(data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTgiPz48c3ZnIHZlcnNpb249IjEuMSIgaWQ9ItCh0LvQvtC5XzEiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgeG1sbnM6eGxpbms9Imh0dHA6Ly93d3cudzMub3JnLzE5OTkveGxpbmsiIHg9IjBweCIgeT0iMHB4IiB2aWV3Qm94PSItMC43IDcuMyAyMy43IDE1LjMiIHN0eWxlPSJlbmFibGUtYmFja2dyb3VuZDpuZXcgLTAuNyA3LjMgMjMuNyAxNS4zOyIgeG1sOnNwYWNlPSJwcmVzZXJ2ZSI+PHN0eWxlIHR5cGU9InRleHQvY3NzIj4uc3Qwe2ZpbGw6bm9uZTtzdHJva2U6I2ZmZmZmZjtzdHJva2Utd2lkdGg6MC41ODI2O3N0cm9rZS1saW5lY2FwOnJvdW5kO3N0cm9rZS1saW5lam9pbjpyb3VuZDt9PC9zdHlsZT48bGluZSBjbGFzcz0ic3QwIiB4MT0iLTAuNCIgeTE9IjE0LjkiIHgyPSIyMi43IiB5Mj0iMTQuOSIvPjxsaW5lIGNsYXNzPSJzdDAiIHgxPSIyMi43IiB5MT0iMTQuOSIgeDI9IjE1LjQiIHkyPSIyMi4yIi8+PGxpbmUgY2xhc3M9InN0MCIgeDE9IjIyLjciIHkxPSIxNC45IiB4Mj0iMTUuNCIgeTI9IjcuNiIvPjwvc3ZnPg==) transparent;
     border: none;
     width: 23px;
     height: 15px;

@@ -10,6 +10,9 @@
   }
   &-header {
     @include block-header(#000);
+    width: auto;
+    margin-left: -25px;
+    margin-right: -25px;
   }
 
   &-input {

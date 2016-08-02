@@ -1,13 +1,26 @@
 .partners {
   &-header {
-    @include block-header(#fff);
+    @include block-header(#000);
   }
   &-logo {
-    width: 33.3%;
-    height: 30px;
-    margin: auto;
-    background: #fff center center no-repeat;
-    background-size: contain;
+    width: 50px;
     cursor: pointer;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    &-wrapper {
+      min-height: 50px;
+      position: relative;
+    }
+  }
+}
+
+@media screen and (max-width: 992px) {
+  .partners {
+    &-logo {
+      margin: 20px auto;
+      position: relative;
+    }
   }
 }

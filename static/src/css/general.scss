@@ -38,8 +38,12 @@ button {
   text-transform: uppercase;
   background-color: #5e88c2;
   margin-top: 70px;
-  font-size: 1.2rem;
+  font-size: 1.1rem;
   font-weight: bold;
   cursor: default;
   color: #fff;
+}
+
+.no-padding {
+  padding: 0;
 }
