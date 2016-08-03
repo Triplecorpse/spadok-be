@@ -4,7 +4,7 @@ angular.module('app')
             let day = input.toString();
 
             if(input / 10 > 1 && day[day.length - 2] === '1') {
-                return input + ' днів';
+                return input + ' дней';
             }
 
             switch(day[day.length - 1]) {
@@ -12,16 +12,16 @@ angular.module('app')
                     day += ' день';
                     break;
                 case '2':
-                    day += ' дні';
+                    day += ' дня';
                     break;
                 case '3':
-                    day += ' дні';
+                    day += ' дня';
                     break;
                 case '4':
-                    day += ' дні';
+                    day += ' дня';
                     break;
                 default:
-                    day += ' днів';
+                    day += ' дней';
                     break;
             }
 

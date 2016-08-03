@@ -9,19 +9,19 @@
                     <div class="project-carousel-slide-icons-item">
                         <div class="people"></div>
                         <p class="project-carousel-slide-icons-item-text-header">{{project.people | spdPeople}}</p>
-                        <p class="project-carousel-slide-icons-item-text">внесли кошти</p>
+                        <p class="project-carousel-slide-icons-item-text">{{project.people | spdPeopleDonated}} средства</p>
                     </div>
                     <div class="project-carousel-slide-icons-item">
                         <div class="money"></div>
                         <p class="project-carousel-slide-icons-item-text-header">{{project.collected | spdCurrency : ' ' : 'грн.'}}</p>
-                        <p class="project-carousel-slide-icons-item-text">залишилось зібрати</p>
+                        <p class="project-carousel-slide-icons-item-text">осталось собрать</p>
                     </div>
                     <div class="project-carousel-slide-icons-item">
                         <div class="calendar">
                             <div class="calendar-days">{{project.daysStarted}}</div>
                         </div>
-                        <p class="project-carousel-slide-icons-item-text-header">{{project.daysStarted | spdDays}}</p>
-                        <p class="project-carousel-slide-icons-item-text">до початку проекту</p>
+                        <p class="project-carousel-slide-icons-item-text-header">{{project.daysStarted | spdDays}}<span class="project-carousel-slide-icons-item-text"> до</span></p>
+                        <p class="project-carousel-slide-icons-item-text">начала проекта</p>
                     </div>
                 </div>
             </div>
@@ -29,7 +29,7 @@
     </ks-swiper-container>
     <div class="project-carousel-button-prev" ng-click="projects.prev()" ng-if="projects.projects.length > 1"></div>
     <div class="project-carousel-button-next" ng-click="projects.next()" ng-if="projects.projects.length > 1"></div>
-    <button type="button" class="project-carousel-button">Про проект</button>
+    <button type="button" class="project-carousel-button">О проекте</button>
     <div class="project-carousel-bullet-wrapper" ng-if="projects.projects.length > 1">
         <div ng-class="'project-carousel-bullet ' + ($index === 0 ? 'project-carousel-bullet-active' : '')" ng-repeat="bullet in projects.projects track by $index" ng-click="projects.goto($index)"></div>
     </div>

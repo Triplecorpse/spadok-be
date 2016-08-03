@@ -4,12 +4,12 @@ angular.module('app')
             let people = input.toString();
 
             if(input / 10 > 1 && people[people.length - 2] === '1') {
-                return input + ' осіб';
+                return input + ' особей';
             }
 
             switch(people[people.length - 1]) {
                 case '1':
-                    people += ' особа';
+                    people += ' особь';
                     break;
                 case '2':
                     people += ' особи';
@@ -21,7 +21,7 @@ angular.module('app')
                     people += ' особи';
                     break;
                 default:
-                    people += ' осіб';
+                    people += ' особей';
                     break;
             }
 

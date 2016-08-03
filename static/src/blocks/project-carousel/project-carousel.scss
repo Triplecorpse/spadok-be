@@ -2,8 +2,8 @@
   background-repeat: no-repeat;
   background-position: 50% 50%;
   background-size: contain;
-  width: 50px;
-  height: 50px;
+  width: 30px;
+  height: 30px;
   margin: auto;
 }
 .project-carousel {
@@ -48,9 +48,9 @@
     &-icons {
       width: 390px;
       font-size: 1.2rem;
-      font-weight: 100;
-      margin: auto;
-      margin-top: 30px;
+      font-weight: normal;
+      line-height: 1.6rem;
+      margin: 30px auto;
       &-item {
         float: left;
         width: 130px;
@@ -67,20 +67,19 @@
           position: relative;
           @include icon();
           &-days {
-            margin-top: 13px;
+            margin-top: 12px;
             position: absolute;
             width: 100%;
-            font-size: 3rem;
+            font-size: 2rem;
           }
         }
         &-text-header {
           font-weight: bold;
-          margin: 0;
-          margin-top: 10px;
+          margin: 10px 0 0 0;
         }
         &-text {
-          font-weight: 100;
-          margin: 0;
+          margin: 0 auto;
+          width: 100px;
         }
       }
     }

@@ -1,6 +1,6 @@
 @mixin placeholder-feedback($opacity) {
   font-size: 1.3rem;
-  color: #6f6f6f;
+  color: #000;
   opacity: $opacity;
   transition: opacity 0.3s ease;
 }
@@ -17,7 +17,7 @@
 
   &-input {
     font-size: 1.3rem;
-    border: 1px solid #6f6f6f;
+    border: 1px solid #cdcaca;
     width: 100%;
     height: 50px;
     background: none;
