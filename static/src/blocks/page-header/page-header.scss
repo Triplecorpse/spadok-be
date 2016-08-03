@@ -25,7 +25,8 @@
       height: 96px;
       width: 100px;
       vertical-align: middle;
-      color: #fff;
+      //color: #fff;
+      color: lightgrey;
       @include page-header-transition();
       &-text {
         display: inline-block;

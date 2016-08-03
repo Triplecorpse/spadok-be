@@ -1,7 +1,7 @@
 angular.module('app', ['ksSwiper', 'ui.router']);
 
 angular.module('app').config(['$stateProvider', '$urlRouterProvider', function($stateProvider, $urlRouterProvider) {
-    var states = ['contacts', 'about', 'project', 'projects', 'e404'];
+    var states = ['contacts', 'about', 'project', 'partners', 'projects', 'e404'];
 
     $urlRouterProvider.otherwise("/");
 
