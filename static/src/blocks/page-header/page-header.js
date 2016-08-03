@@ -8,8 +8,18 @@
         return {
             restrict: "E",
             templateUrl: "./blocks/page-header/page-header.html",
+            controller: ['$location', controller],
+            controllerAs: 'header',
             link: link
         };
+
+        function controller($location) {
+            var vm = this;
+
+            vm.gotoIndex = () => {
+                $location.url("/");
+            };
+        }
 
         function link(scope) {
             $(window).scroll(() => {

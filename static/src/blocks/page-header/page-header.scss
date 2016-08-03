@@ -11,6 +11,7 @@
   &-logo {
     height: 96px;
     margin-top: 25px;
+    cursor: pointer;
     @include page-header-transition();
     &-image {
       display: inline-block;

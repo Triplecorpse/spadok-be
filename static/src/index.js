@@ -20,7 +20,6 @@ angular.module('app').config(['$stateProvider', '$urlRouterProvider', function($
             controllerAs: `${element}`
         })
     });
-    console.log($stateProvider);
 }]);
 
 angular.module('app').controller('appController', function() {
