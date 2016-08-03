@@ -19,6 +19,10 @@
             vm.gotoIndex = () => {
                 $location.url("/");
             };
+
+            vm.isActive = (path) => {
+                return $location.path() === path;
+            };
         }
 
         function link(scope) {

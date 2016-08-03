@@ -1,9 +1,6 @@
 .review-carousel {
-  background-image: url('../media/chat copy 2.png');
-  background-repeat: no-repeat;
-  background-position: 50% 50%;
-  background-size: auto auto;
-  background-color: #245598;
+  background: url('../media/chat copy 2.png') repeat-x 50% 50% #245598;
+  background-size: contain;
   color: #fff;
   height: 515px;
   width: 100%;

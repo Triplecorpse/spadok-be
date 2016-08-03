@@ -13,10 +13,24 @@
                 <div class="pull-right page-header-logo">
                     <nav class="page-header-main-navigation">
                         <ul class="page-header-main-navigation-list">
-                            <li class="page-header-main-navigation-list-item"><a href="#/about">О нас</a></li>
-                            <li class="page-header-main-navigation-list-item"><a href="#/projects">Проекты</a></li>
-                            <li class="page-header-main-navigation-list-item"><a href="#/partners">Партнёры</a></li>
-                            <li class="page-header-main-navigation-list-item"><a href="#/contacts">Контакты</a></li>
+                            <li class="page-header-main-navigation-list-item" ng-class="{active: header.isActive('/about')}">
+                                <a href="#/about" class="page-header-main-navigation-list-item-link">О нас</a>
+                            </li>
+                            <li class="page-header-main-navigation-list-item" ng-class="{active: header.isActive('/projects')}">
+                                <a href="#/projects">Проекты</a>
+                            </li>
+                            <li class="page-header-main-navigation-list-item" ng-class="{active: header.isActive('/partners')}">
+                                <a href="#/partners">Партнёры</a>
+                            </li>
+                            <li class="page-header-main-navigation-list-item" ng-class="{active: header.isActive('/contacts')}">
+                                <a href="#/contacts">Контакты</a>
+                            </li>
+                            <!--<li class="page-header-main-navigation-list-item lang">ukr-->
+                                <!--<ul>-->
+                                    <!--<li>ukr</li>-->
+                                    <!--<li>eng</li>-->
+                                <!--</ul>-->
+                            <!--</li>-->
                         </ul>
                     </nav>
                 </div>

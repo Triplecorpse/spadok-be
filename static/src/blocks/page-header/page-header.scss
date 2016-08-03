@@ -37,6 +37,9 @@
         margin: 0;
         width: 90px;
         @include page-header-transition();
+        &:hover {
+          color: #245598;
+        }
       }
     }
   }
@@ -54,6 +57,20 @@
         display: inline-block;
         margin: 0 45px 0 0;
         font-weight: normal;
+        & a {
+          &, &:active, &:visited, &:focus {
+            //color: #fff;
+            color: lightgrey;
+            @include page-header-transition();
+          }
+          &:hover {
+            color: #245598;
+            @include page-header-transition();
+          }
+        }
+        &.active>a {
+          color: #62c46b;
+        }
         &:last-child {
           margin-right: 0;
         }
@@ -92,7 +109,6 @@
     }
     & a, & a:active, & a:visited {
       color: #000;
-      text-decoration: none;
       @include page-header-transition();
     }
     & a:hover {

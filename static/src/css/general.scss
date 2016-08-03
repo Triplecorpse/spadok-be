@@ -5,18 +5,7 @@ html, body {
   font-family: "Open Sans", sans-serif;
 }
 
-a, a:active, a:visited {
-  //color: #fff;
-  color: lightgrey;
-  text-decoration: none;
-}
-
-a:hover {
-  color: #5e88c2;
-  text-decoration: none;
-}
-
-a:visited, a:active {
+a, a:active, a:visited, a:hover, a:focus {
   text-decoration: none;
 }
 
