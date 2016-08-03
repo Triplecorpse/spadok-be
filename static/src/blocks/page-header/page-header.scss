@@ -1,3 +1,11 @@
+$nav-top-font-color: lightgrey;
+$nav-sticky-font-color: black;
+$nav-top-bg-color: transparent;
+$nav-sticky-bg-color: white;
+$nav-hover-color: #245598;
+$nav-active-color: #62c46b;
+$nav-sticky-border-color: #e4e4e4;
+
 @mixin page-header-transition() {
   transition: all 0.3s ease;
 }
@@ -7,11 +15,12 @@
   width: 100%;
   z-index: 20;
   height: $header-height;
-  background-color: transparent;
+  background-color: $nav-top-bg-color;
   &-logo {
     height: 96px;
     margin-top: 25px;
     cursor: pointer;
+    position: relative;
     @include page-header-transition();
     &-image {
       display: inline-block;
@@ -26,8 +35,7 @@
       height: 96px;
       width: 100px;
       vertical-align: middle;
-      //color: #fff;
-      color: lightgrey;
+      color: $nav-top-font-color;
       @include page-header-transition();
       &-text {
         display: inline-block;
@@ -38,7 +46,7 @@
         width: 90px;
         @include page-header-transition();
         &:hover {
-          color: #245598;
+          color: $nav-hover-color;
         }
       }
     }
@@ -57,19 +65,19 @@
         display: inline-block;
         margin: 0 45px 0 0;
         font-weight: normal;
+        color: $nav-top-font-color;
         & a {
           &, &:active, &:visited, &:focus {
-            //color: #fff;
-            color: lightgrey;
+            color: $nav-top-font-color;
             @include page-header-transition();
           }
           &:hover {
-            color: #245598;
+            color: $nav-hover-color;
             @include page-header-transition();
           }
         }
-        &.active>a {
-          color: #62c46b;
+        &.active > a {
+          color: $nav-active-color;
         }
         &:last-child {
           margin-right: 0;
@@ -83,12 +91,12 @@
     width: 100%;
     z-index: 20;
     height: 80px;
-    background-color: #fff;
-    border-bottom: 1px solid #e4e4e4;
+    background-color: $nav-sticky-bg-color;
+    border-bottom: 1px solid $nav-sticky-border-color;
     @include page-header-transition();
     & .page-header-logo-text-wrapper {
       width: 300px;;
-      color: #000;
+      color: $nav-sticky-font-color;
       height: 100%;
       font-weight: normal;
       @include page-header-transition();
@@ -107,17 +115,75 @@
         @include page-header-transition();
       }
     }
-    & a, & a:active, & a:visited {
-      color: #000;
+    & a, & a:active, & a:visited, & a:focus {
+      color: $nav-sticky-font-color;
       @include page-header-transition();
     }
     & a:hover {
-      color: #5e88c2;
-      text-decoration: none;
+      color: $nav-hover-color;
+      @include page-header-transition();
     }
     & .page-header-main-navigation-list {
       margin: 0;
       @include page-header-transition();
+    }
+    & .lang-list {
+      &-current {
+        color: $nav-sticky-font-color;
+        border-color: $nav-sticky-border-color;
+        background: $nav-sticky-bg-color;
+        @include page-header-transition();
+      }
+      &-wrapper {
+        border: 1px solid $nav-sticky-border-color;
+        color: $nav-sticky-font-color;
+        bottom: -27px;
+        background: $nav-sticky-bg-color;
+      }
+    }
+  }
+}
+
+.lang-list {
+  &-wrapper {
+    position: absolute;
+    right: 1px;
+    bottom: 22px;
+    width: 50px;
+    border: 1px solid lightgrey;
+    border-radius: 3px;
+  }
+  &-menu {
+    padding: 3px 20px 3px 12px;
+    list-style: none;
+    font-size: 1.142rem;
+  }
+  &-item {
+    &:hover {
+      color: $nav-hover-color;
+    }
+  }
+  &-current{
+    border: 1px solid lightgrey;
+    border-radius: 3px;
+    padding-top: 3px;
+    padding-bottom: 3px;
+    padding-left: 12px;
+    display: inline-block;
+    position: relative;
+    width: 50px;
+    font-size: 1.142rem;
+    @include page-header-transition();
+    &:after {
+      content: '';
+      background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAcAAAADCAMAAABoHeX3AAAAGFBMVEUAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABWNxwqAAAAB3RSTlMA8zBKbPzHby5K1gAAAB1JREFUCNcFwYcBACAMAyC6zP8fC/aS3DKVGujXfAQAAEGdCa18AAAAAElFTkSuQmCC);
+      background-repeat: no-repeat;
+      width: 7px;
+      height: 3px;
+      display: block;
+      position: absolute;
+      top: 11px;
+      right: 7px;
     }
   }
 }

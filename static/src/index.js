@@ -22,13 +22,23 @@ angular.module('app').config(['$stateProvider', '$urlRouterProvider', function($
     });
 }]);
 
-angular.module('app').controller('appController', function() {
+angular.module('app').controller('appController', ['$window', function($window) {
 
     var vm = this;
     vm.title = "Спадок";
+    var lang = $window.navigator.languages[0] || $window.navigator.language || $window.navigator.userLanguage;
+
+    console.log(lang);
+
+    vm.hideLangMenu = (event) => {
+        console.log(event);
+        if(!event.target.classList.contains('lang-list-current')) {
+            vm.showLang = false;
+        }
+    };
 
     String.prototype.splice = function(start, delCount, newSubStr) {
         return this.slice(0, start) + newSubStr + this.slice(start + Math.abs(delCount));
     };
 
-});
+}]);
