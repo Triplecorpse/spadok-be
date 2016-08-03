@@ -57,7 +57,7 @@
                 swiper.on('onSlideChangeStart', () => {
                     $('.video-carousel-bullet').removeClass('video-carousel-bullet-active');
                     $('.video-carousel-bullet').eq(swiper.activeIndex).addClass('video-carousel-bullet-active');
-
+                    console.log(swiper.activeIndex);
                 });
 
                 // $(window).resize(() => {

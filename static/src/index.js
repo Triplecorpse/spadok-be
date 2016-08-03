@@ -16,11 +16,7 @@ angular.module('app', ['ksSwiper']);
 angular.module('app').controller('appController', function() {
 
     var vm = this;
-    console.log(vm);
     vm.title = "Спадок";
-    // angular.extend(vm, {
-    //     title
-    // });
 
     String.prototype.splice = function(start, delCount, newSubStr) {
         return this.slice(0, start) + newSubStr + this.slice(start + Math.abs(delCount));
