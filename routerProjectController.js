@@ -7,6 +7,7 @@ var routerProjectController = (app) => {
             isPublished: true
         }, (err, projects) => {
             if (err) res.send(err);
+            res.header('Cache-Control', 'private, no-cache, no-store, must-revalidate');
             res.json(projects);
         })
     });
