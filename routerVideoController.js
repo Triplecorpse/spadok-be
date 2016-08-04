@@ -1,6 +1,4 @@
 var routerVideoController = (app) => {
-    const databaseVideoController = require('./databaseVideoController.js');
-
     app.post('/adminium/addvideo', function (req, res) {
         if(req.session.isLoggedIn){
             databaseVideoController().save(req.body)

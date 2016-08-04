@@ -1,8 +1,13 @@
 var routerController = (app) => {
     const fs = require('fs');
     const express = require('express');
-    const database = require('./databaseProjectController.js');
+    const lang = require('./services/lang.js');
 
+    app.get('/api/language', (req, res) => {
+        var al = req.get('Accept-Language');
+        res.set('Content-Language', lang(al));
+        res.sendStatus(200);
+    });
 
     app.get('/health', function (req, res) {
         res.writeHead(200);

@@ -1,7 +1,7 @@
 angular.module('app')
     .filter('spdPeopleDonated', () => {
         return (input) => {
-            let people = input.toString();
+            let people = (input || 0).toString();
 
             if(input / 10 > 1 && people[people.length - 2] === '1') {
                 return 'внесли';

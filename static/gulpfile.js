@@ -9,7 +9,6 @@ var batch = require('gulp-batch');
 
 var paths = {
     scripts: ['./bower_components/jquery/dist/jquery.min.js',
-        // './bower_components/jquery-ui/jquery-ui.min.js',
         './bower_components/angular/angular.min.js',
         './bower_components/angular-ui-router/release/angular-ui-router.min.js',
         // './bower_components/lodash/dist/lodash.core.min.js',
@@ -19,7 +18,7 @@ var paths = {
         './src/config.js', './src/index.js', './src/states/**/*.js', './src/filters/**/*.js', './src/blocks/**/*.js', './src/services/**/*.js'],
     styles: ['./src/css/bootstrap.css',
         './src/css/swiper.css',
-        './src/css/general.scss', './src/css/mixins.scss', './src/states/**/*.scss', './src/blocks/**/*.scss'],
+        './src/css/general.scss', './src/css/variablse.scss', './src/css/mixins.scss', './src/states/**/*.scss', './src/blocks/**/*.scss'],
     fonts: ['./bower_components/bootstrap/dist/fonts/**/*.*', './src/font/**/*.*'],
     htmls: ['./src/index.html', './src/**/*.html'],
     media: ['./src/media/**/*.*', './src/favicon.ico'],
@@ -29,6 +28,7 @@ var paths = {
 var admin = {
     scripts: ['./bower_components/jquery/dist/jquery.min.js',
         './bower_components/angular/angular.min.js',
+        './bower_components/ng-file-upload/ng-file-upload.min.js',
         './src/admin/js/bootstrap.min.js',
         './src/admin/js/index.js',
         './src/admin/blocks/**/*.js', './src/admin/services/**/*.js'],

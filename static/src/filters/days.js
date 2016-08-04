@@ -1,7 +1,7 @@
 angular.module('app')
     .filter('spdDays', () => {
         return (input) => {
-            let day = input.toString();
+            let day = (input || 0).toString();
 
             if(input / 10 > 1 && day[day.length - 2] === '1') {
                 return input + ' дней';

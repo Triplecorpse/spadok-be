@@ -28,10 +28,7 @@ angular.module('app').controller('appController', ['$window', function($window) 
     vm.title = "Спадок";
     var lang = $window.navigator.languages[0] || $window.navigator.language || $window.navigator.userLanguage;
 
-    console.log(lang);
-
     vm.hideLangMenu = (event) => {
-        console.log(event);
         if(!event.target.classList.contains('lang-list-current')) {
             vm.showLang = false;
         }

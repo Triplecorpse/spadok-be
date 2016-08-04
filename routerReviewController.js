@@ -1,5 +1,4 @@
 var routerReviewController = (app) => {
-    const databaseReviewController = require('./databaseReviewController.js');
 
     app.post('/adminium/addreview', function (req, res) {
         if(req.session.isLoggedIn){

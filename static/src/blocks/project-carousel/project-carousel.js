@@ -8,45 +8,41 @@
         return {
             restrict: "E",
             templateUrl: "./blocks/project-carousel/project-carousel.html",
-            controller: ['$scope', projectCarouselController],
+            controller: ['$scope', '$http', projectCarouselController],
             controllerAs: "projects",
             link: link
         };
 
-        function projectCarouselController($scope) {
+        function projectCarouselController($scope, $http) {
             var vm = this;
+            var date = new Date();
 
-            class Project {
-                constructor(name, description, image, people, collected, daysStarted) {
-                    angular.extend(this, {
-                        name,
-                        description,
-                        image,
-                        people,
-                        collected,
-                        daysStarted
-                    });
-                }
-            }
+            var defaultProject = {
+                name: "Добро пожаловать",
+                description: "К сожалению, на данный момент нет ни одного активного проекта. Чтобы создать проект, нужно зайти в администраторскую панель и воспользоваться соответствующим функционалом.",
+                collected: 0,
+                daysStarted: 0,
+                people: 0
+            };
 
-            vm.projects = [
-                new Project("Дитячий ігровий майданчик у Пущі Водиці",
-                    "У центрі Киві майже у кожному дворі присутній ігровий майданчик. На жаль, про мальовничу Пущу Водицю це важко сказати. Так не повинно бути, тому що кодна дитина повинна кудись спрямовувати свою енергію, а ігровий дитячий майданчик з перешкодами, гірками і годалками - найбільш вдале для того місце.",
-                    "media/children-playground.png",
-                    1, 1225, 1),
-                new Project("Дитячий ігровий майданчик у Пущі ВодиціДитячий ігровий майданчик у Пущі Водиці",
-                    "У центрі Киві майже у кожному дворі присутній ігровий майданчик.",
-                    "media/children-playground.png",
-                    3, 1016801, 3),
-                new Project("Дитячий ігровий майданчик у Пущі Водиці",
-                    "У центрі Киві майже у кожному дворі присутній ігровий майданчик. На жаль, про мальовничу Пущу Водицю це важко сказати. Так не повинно бути, тому що кодна дитина повинна кудись спрямовувати свою енергію, а ігровий дитячий майданчик з перешкодами, гірками і годалками - найбільш вдале для того місце. У центрі Киві майже у кожному дворі присутній ігровий майданчик. На жаль, про мальовничу Пущу Водицю це важко сказати. Так не повинно бути, тому що кодна дитина повинна кудись спрямовувати свою енергію, а ігровий дитячий майданчик з перешкодами, гірками і годалками - найбільш вдале для того місце.",
-                    "media/children-playground.png",
-                    5, 222, 5),
-                new Project("Header",
-                    "Description",
-                    "media/children-playground.png",
-                    12, 1225, 12),
-            ];
+            $http.get(`${window.location.origin}/api/projects`)
+                .then((response) => {
+                    console.log(response.data);
+                    if(response.data.length) {
+                        let projects = response.data.filter((element) => {
+                            let days = new Date(element.date) - date;
+                            element.daysStarted = Math.floor(days / 86400000);
+                            return days >= 0;
+                        });
+                        if(projects.length) {
+                            vm.projects = response.data;
+                        } else {
+                            vm.projects = [defaultProject]
+                        }
+                    } else {
+                        vm.projects = [defaultProject]
+                    }
+                });
 
             $scope.onReadyProjectSwiper = (swiper) => {vm.prev = swiper.slidePrev;
                 console.log(":::: PROJECT SWIPER WAS INITIALIZED ::::");

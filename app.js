@@ -1,24 +1,27 @@
-const http = require('http'),
-    fs = require('fs'),
-    path = require('path'),
-    contentTypes = require('./utils/content-types'),
-    sysInfo = require('./utils/sys-info'),
-    env = process.env,
-    express = require('express'),
-    app = express(),
-    mongoose = require('mongoose');
-
-
+const http = require('http');
+const contentTypes = require('./utils/content-types');
+const env = process.env;
+const express = require('express');
+const app = express();
+const mongoose = require('mongoose');
+const local = 'mongodb://localhost/spadok';
+const bodyParser = require('body-parser');
+const cookieParser = require('cookie-parser');
 const routerGeneralController = require('./routerGeneralController.js');
-const routerLoginController = require('./routerUserController.js');
+const routerUserController = require('./routerUserController.js');
 const routerProjectController = require('./routerProjectController.js');
-const routerReviewController = require('./routerReviewController.js');
 
+
+
+
+mongoose.connect(env.OPENSHIFT_MONGODB_DB_URL || local);
+
+app.use(bodyParser.json());
+app.use(cookieParser());
 app.use(express.static('static/dist'));
 
-routerLoginController(app);
+routerUserController(app);
 routerProjectController(app);
-routerReviewController(app);
 routerGeneralController(app);
 
 app.listen(env.NODE_PORT || 3000, env.NODE_IP || 'localhost', () => {

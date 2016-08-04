@@ -1,10 +1,9 @@
 var routerLoginController = (app) => {
     const fs = require('fs');
-    const express = require('express');
-    const userDatabaseController = require('./databaseUserController.js');
-    const bodyParser = require('body-parser');
+    // const express = require('express');
     const session = require('express-session');
-    const cookieParser = require('cookie-parser');
+    const user = require('./models/user');
+
 
     var newSession = session({
         secret: 'spadokproject',
@@ -17,8 +16,6 @@ var routerLoginController = (app) => {
         }
     });
 
-    app.use(bodyParser.json());
-    app.use(cookieParser());
     app.use(newSession);
 
     app.get('/adminium', function (req, res) {
@@ -31,10 +28,10 @@ var routerLoginController = (app) => {
     app.get('/isloggedin', (req, res) => {
         if ((req.session.cookie._expires > new Date()) && (req.session.isLoggedIn)) {
             req.session.touch();
-            res.status(200).json({});
+            res.sendStatus(200);
         } else {
             req.session.isLoggedIn = false;
-            req.session.destroy(function(err) {
+            req.session.destroy(function (err) {
                 if (err) {
                     console.log(err);
                 }
@@ -44,26 +41,27 @@ var routerLoginController = (app) => {
     });
 
     app.post('/login', function (req, res) {
-        userDatabaseController().find({name: req.body.name})
-            .then((data) => {
-                if (!data) {
-                    findByEmail()
-                }
-                success(data)
-            });
+        user.findOne({name: req.body.name}, (err, user) => {
+            if(err) fail();
+            if(!user) {
+                findByEmail();
+            } else {
+                success(user);
+            }
+        });
 
         function findByEmail() {
-            userDatabaseController().find({email: req.body.name})
-                .then((data) => {
-                    if (!data) {
-                        fail();
-                    }
-                    success(data)
-                });
+            user.findOne({email: req.body.name}, (err, user) => {
+                if(!user || err) {
+                    fail();
+                } else {
+                    success(user)
+                }
+            });
         }
 
         function success(user) {
-            if(req.body.password === user.password) {
+            if (req.body.password === user.password) {
                 user.password = undefined;
                 req.session.isLoggedIn = true;
 
@@ -79,7 +77,7 @@ var routerLoginController = (app) => {
     });
 
     app.post('/newuser', function (req, res) {
-        userDatabaseController().save({
+        user.save({
             name: req.body.name,
             email: req.body.email,
             dateRegistered: new Date(),
@@ -89,7 +87,7 @@ var routerLoginController = (app) => {
 
     app.get('/logout', (req, res) => {
         req.session.isLoggedIn = false;
-        req.session.destroy(function(err) {
+        req.session.destroy(function (err) {
             if (err) {
                 console.log(err);
             } else {
@@ -100,20 +98,26 @@ var routerLoginController = (app) => {
 
     createAdmin();
     function createAdmin() {
-        userDatabaseController().find({name: 'admin'})
-            .then((data) => {
-                if(!data) {
-                    userDatabaseController().save({
-                        name: 'admin',
-                        email: 'eldar.khaitov@gmail.com',
-                        dateRegistered: new Date(),
-                        password: 'admin',
-                        canHandleProjects: true,
-                        canHandleUsers: true
-                    })
-                }
-            });
+        user.find({name: 'admin'}, decide);
+
+        function decide(err, data) {
+            if (err) throw err;
+            if (!data.length) {
+                console.log("not data");
+                let newUser = new user({
+                    name: 'admin',
+                    email: 'eldar.khaitov@gmail.com',
+                    dateRegistered: new Date(),
+                    password: 'admin',
+                    canHandleProjects: true,
+                    canHandleUsers: true
+                });
+                newUser.save((err) => {
+                    if(err) throw err;
+                })
+            }
         }
-    };
+    }
+};
 
 module.exports = routerLoginController;

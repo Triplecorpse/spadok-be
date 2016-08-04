@@ -1,56 +1,64 @@
 var routerProjectController = (app) => {
-    const databaseProjectController = require('./databaseProjectController.js');
+    const project = require('./models/project');
 
-    app.post('/adminium/addproject', function (req, res) {
-        if(req.session.isLoggedIn){
-            databaseProjectController().save(req.body)
-                .then(onSuccess(res), onFail(res));
-        } else {
-            res.sendStatus(401);
-        }
+    app.get('/api/projects', (req, res) => {
+        project.find({
+            isCompleted: false,
+            isPublished: true
+        }, (err, projects) => {
+            if (err) res.send(err);
+            res.json(projects);
+        })
     });
 
     app.get('/adminium/getprojects', (req, res) => {
         if(req.session.isLoggedIn){
-            databaseProjectController().find()
-                .then(onSuccess(res), onFail(res));
+            project.find((err, projects) => {
+                if (err) res.send(err);
+                res.json(projects);
+            });
         } else {
-            res.sendStatus(401);
+            res.sendStatus(401)
         }
     });
 
-    app.post('/adminium/removeproject', (req, res) => {
+    app.post('/adminium/addproject', function (req, res) {
         if(req.session.isLoggedIn){
-            databaseProjectController().remove(req.body)
-                .then(onSuccess(res), onFail(res));
+            let newProject = new project(req.body);
+            newProject.save(req.body, (err,project) => {
+                if (err) res.send(err);
+                res.json(project);
+            });
         } else {
-            res.sendStatus(401);
+            res.sendStatus(401)
         }
     });
 
-    app.post('/adminium/updateproject', (req, res) => {
+
+    app.delete('/adminium/removeproject/:id', (req, res) => {
         if(req.session.isLoggedIn){
-            databaseProjectController().update(req.body)
-                .then(onSuccess(res), onFail(res));
+            project.find({_id: req.params.id}).remove((err, project) => {
+                if (err) res.send(err);
+                res.json(project);
+            })
         } else {
-            res.sendStatus(401);
+            res.sendStatus(401)
         }
     });
 
-    function onSuccess(res) {
-        return (result, msg) => {
-            console.log("Success!", msg);
-            res.status(200).json(result);
+    app.put('/adminium/updateproject', (req, res) => {
+        if(req.session.isLoggedIn) {
+            let id = req.body._id;
+            req.body._id = undefined;
+            let updatedProject = new project(req.body);
+            project.findByIdAndUpdate(id, updatedProject, (err, project) => {
+                if (err) res.send(err);
+                res.json(project);
+            });
+        } else {
+            res.sendStatus(401)
         }
-    }
-
-    function onFail(res) {
-        return (reason, msg) => {
-            console.log("Fail!", msg);
-            res.status(500).json(reason);
-        }
-    }
-
+    });
 };
 
 module.exports = routerProjectController;

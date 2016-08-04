@@ -1,8 +1,9 @@
 <div class="project-carousel" ng-if="projects.projects.length > 0">
-    <ks-swiper-container loop="true" direction="horizontal" slides-per-view="1"
+    <ks-swiper-container loop="projects.projects.length > 1" direction="horizontal" slides-per-view="1"
                          swiper="swiper" on-ready="onReadyProjectSwiper(swiper)" class="swiper-container">
         <ks-swiper-slide class="swiper-slide project-carousel-slide" ng-repeat="project in projects.projects track by $index">
-            <div class="project-carousel-slide-wrapper">
+            <div class="project-carousel-slide-wrapper" style="background-image: url({{project.image}})">
+                <div class="project-carousel-slide-layer"></div>
                 <h3 class="project-carousel-slide-header">{{project.name}}</h3>
                 <p class="project-carousel-slide-description">{{project.description}}</p>
                 <div class="project-carousel-slide-icons clearfix" style="width: 390px">
@@ -13,7 +14,7 @@
                     </div>
                     <div class="project-carousel-slide-icons-item">
                         <div class="money"></div>
-                        <p class="project-carousel-slide-icons-item-text-header">{{project.collected | spdCurrency : ' ' : 'грн.'}}</p>
+                        <p class="project-carousel-slide-icons-item-text-header">{{project.money | spdCurrency : ' ' : 'грн.'}}</p>
                         <p class="project-carousel-slide-icons-item-text">осталось собрать</p>
                     </div>
                     <div class="project-carousel-slide-icons-item">

@@ -28,12 +28,10 @@
                     $scope.people = newVal.people;
                     $scope.money = newVal.money;
                     $scope.date = new Date(newVal.date);
-                    $scope.isPeopleShown = newVal.isPeopleShown;
-                    $scope.isMoneyShown = newVal.isMoneyShown;
-                    $scope.isDaysShown = newVal.isDaysShown;
                     $scope.isPublished = newVal.isPublished;
+                    $scope.isCompleted = newVal.isCompleted;
                 } else {
-                    $scope.name = $scope.description = $scope.people = $scope.money = $scope.date = $scope.isPeopleShown = $scope.isMoneyShown = $scope.isDaysShown = $scope.isPublished = null;
+                    $scope.name = $scope.description = $scope.people = $scope.money = $scope.date = $scope.isCompleted = $scope.isPublished = null;
                 }
             }, true);
 
@@ -48,9 +46,7 @@
             };
 
             $scope.delete = () => {
-                $http.post('/adminium/removeproject', {
-                    id: $scope.init._id
-                })
+                $http.delete(`/adminium/removeproject/${$scope.init._id}`)
                     .then(success, fail);
             };
 
@@ -61,25 +57,21 @@
                     people: $scope.people,
                     money: $scope.money,
                     date: $scope.date,
-                    isPeopleShown: $scope.isPeopleShown,
-                    isMoneyShown: $scope.isMoneyShown,
-                    isDaysShown: $scope.isDaysShown,
+                    isCompleted: $scope.isCompleted,
                     isPublished: $scope.isPublished
                 })
                     .then(success, fail);
             }
 
             function update()  {
-                $http.post('/adminium/updateproject', {
+                $http.put('/adminium/updateproject', {
                     _id: $scope.init._id,
                     name: $scope.name,
                     description: $scope.description,
                     people: $scope.people,
                     money: $scope.money,
                     date: $scope.date,
-                    isPeopleShown: $scope.isPeopleShown,
-                    isMoneyShown: $scope.isMoneyShown,
-                    isDaysShown: $scope.isDaysShown,
+                    isCompleted: $scope.isCompleted,
                     isPublished: $scope.isPublished
                 })
                     .then(success, fail);
@@ -89,7 +81,7 @@
                 $scope.statusText = s200;
                 $scope.statusClassName = "label label-success";
                 $scope.isQueriing = false;
-                $scope.name = $scope.description = $scope.people = $scope.money = $scope.date = $scope.isPeopleShown = $scope.isMoneyShown = $scope.isDaysShown = $scope.isPublished = null;
+                $scope.name = $scope.description = $scope.people = $scope.money = $scope.date = $scope.isCompleted = $scope.isPublished = null;
                 viewService.updateProjects();
                 final();
                 return data;
