@@ -52,13 +52,13 @@
 
             function add() {
                 $http.post('/adminium/addproject', {
-                    name: $scope.name,
-                    description: $scope.description,
-                    people: $scope.people,
-                    money: $scope.money,
-                    date: $scope.date,
-                    isCompleted: $scope.isCompleted,
-                    isPublished: $scope.isPublished
+                    name: $scope.name || '',
+                    description: $scope.description || '',
+                    people: $scope.people || 0,
+                    money: $scope.money || 0,
+                    date: $scope.date || new Date(),
+                    isCompleted: $scope.isCompleted || false,
+                    isPublished: $scope.isPublished || false
                 })
                     .then(success, fail);
             }
