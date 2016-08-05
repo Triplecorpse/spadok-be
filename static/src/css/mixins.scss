@@ -82,3 +82,31 @@
   height: 50px;
   width: 50px;
 }
+
+@mixin button-donate() {
+  background-color: #62c46b;
+  &:hover {
+    border: 1px solid #62c46b;
+    background-color: transparent;
+    color: #62c46b;
+  }
+}
+
+@mixin button-type-2() {
+  background-color: transparent;
+  border: 1px solid rgba(255, 255, 255, 0.4);
+  &:hover {
+    border: none;
+    background-color: #eaeef5;
+    color: #245598;
+  }
+}
+
+@mixin icon() {
+  background-repeat: no-repeat;
+  background-position: 50% 50%;
+  background-size: contain;
+  width: 33px;
+  height: 33px;
+  margin: auto;
+}

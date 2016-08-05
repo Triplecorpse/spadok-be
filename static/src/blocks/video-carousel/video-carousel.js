@@ -52,12 +52,12 @@
                     $('.video-carousel-bullet').eq(index).addClass('video-carousel-bullet-active');
                 };
 
-                console.log(':::: VIDEO SWIPER WAS INITIALIZED ::::');
+                // console.log(':::: VIDEO SWIPER WAS INITIALIZED ::::');
 
                 swiper.on('onSlideChangeStart', () => {
                     $('.video-carousel-bullet').removeClass('video-carousel-bullet-active');
                     $('.video-carousel-bullet').eq(swiper.activeIndex).addClass('video-carousel-bullet-active');
-                    console.log(swiper.activeIndex);
+                    // console.log(swiper.activeIndex);
                 });
 
                 // $(window).resize(() => {

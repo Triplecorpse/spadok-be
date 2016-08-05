@@ -1,0 +1,22 @@
+<div class="project-item-wrapper">
+    <img ng-src="{{project.image}}" alt="Project Header" class="project-item-image">
+    <h3 class="project-item-header">{{project.name}}</h3>
+    <p class="project-item-text">{{project.description}}</p>
+    <button class="project-item-button">о проекте</button>
+    <div class="project-item-stats">
+        <div class="project-item-stats-icon-wrapper">
+            <div class="project-item-stats-icon-people"></div>
+            <div class="project-item-stats-icon-text">{{project.people}} волонтёров</div>
+        </div>
+        <div class="project-item-stats-icon-wrapper">
+            <div class="project-item-stats-icon-money"></div>
+            <div class="project-item-stats-icon-text">{{project.money | spdCurrency : ' ' : 'грн.'}} необходимо</div>
+        </div>
+        <div class="project-item-stats-icon-wrapper">
+            <div class="project-item-stats-icon-calendar">
+                <div class="project-item-stats-icon-calendar-days">{{project.days}}</div>
+            </div>
+            <div class="project-item-stats-icon-text">{{project.days | spdDays}} осталось</div>
+        </div>
+    </div>
+</div>

@@ -1,6 +1,8 @@
 angular.module('app')
     .filter('spdPeople', () => {
-        return (input) => {
+        return (input, simpleText) => {
+            if(simpleText) return input;
+
             let people = (input || 0).toString();
 
             if(input / 10 > 1 && people[people.length - 2] === '1') {

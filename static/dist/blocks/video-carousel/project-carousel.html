@@ -1,7 +1,7 @@
 <div class="project-carousel" ng-if="carousel.projects.length > 0">
     <div class="container">
         <div class="row">
-            <div class="col-md-8">
+            <div class="col-md-12">
                 <ks-swiper-container loop="true" show-nav-buttons="true" pagination-clickable="true" direction="horizontal" slides-per-view="1" pagination-is-active="true"
                                      swiper="swiper" on-ready="project.onReadyProjectSwiper(swiper)" class="swiper-container" autoplay="true">
                     <ks-swiper-slide class="swiper-slide project-carousel-slide" ng-repeat="project in carousel.projects">

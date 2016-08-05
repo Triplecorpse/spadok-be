@@ -9,10 +9,21 @@
                 <label for="project-description">Description</label>
                 <textarea class="form-control" rows="5" id="project-description" placeholder="Description" ng-model="description"></textarea>
             </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-6">
             <div class="form-group">
                 <label for="project-picture">Picture</label>
                 <input type="file" id="project-picture" name="file">
-                <p class="help-block">Upload a picture related to this project</p>
+                <p class="help-block">Upload a picture to be considered as main for this project</p>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="form-group">
+                <label for="project-picture">Picture</label>
+                <input type="file" id="project-pictures" name="file" multiple>
+                <p class="help-block">Upload picture gallery for this project</p>
             </div>
         </div>
     </div>

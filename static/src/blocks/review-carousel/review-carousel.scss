@@ -46,10 +46,9 @@
   }
 
   &-button {
+    @include button-type-2();
     display: block;
     margin: 30px auto 0;
-    background-color: transparent;
-    border: 1px solid #7c99c1;
     width: 180px;
   }
 

@@ -11,7 +11,8 @@
   height: 355px;
   width: 100%;
   &-wrapper {
-    width: 100%;
+    width: 25%;
+    margin: auto;
   }
   &-header {
     @include block-header(#fff)
@@ -53,5 +54,11 @@
     position: relative;
     width: 100%;
     height: 50px;
+  }
+}
+
+@media (max-width: 992px) {
+  .subscription-wrapper {
+    width: 100%;
   }
 }

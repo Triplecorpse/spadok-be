@@ -19,8 +19,14 @@ button {
   margin-top: 70px;
   font-size: 1.1rem;
   font-weight: bold;
-  cursor: default;
+  cursor: pointer;
   color: #fff;
+  outline: none;
+  &:hover {
+    color: #5e88c2;
+    border: 1px solid #5e88c2;
+    background: transparent;
+  }
 }
 
 .no-padding {

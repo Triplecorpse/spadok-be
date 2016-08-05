@@ -1,0 +1,23 @@
+.projects-list {
+  &-button {
+    color: #000;
+    background: none;
+    margin-top: 0;
+    &.active {
+      color: #fff;
+      background: #5e88c2;
+    }
+    &-wrapper {
+      margin: 45px auto 25px;
+      text-align: center;
+      width: auto;
+    }
+  }
+  &-wrapper {
+    width: auto;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+}

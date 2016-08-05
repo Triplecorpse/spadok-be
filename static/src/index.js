@@ -22,13 +22,24 @@ angular.module('app').config(['$stateProvider', '$urlRouterProvider', function($
     });
 }]);
 
-angular.module('app').controller('appController', ['$window', function($window) {
+angular.module('app').controller('appController', ['$window', '$scope', 'dataService', function($window, $scope, dataService) {
 
     var vm = this;
     vm.title = "Спадок";
+    dataService.init()
+        .then(() => {
+            vm.isProjectsLoaded = true;
+    });
+
+    $(window).scroll(() => {
+        if(vm.showLang) {
+            vm.showLang = false;
+            $scope.$apply();
+        }
+    });
 
     vm.hideLangMenu = (event) => {
-        if(!event.target.classList.contains('lang-list-current')) {
+        if (!event.target.classList.contains('lang-list-current')) {
             vm.showLang = false;
         }
     };

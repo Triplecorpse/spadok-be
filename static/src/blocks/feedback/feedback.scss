@@ -6,7 +6,8 @@
 }
 .feedback {
   &-wrapper {
-    width: 100%;
+    width: 25%;
+    margin: auto;
   }
   &-header {
     @include block-header(#000);
@@ -47,6 +48,18 @@
   }
 
   &-input-group {
+    width: 100%;
+  }
+}
+
+//@media (max-width: 1200px) {
+//  .feedback-wrapper {
+//    width: 50%;
+//  }
+//}
+
+@media (max-width: 992px) {
+  .feedback-wrapper {
     width: 100%;
   }
 }

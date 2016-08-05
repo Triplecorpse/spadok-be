@@ -44,7 +44,7 @@
                     $('.review-carousel-bullet').eq(index).addClass('review-carousel-bullet-active');
                 };
 
-                console.log(':::: REVIEW SWIPER WAS INITIALIZED ::::');
+                // console.log(':::: REVIEW SWIPER WAS INITIALIZED ::::');
 
                 swiper.on('onSlideChangeStart', () => {
                     let realIndex;
