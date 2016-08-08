@@ -1,7 +1,7 @@
 angular.module('app', ['ksSwiper', 'ui.router']);
 
 angular.module('app').config(['$stateProvider', '$urlRouterProvider', function($stateProvider, $urlRouterProvider) {
-    var states = ['contacts', 'about', 'project', 'partners', 'projects', 'e404'];
+    var states = ['contacts', 'about', 'partners', 'projects', 'e404'];
 
     $urlRouterProvider.otherwise("/");
 
@@ -10,6 +10,11 @@ angular.module('app').config(['$stateProvider', '$urlRouterProvider', function($
         templateUrl: "states/index/index.html",
         controller: "mainController",
         controllerAs: "main"
+    }).state("project", {
+        url: "/project/{projectId}",
+        templateUrl: "states/project/project.html",
+        controller: "projectController",
+        controllerAs: "project"
     });
 
     states.forEach((element) => {
@@ -47,5 +52,4 @@ angular.module('app').controller('appController', ['$window', '$scope', 'dataSer
     String.prototype.splice = function(start, delCount, newSubStr) {
         return this.slice(0, start) + newSubStr + this.slice(start + Math.abs(delCount));
     };
-
 }]);

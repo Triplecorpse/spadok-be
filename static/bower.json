@@ -20,10 +20,10 @@
     "bootstrap": "^3.3.6",
     "angular": "~1.4.1",
     "angular-ui-router": "^0.3.1",
-    "lodash": "^4.13.1",
     "Swiper": "swiper#^3.3.1",
     "angular-swiper": "^0.4.0",
     "jquery-ui": "^1.12.0",
-    "ng-file-upload": "^12.0.4"
+    "ng-file-upload": "^12.0.4",
+    "underscore": "^1.8.3"
   }
 }

@@ -11,13 +11,8 @@
                     money: "=",
                     days: "=",
                     options: "="
-                },
-                link: link
+                }
             };
-
-            function link(scope, element, attributes) {
-                console.log(element);
-            }
         }
     ]);
 })();

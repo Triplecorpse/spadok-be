@@ -1,5 +1,8 @@
-angular.module('app').controller('projectController', function() {
+angular.module('app').controller('projectController', ['$stateParams', 'dataService', function($stateParams, dataService) {
     var vm = this;
-    document.title = 'Допомога бійцям АТО - Спадок';
-
-});
+    vm.project = _.find(dataService.projects, (element) => {
+        return element._id === $stateParams.projectId;
+    });
+    console.log(vm.project);
+    document.title = `${vm.project.name} - Спадок`;
+}]);

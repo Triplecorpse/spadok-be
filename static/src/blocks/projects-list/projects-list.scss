@@ -14,10 +14,35 @@
     }
   }
   &-wrapper {
-    width: auto;
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
-    justify-content: center;
+    margin: auto;
+    margin-bottom: 80px;
+    width: 430px;
+    &-area {
+      margin: -25px;
+    }
+  }
+}
+
+@media (min-width: 2151px) {
+  .projects-list-wrapper {
+    width: 2150px;
+  }
+}
+
+@media (max-width: 2150px) {
+  .projects-list-wrapper {
+    width: 1720px;
+  }
+}
+
+@media (max-width: 1720px) {
+  .projects-list-wrapper {
+    width: 1290px;
+  }
+}
+
+@media (max-width: 1290px) {
+  .projects-list-wrapper {
+    width: 860px;
   }
 }

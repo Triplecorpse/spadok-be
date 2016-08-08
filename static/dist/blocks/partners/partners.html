@@ -1,12 +1,14 @@
-<div class="container-fluid">
-    <div class="row">
-        <div class="col-md-12">
-            <h3 class="partners-header">Наши партнёры</h3>
+<div class="partners-wrapper">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12">
+                <h3 class="partners-header">Наши партнёры</h3>
+            </div>
         </div>
-    </div>
-    <div class="row partners-logo-wrapper">
-        <div class="col-md-1 partners-logo-wrapper" ng-style="" ng-repeat="partner in partners.partners">
-            <img ng-src="{{partner.greydLogo}}" alt="partner" class="partners-logo" ng-mouseenter="partners.color($index)" ng-mouseleave="partners.decolor($index)">
+        <div class="row partners-logo-wrapper">
+            <div class="col-md-1 partners-logo-wrapper" ng-style="" ng-repeat="partner in partners.partners">
+                <img ng-src="{{partner.greydLogo}}" alt="partner" class="partners-logo" ng-mouseenter="partners.color($index)" ng-mouseleave="partners.decolor($index)">
+            </div>
         </div>
     </div>
 </div>

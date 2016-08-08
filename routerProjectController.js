@@ -1,9 +1,9 @@
 var routerProjectController = (app) => {
     const project = require('./models/project');
+    const parseProject = require('./services/project');
 
     app.get('/api/projects', (req, res) => {
         project.find({
-            isCompleted: false,
             isPublished: true
         }, (err, projects) => {
             if (err) res.send(err);
@@ -25,8 +25,9 @@ var routerProjectController = (app) => {
 
     app.post('/adminium/addproject', function (req, res) {
         if(req.session.isLoggedIn){
-            let newProject = new project(req.body);
-            newProject.save(req.body, (err,project) => {
+            let currentProject = parseProject(req.body);
+            let newProject = new project(currentProject);
+            newProject.save(req.body, (err, project) => {
                 if (err) res.send(err);
                 res.json(project);
             });
@@ -50,8 +51,8 @@ var routerProjectController = (app) => {
     app.put('/adminium/updateproject', (req, res) => {
         if(req.session.isLoggedIn) {
             let id = req.body._id;
-            req.body._id = undefined;
-            let updatedProject = new project(req.body);
+            let currentProject = parseProject(req.body);
+            let updatedProject = new project(currentProject);
             project.findByIdAndUpdate(id, updatedProject, (err, project) => {
                 if (err) res.send(err);
                 res.json(project);

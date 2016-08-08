@@ -1,5 +1,6 @@
 (function() {
     angular.module('app').service('dataService', ['$http', function ($http) {
+    var origin = window.location.protocol + '//' + window.location.host; //IE10 crunch
 
     function init() {
         var date = new Date();
@@ -12,13 +13,13 @@
             people: 0
         };
 
-        return $http.get(`${window.location.origin}/api/projects`)
+        return $http.get(`${origin}/api/projects`)
             .then((response) => {
                 if (response.data.length) {
-                    let projects = response.data.filter((element) => {
+                    let projects = _.map(response.data,(element) => {
                         let days = new Date(element.date) - date;
-                        element.days = Math.floor(days / 86400000);
-                        return days >= 0;
+                        element.days = Math.ceil(days / 86400000);
+                        element.bucks = Math.round(element.money / 26)
                     });
                     if (projects.length) {
                         this.projects = response.data;
@@ -28,7 +29,6 @@
                 } else {
                     this.projects = [defaultProject]
                 }
-                delete response.data;
                 return response;
             }, (reason) => {
                 return reason;
@@ -42,7 +42,8 @@
             partners: [],
             team: [],
             contacts: {},
-            init
+            init,
+            origin
         };
     }]);
 })();

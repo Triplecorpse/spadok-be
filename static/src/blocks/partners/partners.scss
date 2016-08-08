@@ -2,6 +2,9 @@
   &-header {
     @include block-header(#000);
   }
+  &-wrapper {
+    min-height: 285px;
+  }
   &-logo {
     width: 70px;
     cursor: pointer;

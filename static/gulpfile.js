@@ -11,7 +11,7 @@ var paths = {
     scripts: ['./bower_components/jquery/dist/jquery.min.js',
         './bower_components/angular/angular.min.js',
         './bower_components/angular-ui-router/release/angular-ui-router.min.js',
-        // './bower_components/lodash/dist/lodash.core.min.js',
+        './bower_components/underscore/underscore-min.js',
         './bower_components/Swiper/dist/js/swiper.min.js',
         './bower_components/angular-swiper/dist/angular-swiper.js',
         './src/js/bootstrap.min.js',

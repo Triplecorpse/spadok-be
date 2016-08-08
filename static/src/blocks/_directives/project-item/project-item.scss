@@ -1,19 +1,19 @@
 .project-item {
   &-wrapper {
     border: 1px solid #eaeaea;
-    //display: inline-block;
+    display: inline-block;
     background-color: #f9f9f9;
     width: 380px;
     height: 414px;
-    //margin-right: 50px;
-    //margin-bottom: 50px;
     margin: 25px;
-    position: relative;
   }
   &-image {
     width: 100%;
     height: 160px;
     background-color: #ccc;
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-size: cover;
   }
   &-header {
     font-size: 2.4rem;
@@ -33,15 +33,17 @@
     overflow: hidden;
   }
   &-button {
-    margin: 21px  0 20px 20px;
+    margin: 12px  0 20px 20px;
     display: inline-block;
     width: 125px;
     height: 40px;
+    float: left;
+
   }
   &-stats {
     display: inline-block;
     width: 219px;
-    position: absolute;
+    float: left;
     bottom: 10px;
     &-icon {
       &-wrapper {
@@ -62,7 +64,7 @@
         @include icon();
         position: relative;
         &-days {
-          margin-top: 14px;
+          margin-top: 16px;
           position: absolute;
           width: 100%;
           font-size: 1rem;
