@@ -1,8 +1,9 @@
 module.exports = (project) => {
     var parsed =  {
-        name: (project.name || '').replace('<', '&lt;').replace('>', '&gt;'),
-        description: (project.description || '').replace('<', '&lt;').replace('>', '&gt;'),
-        picture: (project.picture || '').replace('<', '&lt;').replace('>', '&gt;'),
+        name: (project.name || '').replace('/</g', '&lt;').replace('/>/g', '&gt;'),
+        shortDescription: (project.shortDescription || '').replace('/</g', '&lt;').replace('/>/g', '&gt;'),
+        description: (project.description || '').replace('/</g', '&lt;').replace('/>/g', '&gt;'),
+        picture: (project.picture || '').replace('/</g', '&lt;').replace('/>/g', '&gt;'),
         people: Number(project.people) || 0,
         money: Number(project.money) || 0,
         date: (project.date !== undefined) && new Date(project.date),

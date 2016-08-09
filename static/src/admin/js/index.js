@@ -24,6 +24,11 @@ function appController($scope, viewService, dataService, $http) {
     getall();
 
     $scope.$watch(() => viewService.state, (newVal) => {
+        if(newVal !== 'login') {
+            vm.canLogin = false;
+            vm.isLoggedIn = true;
+            vm.isDataLoaded = true;
+        }
         vm.state = newVal;
     });
 

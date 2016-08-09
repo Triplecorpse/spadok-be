@@ -23,8 +23,10 @@
                     })
                     .then((response) => {
                         scope.status = ` ${response.status} ${response.statusText}. Welcome,  ${response.data.name}`;
-                        viewService.state = "projects";
-                        dataService.init();
+                        dataService.init()
+                            .then(() => {
+                                viewService.state = "projects";
+                            });
                     }, (reason) => {
                         if(reason.status === 401) {
                             scope.status = `Sorry, but you are not supposed to be here. ${reason.status} ${reason.statusText}.`;
