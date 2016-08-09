@@ -2,27 +2,6 @@ var routerProjectController = (app) => {
     const project = require('./models/project');
     const parseProject = require('./services/project');
 
-    app.get('/api/projects', (req, res) => {
-        project.find({
-            isPublished: true
-        }, (err, projects) => {
-            if (err) res.send(err);
-            res.header('Cache-Control', 'private, no-cache, no-store, must-revalidate');
-            res.json(projects);
-        })
-    });
-
-    app.get('/adminium/getprojects', (req, res) => {
-        if(req.session.isLoggedIn){
-            project.find((err, projects) => {
-                if (err) res.send(err);
-                res.json(projects);
-            });
-        } else {
-            res.sendStatus(401)
-        }
-    });
-
     app.post('/adminium/addproject', function (req, res) {
         if(req.session.isLoggedIn){
             let currentProject = parseProject(req.body);

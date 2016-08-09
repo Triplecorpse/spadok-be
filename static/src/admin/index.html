@@ -13,12 +13,12 @@
         <!-- Collect the nav links, forms, and other content for toggling -->
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
             <ul class="nav navbar-nav">
-                <li class="active"><a href="#">Projects</a></li>
-                <li><a href="#">Reviews</a></li>
-                <li><a href="#">Videos</a></li>
-                <li><a href="#">Files</a></li>
-                <li><a href="#">Page Setup</a></li>
-                <li><a href="#">Users</a></li>
+                <li ng-class="{active: app.isActive('projects')}" ng-click="app.setActive('projects')"><a href="#">Projects</a></li>
+                <li ng-class="{active: app.isActive('reviews')}" ng-click="app.setActive('reviews')"><a href="#">Reviews</a></li>
+                <li ng-class="{active: app.isActive('videos')}" ng-click="app.setActive('videos')"><a href="#">Videos</a></li>
+                <li ng-class="{active: app.isActive('files')}" ng-click="app.setActive('files')"><a href="#">Files</a></li>
+                <li ng-class="{active: app.isActive('page')}" ng-click="app.setActive('page')"><a href="#">Page Setup</a></li>
+                <li ng-class="{active: app.isActive('users')}" ng-click="app.setActive('users')"><a href="#">Users</a></li>
             </ul>
         <ul class="nav navbar-nav navbar-right">
             <li><a href="/logout">Logout</a></li>
@@ -31,14 +31,8 @@
         <div class="col-md-12">
             <h1>Spadok - Adminium</h1>
         </div>
-        <div ng-switch="app.state">
-            <div ng-switch-when="projectManager">
-                <spda-porject-manager></spda-porject-manager>
-            </div>
-            <div ng-switch-default>
-                <spda-login-form></spda-login-form>
-            </div>
-        </div>
+        <spda-list-manager entity="app.state" ng-if="app.isDataLoaded"></spda-list-manager>
+        <spda-login-form ng-if="app.canLogin"></spda-login-form>
     </div>
 </div>
 </body>

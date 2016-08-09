@@ -28,6 +28,24 @@
         </div>
     </div>
     <div class="row">
+        <div class="col-md-12">
+            <div class="form-group">
+                <div class="dropdown">
+                    <label for="parent-project">Parent Project</label>
+                    <button class="btn btn-default dropdown-toggle" type="button" id="parent-project" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                        Parent
+                        <span class="caret"></span>
+                    </button>
+                    <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+                        <li><a href="#">None</a></li>
+                        <li role="separator" class="divider"></li>
+                        <li ng-repeat="project in projects" ng-click="set(project.id)"><a href="#">{{project.name}}</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
         <div class="col-md-4">
             <div class="form-group">
                 <input type="number" class="form-control" placeholder="People" ng-model="people">
@@ -61,13 +79,13 @@
     <div class="row project-footer">
         <div class="col-md-4">
             <div ng-switch="view">
-                <div ng-switch-when="new-project">
+                <div ng-switch-when="new">
                     <button type="submit" class="btn btn-default project-add" value="Add" ng-disabled="isQueriing">Add</button>
                 </div>
-                <div ng-switch-when="edit-project">
+                <div ng-switch-when="edit">
                     <div class="checkbox">
                         <label>
-                            <input type="checkbox" ng-model="canDelete"> Really delete project
+                            <input type="checkbox" ng-model="canDelete" ng-change="change()"> Really delete project
                         </label>
                     </div>
                     <button type="button" class="btn btn-danger" value="Delete" ng-disabled="!canDelete" ng-click="delete()">Delete</button>

@@ -5,7 +5,8 @@ var PartnerSchema = new mongoose.Schema({
     cLogo: String,
     site: String,
     description: String,
-    projectsHelped: Number
+    projectsHelped: Number,
+    isPublished: Boolean
 });
 
-module.exports = mongoose.model('Page', PartnerSchema);
+module.exports = mongoose.model('Partner', PartnerSchema);

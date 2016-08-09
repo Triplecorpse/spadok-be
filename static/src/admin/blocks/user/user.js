@@ -1,7 +1,7 @@
 (function() {
     angular
         .module('app')
-        .directive('spdaNewProject', ['$http', 'viewService', '$interval', '$timeout', 'dataService', directive]);
+        .directive('spdaUser', ['$http', 'viewService', '$interval', '$timeout', 'dataService', directive]);
 
     function directive ($http, viewService, $interval, $timeout, dataService) {
         const s200 = "Congrats! Your operation was successfully completed! :)";
@@ -11,7 +11,7 @@
 
         return {
             restrict: "E",
-            templateUrl: "./admin/blocks/new-project/new-project.html",
+            templateUrl: "./admin/blocks/user/user.html",
             scope: {
                 init: "=",
                 view: "="

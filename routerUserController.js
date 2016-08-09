@@ -4,7 +4,6 @@ var routerLoginController = (app) => {
     const session = require('express-session');
     const user = require('./models/user');
 
-
     var newSession = session({
         secret: 'spadokproject',
         resave: true,
@@ -25,7 +24,7 @@ var routerLoginController = (app) => {
         });
     });
 
-    app.get('/isloggedin', (req, res) => {
+    app.get('/adminium/isloggedin', (req, res) => {
         if ((req.session.cookie._expires > new Date()) && (req.session.isLoggedIn)) {
             req.session.touch();
             res.sendStatus(200);
@@ -40,7 +39,7 @@ var routerLoginController = (app) => {
         }
     });
 
-    app.post('/login', function (req, res) {
+    app.post('/adminium/login', function (req, res) {
         user.findOne({name: req.body.name}, (err, user) => {
             if(err) fail();
             if(!user) {
@@ -76,7 +75,7 @@ var routerLoginController = (app) => {
         }
     });
 
-    app.post('/newuser', function (req, res) {
+    app.post('/adminium/newuser', function (req, res) {
         user.save({
             name: req.body.name,
             email: req.body.email,
@@ -85,7 +84,7 @@ var routerLoginController = (app) => {
         })
     });
 
-    app.get('/logout', (req, res) => {
+    app.get('/adminium/logout', (req, res) => {
         req.session.isLoggedIn = false;
         req.session.destroy(function (err) {
             if (err) {

@@ -13,22 +13,62 @@
             people: 0
         };
 
-        return $http.get(`${origin}/api/projects`)
+        function parsePage(list) {
+
+        }
+
+        function parsePartners(list) {
+
+        }
+
+        function parseProjects(list) {
+            this.projects = _.map(list, (element) => {
+                let days = new Date(element.date) - date;
+                element.days = Math.ceil(days / 86400000);
+                element.bucks = Math.round(element.money / 26)
+            });
+
+            this.projectsActive = _.filter(projects, (element) => {
+                return element.isCompleted == false;
+            });
+
+            this.projectsCompleted = _.filter(projects, (element) => {
+                return element.isCompleted == true;
+            });
+
+            if (!this.projects.length) {
+                this.projects = [defaultProject];
+            }
+
+            if (!this.projectsActive.length) {
+                this.projectsActive = [defaultProject];
+            }
+
+            if (!this.projectsCompleted.length) {
+                this.projectsCompleted = [defaultProject];
+            }
+        }
+
+        function parseReviews(list) {
+
+        }
+
+        function parseUsers(list) {
+
+        }
+
+        function parseVideos(list) {
+
+        }
+
+        return $http.get(`${origin}/api/getall`)
             .then((response) => {
-                if (response.data.length) {
-                    let projects = _.map(response.data,(element) => {
-                        let days = new Date(element.date) - date;
-                        element.days = Math.ceil(days / 86400000);
-                        element.bucks = Math.round(element.money / 26)
-                    });
-                    if (projects.length) {
-                        this.projects = response.data;
-                    } else {
-                        this.projects = [defaultProject]
-                    }
-                } else {
-                    this.projects = [defaultProject]
-                }
+                parsePage(response.data[0]);
+                parsePartners(response.data[1]);
+                parseProjects(response.data[2]);
+                parseReviews(response.data[3]);
+                parseUsers(response.data[4]);
+                parseVideos(response.data[5]);
                 return response;
             }, (reason) => {
                 return reason;
@@ -37,6 +77,8 @@
         
         return {
             projects: [],
+            projectsActive: [],
+            projectsCompleted: [],
             videos: [],
             reviews: [],
             partners: [],

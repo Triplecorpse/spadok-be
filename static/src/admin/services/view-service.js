@@ -6,8 +6,8 @@
     function viewService ($http) {
 
         return {
-            state: 'login',
-            pmState: 'none',
+            state: 'none',
+            subState: 'none',
             updateProjects: undefined
         };
 

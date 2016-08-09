@@ -115,7 +115,7 @@ $nav-sticky-border-color: #e4e4e4;
         @include page-header-transition();
       }
     }
-    & a, & a:active, & a:visited, & a:focus {
+    & a {
       color: $nav-sticky-font-color;
       @include page-header-transition();
     }

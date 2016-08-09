@@ -1,9 +1,9 @@
 (function() {
     angular
         .module('app')
-        .directive('spdaLoginForm', ['$http', 'viewService', loginForm]);
+        .directive('spdaLoginForm', ['$http', 'viewService', 'dataService', loginForm]);
 
-    function loginForm ($http, viewService) {
+    function loginForm ($http, viewService, dataService) {
 
         return {
             restrict: "E",
@@ -17,13 +17,14 @@
             scope.submit = (form) => {
                 scope.status = 'Searching...';
                 scope.queriing = true;
-                $http.post('/login', {
+                $http.post('/adminium/login', {
                         name: scope.name,
                         password: scope.password
                     })
                     .then((response) => {
                         scope.status = ` ${response.status} ${response.statusText}. Welcome,  ${response.data.name}`;
-                        viewService.state = "projectManager";
+                        viewService.state = "projects";
+                        dataService.init();
                     }, (reason) => {
                         if(reason.status === 401) {
                             scope.status = `Sorry, but you are not supposed to be here. ${reason.status} ${reason.statusText}.`;

@@ -1,31 +1,30 @@
 (function() {
     angular
         .module('app')
-        .directive('spdaPorjectManager', ['$http', 'viewService', 'dataService', projecManager]);
+        .directive('spdaListManager', ['$http', 'viewService', 'dataService', projecManager]);
 
     function projecManager ($http, viewService, dataService) {
 
         return {
             restrict: "E",
-            templateUrl: "./admin/blocks/project-manager/project-manager.html",
-            controller: ['$scope', controller]
+            templateUrl: "./admin/blocks/list-manager/list-manager.html",
+            scope: {
+                entity: '='
+            },
+            controller: ['$scope', controller],
+            controllerAs: 'list'
         };
 
         function controller($scope) {
-            viewService.subState = $scope.state = 'new-project';
-            $scope.projects = dataService.projects;
+            $scope.model = dataService[$scope.entity];
+            $scope.view = 'new';
 
-            $scope.$watch(() => viewService.subState, (newVal) => {
+            $scope.$watch(() => viewService.state, (newVal) => {
                 $scope.state = newVal;
+                $scope.model = dataService[newVal];
             });
 
-            var update = () => {
-                $http.get('/adminium/getprojects')
-                    .then((response) => {
-                    })
-            };
-
-            viewService.updateProjects = update.bind(this);
+            viewService.updateProjects = dataService.init.bind(this);
             viewService.updateProjects();
         }
     }

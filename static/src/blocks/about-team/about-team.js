@@ -1,13 +1,18 @@
 (function() {
     angular
         .module('app')
-        .directive('spdAboutHeader', [about]);
+        .directive('spdAboutTeam', [about]);
 
     function about () {
 
         return {
             restrict: "E",
-            templateUrl: "./blocks/about-header/about-header.html"
+            templateUrl: "./blocks/about-team/about-team.html",
+            controller: ['$scope', 'dataService', controller]
         };
+
+        function controller($scope, dataService) {
+            $scope.team = dataService.team;
+        }
     }
 })();

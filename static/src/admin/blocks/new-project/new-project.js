@@ -1,9 +1,9 @@
 (function() {
     angular
         .module('app')
-        .directive('spdaNewProject', ['$http', 'viewService', '$interval', '$timeout', directive]);
+        .directive('spdaNewProject', ['$http', 'viewService', '$interval', '$timeout', 'dataService', directive]);
 
-    function directive ($http, viewService, $interval, $timeout) {
+    function directive ($http, viewService, $interval, $timeout, dataService) {
         const s200 = "Congrats! Your operation was successfully completed! :)";
         const s401 = "Sorry, something was happened with your session. Please, reenter your credentials :(";
         const s500 = "Sorry, something was happened with server. Wait a few minutes or contact your administrator :(";
@@ -21,6 +21,7 @@
 
         function controller($scope) {
             var vm = this;
+            $scope.projects = dataService.projects;
             $scope.$watch(() => $scope.init, (newVal) => {
                 if(newVal) {
                     $scope.name = newVal.name;
@@ -37,17 +38,23 @@
 
             $scope.submit = (form, event) => {
                 $scope.isQueriing = true;
-                if(event.target.getAttribute('form-type') === "new-project") {
+                if(event.target.getAttribute('form-type') === "new") {
                     add();
-                } else if(event.target.getAttribute('form-type') === "edit-project") {
+                } else if(event.target.getAttribute('form-type') === "edit") {
                     update();
+                } else {
+                    fail()
                 }
-
             };
 
             $scope.delete = () => {
                 $http.delete(`/adminium/removeproject/${$scope.init._id}`)
-                    .then(success, fail);
+                    .then((response) => {
+                        success(response);
+                    }, fail);
+            };
+            $scope.change = () => {
+                console.log($scope.vm);
             };
 
             function add() {
@@ -82,7 +89,8 @@
                 $scope.statusClassName = "label label-success";
                 $scope.isQueriing = false;
                 $scope.name = $scope.description = $scope.people = $scope.money = $scope.date = $scope.isCompleted = $scope.isPublished = null;
-                viewService.updateProjects();
+                dataService.init();
+                viewService.highlightAdd();
                 final();
                 return data;
             }
@@ -93,7 +101,7 @@
                 } else if(data.status === 500) {
                     $scope.statusText = s500;
                 } else {
-                    $scope.statusText = sOther;
+                    $scope.statusText = `${data.status} ${data.statusMessage} ${sOther}`;
                 }
                 $scope.statusClassName = "label label-danger";
                 final();

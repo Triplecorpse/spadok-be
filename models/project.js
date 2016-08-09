@@ -8,6 +8,7 @@ var ProjectSchema   = new mongoose.Schema({
     date: Date,
     isPublished: Boolean,
     isCompleted: Boolean,
+    child: String,
     extension: String
 });
 

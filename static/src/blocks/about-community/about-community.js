@@ -1,13 +1,13 @@
 (function() {
     angular
         .module('app')
-        .directive('spdAboutHeader', [about]);
+        .directive('spdAboutCommunity', [about]);
 
     function about () {
 
         return {
             restrict: "E",
-            templateUrl: "./blocks/about-header/about-header.html"
+            templateUrl: "./blocks/about-community/about-community.html"
         };
     }
 })();
