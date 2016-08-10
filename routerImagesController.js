@@ -42,8 +42,8 @@ var routerImagesController = (app) => {
 
                 url = url.slice(index).join('/');
                 urls.push(url);
-                // res.json(urls);
-                // return;
+                res.json(urls);
+                return;
                 if(url) {
                     project.findById(req.params.id, (err, foundProject) => {
                         if (req.params.entity === 'main') {
