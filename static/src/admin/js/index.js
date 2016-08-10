@@ -1,4 +1,4 @@
-angular.module('app', []);
+angular.module('app', ['angularFileUpload']);
 
 angular.module('app').controller('appController', ['$scope', 'viewService', 'dataService', '$http', appController]);
 

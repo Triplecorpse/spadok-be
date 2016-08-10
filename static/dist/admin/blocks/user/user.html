@@ -1,17 +1,17 @@
-<form name="form" form-type="{{view}}" ng-submit="submit(form, $event)">
+<form name="form" form-type="{{view}}" ng-submit="submit(form, $event)" autocomplete="off">
     <div class="row">
         <div class="col-md-12">
             <div class="form-group">
                 <label for="user-name">Name</label>
-                <input type="text" class="form-control" id="user-name" placeholder="Name" ng-model="name">
+                <input type="text" class="form-control" id="user-name" placeholder="Name" ng-model="name" autocomplete="off">
             </div>
             <div class="form-group">
                 <label for="user-email">Email</label>
-                <input type="email" class="form-control" id="user-email" placeholder="Email" ng-model="email">
+                <input type="email" class="form-control" id="user-email" placeholder="Email" ng-model="email" autocomplete="off">
             </div>
             <div class="form-group">
                 <label for="user-password">Password</label>
-                <input type="password" class="form-control" id="user-password" placeholder="Password" ng-model="password">
+                <input type="password" class="form-control" id="user-password" placeholder="Password" ng-model="password" autocomplete="off">
             </div>
         </div>
     </div>

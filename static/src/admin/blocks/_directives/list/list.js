@@ -15,7 +15,6 @@
         };
 
         function controller($scope) {
-            console.log($scope.model);
             $scope.isLoading = dataService.isLoading;
             $scope.model = dataService[viewService.state];
 

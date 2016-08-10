@@ -1,4 +1,4 @@
-<form name="form" form-type="{{view}}" ng-submit="submit(form, $event)">
+<form name="form" form-type="{{view}}" ng-submit="submit(form, $event)" autocomplete="off">
     <div class="row">
         <div class="col-md-12">
             <div class="form-group">
@@ -14,16 +14,16 @@
     <div class="row">
         <div class="col-md-6">
             <div class="form-group">
-                <label for="project-picture">Picture</label>
-                <input type="file" id="project-picture" name="file">
-                <p class="help-block">Upload a picture to be considered as main for this project</p>
+                <label for="project-picture">Main Picture</label>
+                <input type="file" id="project-picture" name="images" nv-file-select uploader="uploaderSingle" option="uso">
+                <p class="help-block">Upload a picture to be considered as main for this project. It would be good to be dark and width 2 times bigger than height.</p>
             </div>
         </div>
         <div class="col-md-6">
             <div class="form-group">
-                <label for="project-picture">Picture</label>
-                <input type="file" id="project-pictures" name="file" multiple>
-                <p class="help-block">Upload picture gallery for this project</p>
+                <label for="project-picture">Picture Gallery</label>
+                <input type="file" id="project-pictures" name="images" multiple nv-file-select uploader="uploaderBatch">
+                <p class="help-block">Upload picture gallery for this project.</p>
             </div>
         </div>
     </div>

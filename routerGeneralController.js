@@ -2,8 +2,16 @@ var routerController = (app) => {
     const fs = require('fs');
     const express = require('express');
     const lang = require('./services/lang.js');
+    const multer  = require('multer');
+    const upload = multer({ dest: `static/media/` });
 
     const dbGetters = require('./services/dbGetters');
+
+    app.post('/k', (req, res) => {
+        // console.log(req.files);
+        // console.log(req.body);
+        // res.sendStatus(200);
+    });
 
     app.get('/api/language', (req, res) => {
         var al = req.get('Accept-Language');

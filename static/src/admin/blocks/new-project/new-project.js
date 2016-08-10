@@ -16,11 +16,20 @@
                 init: "=",
                 view: "="
             },
-            controller: ['$scope', controller]
+            controller: ['$scope', 'FileUploader', controller]
         };
 
-        function controller($scope) {
+        function controller($scope, FileUploader) {
             var vm = this;
+            var action;
+
+            $scope.uploaderSingle = new FileUploader({
+                removeAfterUpload: true
+            });
+            $scope.uploaderBatch = new FileUploader({
+                removeAfterUpload: true
+            });
+
             $scope.projects = dataService.projects;
             $scope.$watch(() => $scope.init, (newVal) => {
                 if(newVal) {
@@ -40,8 +49,10 @@
                 $scope.isQueriing = true;
                 if(event.target.getAttribute('form-type') === "new") {
                     add();
+                    action = 'add';
                 } else if(event.target.getAttribute('form-type') === "edit") {
                     update();
+                    action = 'update';
                 } else {
                     fail()
                 }
@@ -49,12 +60,8 @@
 
             $scope.delete = () => {
                 $http.delete(`/adminium/removeproject/${$scope.init._id}`)
-                    .then((response) => {
-                        success(response);
-                    }, fail);
-            };
-            $scope.change = () => {
-                console.log($scope.vm);
+                    .then(success, fail);
+                action = 'delete';
             };
 
             function add() {
@@ -92,6 +99,10 @@
                 dataService.init();
                 viewService.highlightAdd();
                 final();
+                if(action === 'add' || action === 'update') {
+                    uploadFiles(data.data._id);
+                }
+                action = '';
                 return data;
             }
 
@@ -115,6 +126,24 @@
                     $scope.statusText = "";
                     $scope.statusClassName = "";
                 }, 3000);
+            }
+
+            function uploadFiles(id) {
+                console.log($scope.uploaderSingle);
+                console.log($scope.uploaderBatch);
+                $scope.uploaderSingle.onBeforeUploadItem = function (item) {
+                    item.url = `${window.location.origin}/adminium/projectimg/${id}/main`;
+                };
+                $scope.uploaderBatch.onBeforeUploadItem = function (item) {
+                    item.url = `${window.location.origin}/adminium/projectimg/${id}/gallery`;
+                };
+                // $scope.uso = {url:`${window.location.origin}/adminium/projectimg/${id}/main`};
+                // $scope.uploaderSingle.url = `${window.location.origin}/adminium/projectimg/${id}/main`;
+                // $scope.uploaderBatch.url = `${window.location.origin}/adminium/projectimg/${id}/gallery`;
+                // $scope.uploaderSingle.removeAfterUpload = true;
+                // $scope.uploaderBatch.removeAfterUpload = true;
+                $scope.uploaderSingle.uploadAll();
+                $scope.uploaderBatch.uploadAll();
             }
         }
     }

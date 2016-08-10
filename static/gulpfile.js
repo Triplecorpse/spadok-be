@@ -28,7 +28,7 @@ var paths = {
 var admin = {
     scripts: ['./bower_components/jquery/dist/jquery.min.js',
         './bower_components/angular/angular.min.js',
-        './bower_components/ng-file-upload/ng-file-upload.min.js',
+        './bower_components/angular-file-upload/dist/angular-file-upload.js',
         './bower_components/underscore/underscore-min.js',
         './src/admin/js/bootstrap.min.js',
         './src/admin/js/index.js',
