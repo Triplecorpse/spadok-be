@@ -35,10 +35,14 @@ var routerImagesController = (app) => {
                         } else if (req.params.entity === 'gallery') {
                             foundProject.pictures.push(url);
                         }
+                        foundProject._id = undefined;
                         let updatedProject = new project(foundProject);
                         project.findByIdAndUpdate(req.params.id, updatedProject, (err, project) => {
-                            if (err) res.send(err);
-                            res.sendStatus(200);
+                            if (err){
+                                res.send(err);
+                            } else {
+                                res.sendStatus(200);
+                            }
                         });
                     });
                 }

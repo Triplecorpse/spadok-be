@@ -31,10 +31,14 @@ var routerProjectController = (app) => {
         if(req.session.isLoggedIn) {
             let id = req.body._id;
             let currentProject = parseProject(req.body);
+            currentProject._id
             let updatedProject = new project(currentProject);
             project.findByIdAndUpdate(id, updatedProject, (err, project) => {
-                if (err) res.send(err);
-                res.json(project);
+                if (err) {
+                    res.json({up: updatedProject, p: project, e: err});
+                } else {
+                    res.json(project);
+                }
             });
         } else {
             res.sendStatus(401)
