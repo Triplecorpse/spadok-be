@@ -22,7 +22,12 @@ var routerImagesController = (app) => {
             form.keepExtensions = true;
             form.multiples = true;
             form.parse(req, function (err, fields, files) {
+                let urls = [];
+                urls.push(files.file.path);
+
                 let url = files.file.path.split(`\\`);
+                urls.push(url);
+
                 let index;
                 for(let i in url) {
                     if(url[i] === 'media') {
@@ -30,7 +35,12 @@ var routerImagesController = (app) => {
                         break;
                     }
                 }
+                urls.push(index);
+
                 url = url.slice(index).join('/');
+                urls.push(url);
+                res.json(urls);
+                return;
                 if(url) {
                     project.findById(req.params.id, (err, foundProject) => {
                         if (req.params.entity === 'main') {
@@ -47,6 +57,8 @@ var routerImagesController = (app) => {
                             }
                         });
                     });
+                } else {
+                    res.sendStatus(304);
                 }
             });
         } else {
