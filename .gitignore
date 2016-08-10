@@ -6,3 +6,4 @@
 /static/
 !/static/dist
 /static/dist/media/projects/**/*.*
+!/static/dist/media/projects/.info
