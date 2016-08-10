@@ -5,12 +5,6 @@ var routerController = (app) => {
 
     const dbGetters = require('./services/dbGetters');
 
-    app.post('/k', (req, res) => {
-        // console.log(req.files);
-        // console.log(req.body);
-        // res.sendStatus(200);
-    });
-
     app.get('/api/language', (req, res) => {
         var al = req.get('Accept-Language');
         res.set('Content-Language', lang(al));
