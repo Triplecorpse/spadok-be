@@ -1,5 +1,3 @@
-var mongoose = require('mongoose');
-
 module.exports = (project) => {
     let temp = {};
 
@@ -11,7 +9,7 @@ module.exports = (project) => {
         }
     }
 
-    let parsed =  {
+    return {
         rusName: temp.rusName || '',
         rusShortDescription: temp.rusShortDescription || '',
         rusDescription: temp.rusDescription || '',
@@ -32,10 +30,4 @@ module.exports = (project) => {
         isPublished: Boolean(project.isPublished) || false,
         isCompleted: Boolean(project.isCompleted) || false,
     };
-
-    // if(project._id) {
-    //     parsed._id = project._id;
-    // }
-
-    return parsed;
 };

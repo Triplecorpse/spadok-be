@@ -30,18 +30,14 @@ var routerProjectController = (app) => {
     app.put('/adminium/updateproject', (req, res) => {
         if(req.session.isLoggedIn) {
             let id = req.body._id;
-            let currentProject = parseProject(req.body);
-            let updatedProject = new project(currentProject);
-            project.findById(id, (err, prg) => {
-                project.findByIdAndUpdate(id, currentProject, (err, project) => {
-                    if (err) {
-                        res.status(500).json({up: currentProject, p: prg, e: err});
-                    } else {
-                        res.json(project);
-                    }
-                });
-            })
-            // project.update({_id: id}, updatedProject)
+            let updatedProject = parseProject(req.body);
+            project.findByIdAndUpdate(id, updatedProject, (err, project) => {
+                if (err) {
+                    res.status(500).json({up: updatedProject, e: err});
+                } else {
+                    res.json(project);
+                }
+            });
         } else {
             res.sendStatus(401)
         }
