@@ -6,9 +6,8 @@ var routerImagesController = (app) => {
 
     app.post('/adminium/projectimg/:id/:entity', function (req, res) {
         if(req.session.isLoggedIn){
-            console.log(__filename, __dirname, fs.readdirSync(__dirname));
-            var innerDir = `./static/dist/media/projects/${req.params.id}`;
-            var outerDir = `./static/dist/media/projects/${req.params.id}/${req.params.entity}`;
+            var innerDir = `${__dirname}/static/dist/media/projects/${req.params.id}`;
+            var outerDir = `${__dirname}/static/dist/media/projects/${req.params.id}/${req.params.entity}`;
             if (!fs.existsSync(innerDir)) {
                 fs.mkdirSync(innerDir);
                 fs.mkdirSync(`${innerDir}/main`);
@@ -19,7 +18,16 @@ var routerImagesController = (app) => {
             form.keepExtensions = true;
             form.multiples = true;
             form.parse(req, function (err, fields, files) {
-                let url = files.file.path.split(`\\`).slice(2).join('/');
+                let url = files.file.path.split(`\\`);
+                let index;
+                for(let i in url) {
+                    if(url[i] === 'media') {
+                        index = i;
+                        break;
+                    }
+                }
+                url = url.slice(index).join('/');
+                console.log(url);
                 if(url) {
                     project.findById(req.params.id, (err, foundProject) => {
                         if (req.params.entity === 'main') {
