@@ -45,11 +45,9 @@
                 $scope.parentProject = _.find($scope.projects, (proj) => {
                     return proj._id === id;
                 });
-                console.log($scope.parentProject);
             };
 
             $scope.$watch(() => $scope.init, (newVal) => {
-                console.log("$scope.init", newVal);
                 if(newVal) {
                     delete $scope.activeProject;
                     $scope.activeProject = angular.copy($scope.init);
@@ -81,16 +79,13 @@
             };
 
             function add() {
-                $scope.activeProject.parentProjectId = $scope.parentProject._id;
-                console.log($scope.activeProject.parentProjectId, $scope.parentProject._id);
+                $scope.activeProject.parentProjectId = $scope.parentProject && $scope.parentProject._id;
                 $http.post('/adminium/addproject', $scope.activeProject)
                     .then(success, fail);
             }
 
             function update()  {
-                $scope.activeProject.parentProjectId = $scope.parentProject._id;
-                console.log($scope.activeProject.parentProjectId, $scope.parentProject._id);
-
+                $scope.activeProject.parentProjectId = $scope.parentProject && $scope.parentProject._id;
                 $http.put('/adminium/updateproject', $scope.activeProject)
                     .then(success, fail);
             }

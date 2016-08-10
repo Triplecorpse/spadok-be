@@ -1,6 +1,11 @@
 (function() {
     angular.module('app').service('dataService', ['$http', function ($http) {
     var origin = window.location.protocol + '//' + window.location.host; //IE10 crunch
+    var self = this;
+    var data = {
+        init,
+        origin
+    };
 
     function init() {
         var date = new Date();
@@ -22,31 +27,33 @@
         }
 
         function parseProjects(list) {
-            this.projects = _.map(list, (element) => {
+            data.projects = _.map(list, (element) => {
                 let days = new Date(element.date) - date;
                 element.days = Math.ceil(days / 86400000);
-                element.bucks = Math.round(element.money / 26)
+                element.bucks = Math.round(element.money / 26);
+                return element;
             });
 
-            this.projectsActive = _.filter(projects, (element) => {
+            data.projectsActive = _.filter(data.projects, (element) => {
                 return element.isCompleted == false;
             });
 
-            this.projectsCompleted = _.filter(projects, (element) => {
+            data.projectsCompleted = _.filter(data.projects, (element) => {
                 return element.isCompleted == true;
             });
 
-            if (!this.projects.length) {
-                this.projects = [defaultProject];
-            }
-
-            if (!this.projectsActive.length) {
-                this.projectsActive = [defaultProject];
-            }
-
-            if (!this.projectsCompleted.length) {
-                this.projectsCompleted = [defaultProject];
-            }
+            // if (!self.projects.length) {
+            //     self.projects = [defaultProject];
+            // }
+            //
+            // if (!self.projectsActive.length) {
+            //     self.projectsActive = [defaultProject];
+            // }
+            //
+            // if (!self.projectsCompleted.length) {
+            //     self.projectsCompleted = [defaultProject];
+            // }
+            console.log(":::: DATASERVICE PROJECTS ::::", self.projects, self.projectsActive, self.projectsCompleted);
         }
 
         function parseReviews(list) {
@@ -75,17 +82,18 @@
             });
         }
         
-        return {
-            projects: [],
-            projectsActive: [],
-            projectsCompleted: [],
-            videos: [],
-            reviews: [],
-            partners: [],
-            team: [],
-            contacts: {},
-            init,
-            origin
-        };
+        return data;
+        // {
+        //     projects: [],
+        //     projectsActive: [],
+        //     projectsCompleted: [],
+        //     videos: [],
+        //     reviews: [],
+        //     partners: [],
+        //     team: [],
+        //     contacts: {},
+        //     init,
+        //     origin
+        // }
     }]);
 })();

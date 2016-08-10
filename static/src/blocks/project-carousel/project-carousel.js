@@ -15,6 +15,9 @@
         function projectCarouselController($scope, $http) {
             var vm = this;
             vm.projects = dataService.projects;
+            $timeout(() => {
+                console.log(vm.projects, dataService);
+            }, 2000);
             vm.iconOptions = {
                 textes: [' средства', ' осталось собрать', ' до начала проекта'],
                 simpleText: false

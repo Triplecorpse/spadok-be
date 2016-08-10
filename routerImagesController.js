@@ -18,19 +18,21 @@ var routerImagesController = (app) => {
             form.keepExtensions = true;
             form.multiples = true;
             form.parse(req, function (err, fields, files) {
-                project.findById(req.params.id, (err, foundProject) => {
-                    let url = files.file.path.split(`\\`).slice(2).join('/');
-                    if(req.params.entity === 'main') {
-                        foundProject.picture = url;
-                    } else if(req.params.entity === 'gallery') {
-                        foundProject.pictures.push(url);
-                    }
-                    let updatedProject = new project(foundProject);
-                    project.findByIdAndUpdate(req.params.id, updatedProject, (err, project) => {
-                        if (err) res.send(err);
-                        res.sendStatus(200);
+                let url = files.file.path.split(`\\`).slice(2).join('/');
+                if(url) {
+                    project.findById(req.params.id, (err, foundProject) => {
+                        if (req.params.entity === 'main') {
+                            foundProject.picture = url;
+                        } else if (req.params.entity === 'gallery') {
+                            foundProject.pictures.push(url);
+                        }
+                        let updatedProject = new project(foundProject);
+                        project.findByIdAndUpdate(req.params.id, updatedProject, (err, project) => {
+                            if (err) res.send(err);
+                            res.sendStatus(200);
+                        });
                     });
-                });
+                }
             });
         } else {
             res.sendStatus(401)
