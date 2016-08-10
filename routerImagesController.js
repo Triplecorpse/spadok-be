@@ -42,8 +42,7 @@ var routerImagesController = (app) => {
 
                 url = url.slice(index).join('/');
                 urls.push(url);
-                res.json(urls);
-                return;
+
                 if(url) {
                     project.findById(req.params.id, (err, foundProject) => {
                         if (req.params.entity === 'main') {
@@ -52,13 +51,15 @@ var routerImagesController = (app) => {
                             foundProject.pictures.push(url);
                         }
                         foundProject._id = undefined;
-                        project.findByIdAndUpdate(req.params.id, foundProject, (err, project) => {
-                            if (err){
-                                res.status(500).json({e: err, up: {foundProject}});
-                            } else {
-                                res.status(200).json(project);
-                            }
-                        });
+                        res.json(foundProject);
+
+                        // project.findByIdAndUpdate(req.params.id, foundProject, (err, project) => {
+                        //     if (err){
+                        //         res.status(500).json({e: err, up: {foundProject}});
+                        //     } else {
+                        //         res.status(200).json(project);
+                        //     }
+                        // });
                     });
                 } else {
                     res.sendStatus(304);
