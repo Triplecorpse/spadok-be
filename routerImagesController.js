@@ -44,23 +44,32 @@ var routerImagesController = (app) => {
                 urls.push(url);
 
                 if(url) {
-                    project.findById(req.params.id, (err, foundProject) => {
-                        if (req.params.entity === 'main') {
-                            foundProject.picture = url;
-                        } else if (req.params.entity === 'gallery') {
-                            foundProject.pictures.push(url);
-                        }
-                        foundProject._id = undefined;
-                        // res.json(foundProject);
+                    let foundProject = {};
+                    if (req.params.entity === 'main') {
+                        foundProject.picture = url;
+                    } else if (req.params.entity === 'gallery') {
+                        foundProject.pictures.push(url);
+                    }
+                    // project.findById(req.params.id, (err, foundProject) => {
+                    //     if (req.params.entity === 'main') {
+                    //         foundProject.picture = url;
+                    //     } else if (req.params.entity === 'gallery') {
+                    //         foundProject.pictures.push(url);
+                    //     }
+                    //     foundProject._id = undefined;
+                    //     // res.json(foundProject);
+                        urls.push(foundProject);
+                    //     urls.push(req.params.id);
 
-                        project.findByIdAndUpdate(req.params.id, foundProject, (err, project) => {
+                        project.update({_id: req.params.id}, foundProject, (err, project) => {
                             if (err){
                                 res.status(500).json({e: err, up: {foundProject}});
                             } else {
-                                res.status(200).json(project);
+                                urls.push(project);
+                                res.status(200).json(urls);
                             }
                         });
-                    });
+                    // });
                 } else {
                     res.sendStatus(304);
                 }
