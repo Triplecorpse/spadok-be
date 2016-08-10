@@ -31,7 +31,6 @@ var routerProjectController = (app) => {
         if(req.session.isLoggedIn) {
             let id = req.body._id;
             let currentProject = parseProject(req.body);
-            currentProject._id
             let updatedProject = new project(currentProject);
             project.findById(id, (err, prg) => {
                 project.findByIdAndUpdate(id, updatedProject, (err, project) => {

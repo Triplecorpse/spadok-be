@@ -33,9 +33,9 @@ module.exports = (project) => {
         isCompleted: Boolean(project.isCompleted) || false,
     };
 
-    if(project._id) {
-        parsed._id = project._id;
-    }
+    // if(project._id) {
+    //     parsed._id = project._id;
+    // }
 
     return parsed;
 };
