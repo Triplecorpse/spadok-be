@@ -2,8 +2,6 @@ var routerController = (app) => {
     const fs = require('fs');
     const express = require('express');
     const lang = require('./services/lang.js');
-    const multer  = require('multer');
-    const upload = multer({ dest: `static/media/` });
 
     const dbGetters = require('./services/dbGetters');
 
