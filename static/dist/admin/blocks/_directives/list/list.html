@@ -5,7 +5,7 @@
 </div>
 <div class="list-group" ng-if="!isLoading">
     <a href="#" class="list-group-item" ng-click="edit($event, $index, object)" ng-repeat="object in model track by $index">
-        <h4 class="list-group-item-heading">{{object.name || 'No name'}}</h4>
-        <p class="list-group-item-text">{{object.description || object.email || 'No description'}}</p>
+        <h4 class="list-group-item-heading">{{object.rusName || 'No name'}}</h4>
+        <p class="list-group-item-text">{{object.rusShortDescription || object.email || 'No description'}}</p>
     </a>
 </div>

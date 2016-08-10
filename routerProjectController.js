@@ -6,7 +6,7 @@ var routerProjectController = (app) => {
         if(req.session.isLoggedIn){
             let currentProject = parseProject(req.body);
             let newProject = new project(currentProject);
-            newProject.save(req.body, (err, project) => {
+            newProject.save(currentProject, (err, project) => {
                 if (err) res.send(err);
                 res.json(project);
             });

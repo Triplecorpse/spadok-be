@@ -22,6 +22,10 @@
                 $scope.model = dataService[viewService.state];
             }, true);
 
+            $scope.$watch(() => dataService.isLoading, () => {
+                $scope.isLoading = dataService.isLoading;
+            });
+
             $scope.edit = (event, index, entity) => {
                 $(".list-group-item").removeClass('active');
                 event.currentTarget.classList.add('active');

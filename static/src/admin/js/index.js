@@ -5,6 +5,7 @@ angular.module('app').controller('appController', ['$scope', 'viewService', 'dat
 function appController($scope, viewService, dataService, $http) {
     var vm = this;
     vm.title = "Spadok - adminium";
+    vm.isDataLoaded = false;
 
     function getall() {
         $http.get('/adminium/isloggedin')
@@ -15,6 +16,7 @@ function appController($scope, viewService, dataService, $http) {
                 dataService.init()
                     .finally(() => {
                         vm.isDataLoaded = true;
+                        viewService.state = 'projects';
                     });
             }, () => {
                 viewService.state = 'login';

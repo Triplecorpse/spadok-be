@@ -25,11 +25,9 @@ var routerImagesController = (app) => {
                     } else if(req.params.entity === 'gallery') {
                         foundProject.pictures.push(url);
                     }
-                    console.log(req.params.entity, ":", url);
                     let updatedProject = new project(foundProject);
                     project.findByIdAndUpdate(req.params.id, updatedProject, (err, project) => {
                         if (err) res.send(err);
-                        console.log(project);
                         res.sendStatus(200);
                     });
                 });

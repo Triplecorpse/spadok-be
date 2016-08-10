@@ -22,6 +22,14 @@
         function controller($scope, FileUploader) {
             var vm = this;
             var action;
+            $scope.filesStatus = 0;
+            $scope.video = {};
+            $scope.parentProject = {rusName: "None"};
+
+            $scope.$watch(() => dataService.isLoading, () => {
+                $scope.isLoading = dataService.isLoading;
+                $scope.projects = dataService.projects;
+            });
 
             $scope.uploaderSingle = new FileUploader({
                 removeAfterUpload: true
@@ -29,19 +37,27 @@
             $scope.uploaderBatch = new FileUploader({
                 removeAfterUpload: true
             });
+            $scope.uploaderBatch.onAfterAddingAll = function (item) {
+                $scope.filesStatus = $scope.uploaderBatch.queue.length;
+            };
 
-            $scope.projects = dataService.projects;
+            $scope.setParentProject = (id) => {
+                $scope.parentProject = _.find($scope.projects, (proj) => {
+                    return proj._id === id;
+                });
+                console.log($scope.parentProject);
+            };
+
             $scope.$watch(() => $scope.init, (newVal) => {
+                console.log("$scope.init", newVal);
                 if(newVal) {
-                    $scope.name = newVal.name;
-                    $scope.description = newVal.description;
-                    $scope.people = newVal.people;
-                    $scope.money = newVal.money;
-                    $scope.date = new Date(newVal.date);
-                    $scope.isPublished = newVal.isPublished;
-                    $scope.isCompleted = newVal.isCompleted;
+                    delete $scope.activeProject;
+                    $scope.activeProject = angular.copy($scope.init);
+                    $scope.activeProject.date = new Date($scope.init.date);
+                    $scope.setParentProject(newVal.parentProjectId);
                 } else {
-                    $scope.name = $scope.description = $scope.people = $scope.money = $scope.date = $scope.isCompleted = $scope.isPublished = null;
+                    $scope.activeProject = {};
+                    $scope.setParentProject();
                 }
             }, true);
 
@@ -65,42 +81,32 @@
             };
 
             function add() {
-                $http.post('/adminium/addproject', {
-                    name: $scope.name || '',
-                    description: $scope.description || '',
-                    people: $scope.people || 0,
-                    money: $scope.money || 0,
-                    date: $scope.date || new Date(),
-                    isCompleted: $scope.isCompleted || false,
-                    isPublished: $scope.isPublished || false
-                })
+                $scope.activeProject.parentProjectId = $scope.parentProject._id;
+                console.log($scope.activeProject.parentProjectId, $scope.parentProject._id);
+                $http.post('/adminium/addproject', $scope.activeProject)
                     .then(success, fail);
             }
 
             function update()  {
-                $http.put('/adminium/updateproject', {
-                    _id: $scope.init._id,
-                    name: $scope.name,
-                    description: $scope.description,
-                    people: $scope.people,
-                    money: $scope.money,
-                    date: $scope.date,
-                    isCompleted: $scope.isCompleted,
-                    isPublished: $scope.isPublished
-                })
+                $scope.activeProject.parentProjectId = $scope.parentProject._id;
+                console.log($scope.activeProject.parentProjectId, $scope.parentProject._id);
+
+                $http.put('/adminium/updateproject', $scope.activeProject)
                     .then(success, fail);
             }
 
             function success(data) {
-                $scope.statusText = s200;
-                $scope.statusClassName = "label label-success";
-                $scope.isQueriing = false;
-                $scope.name = $scope.description = $scope.people = $scope.money = $scope.date = $scope.isCompleted = $scope.isPublished = null;
+                $scope.activeProject = {};
+                $scope.setParentProject();
                 dataService.init();
                 viewService.highlightAdd();
                 final();
                 if(action === 'add' || action === 'update') {
                     uploadFiles(data.data._id);
+                } else {
+                    $scope.statusText = s200;
+                    $scope.statusClassName = "label label-success";
+                    $scope.isQueriing = false;
                 }
                 action = '';
                 return data;
@@ -125,25 +131,23 @@
                 $timeout(() => {
                     $scope.statusText = "";
                     $scope.statusClassName = "";
-                }, 3000);
+                }, 5000);
             }
 
             function uploadFiles(id) {
-                console.log($scope.uploaderSingle);
-                console.log($scope.uploaderBatch);
                 $scope.uploaderSingle.onBeforeUploadItem = function (item) {
                     item.url = `${window.location.origin}/adminium/projectimg/${id}/main`;
                 };
                 $scope.uploaderBatch.onBeforeUploadItem = function (item) {
                     item.url = `${window.location.origin}/adminium/projectimg/${id}/gallery`;
                 };
-                // $scope.uso = {url:`${window.location.origin}/adminium/projectimg/${id}/main`};
-                // $scope.uploaderSingle.url = `${window.location.origin}/adminium/projectimg/${id}/main`;
-                // $scope.uploaderBatch.url = `${window.location.origin}/adminium/projectimg/${id}/gallery`;
-                // $scope.uploaderSingle.removeAfterUpload = true;
-                // $scope.uploaderBatch.removeAfterUpload = true;
                 $scope.uploaderSingle.uploadAll();
                 $scope.uploaderBatch.uploadAll();
+                $scope.filesStatus = 0;
+
+                $scope.statusText = s200;
+                $scope.statusClassName = "label label-success";
+                $scope.isQueriing = false;
             }
         }
     }
