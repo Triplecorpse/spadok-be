@@ -33,14 +33,15 @@ var routerProjectController = (app) => {
             let currentProject = parseProject(req.body);
             let updatedProject = new project(currentProject);
             project.findById(id, (err, prg) => {
-                project.findByIdAndUpdate(id, updatedProject, (err, project) => {
+                project.update({_id: id}, updatedProject, (err, project) => {
                     if (err) {
-                        res.json({up: updatedProject, p: prg, e: err});
+                        res.status(500).json({up: updatedProject, p: prg, e: err});
                     } else {
                         res.json(project);
                     }
                 });
             })
+            // project.update({_id: id}, updatedProject)
         } else {
             res.sendStatus(401)
         }
