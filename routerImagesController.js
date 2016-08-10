@@ -51,15 +51,15 @@ var routerImagesController = (app) => {
                             foundProject.pictures.push(url);
                         }
                         foundProject._id = undefined;
-                        res.json(foundProject);
+                        // res.json(foundProject);
 
-                        // project.findByIdAndUpdate(req.params.id, foundProject, (err, project) => {
-                        //     if (err){
-                        //         res.status(500).json({e: err, up: {foundProject}});
-                        //     } else {
-                        //         res.status(200).json(project);
-                        //     }
-                        // });
+                        project.findByIdAndUpdate(req.params.id, foundProject, (err, project) => {
+                            if (err){
+                                res.status(500).json({e: err, up: {foundProject}});
+                            } else {
+                                res.status(200).json(project);
+                            }
+                        });
                     });
                 } else {
                     res.sendStatus(304);
