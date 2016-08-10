@@ -6,8 +6,12 @@ var routerImagesController = (app) => {
 
     app.post('/adminium/projectimg/:id/:entity', function (req, res) {
         if(req.session.isLoggedIn){
+            var projects = `${__dirname}/static/dist/media/projects`;
             var innerDir = `${__dirname}/static/dist/media/projects/${req.params.id}`;
             var outerDir = `${__dirname}/static/dist/media/projects/${req.params.id}/${req.params.entity}`;
+            if (!fs.existsSync(projects)) {
+                fs.mkdirSync(projects);
+            }
             if (!fs.existsSync(innerDir)) {
                 fs.mkdirSync(innerDir);
                 fs.mkdirSync(`${innerDir}/main`);
