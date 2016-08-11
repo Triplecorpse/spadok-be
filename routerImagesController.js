@@ -22,14 +22,10 @@ var routerImagesController = (app) => {
             form.keepExtensions = true;
             form.multiples = true;
             form.parse(req, function (err, fields, files) {
-                let urls = [];
-                urls.push(files.file.path);
-
                 let url = files.file.path.split(`\\`);
                 if(url.length === 1) {
                     url = files.file.path.split(`/`);
                 }
-                urls.push(url);
 
                 let index;
                 for(let i in url) {
@@ -38,39 +34,24 @@ var routerImagesController = (app) => {
                         break;
                     }
                 }
-                urls.push(index);
 
                 url = url.slice(index).join('/');
-                urls.push(url);
 
                 if(url) {
-                    let foundProject = {};
+                    let updatedProject = {};
                     if (req.params.entity === 'main') {
-                        foundProject.picture = url;
+                        updatedProject.picture = url;
                     } else if (req.params.entity === 'gallery') {
-                        foundProject.pictures.push(url);
+                        updatedProject.pictures.push(url);
                     }
-                    // project.findById(req.params.id, (err, foundProject) => {
-                    //     if (req.params.entity === 'main') {
-                    //         foundProject.picture = url;
-                    //     } else if (req.params.entity === 'gallery') {
-                    //         foundProject.pictures.push(url);
-                    //     }
-                    //     foundProject._id = undefined;
-                    //     // res.json(foundProject);
-                        urls.push(foundProject);
-                    //     urls.push(req.params.id);
-
-                        project.update({_id: req.params.id}, foundProject, (err, project) => {
-                            if (err){
-                                res.status(500).json({e: err, up: {foundProject}});
-                            } else {
-                                urls.push(project);
-                                res.status(200).json(urls);
-                            }
-                        });
-                    // });
-                } else {
+                    project.update({_id: req.params.id}, updatedProject, (err, project) => {
+                        if (err){
+                            res.status(500).json({e: err, up: {updatedProject}});
+                        } else {
+                            res.status(200).json(project);
+                        }
+                    });
+            } else {
                     res.sendStatus(304);
                 }
             });

@@ -14,6 +14,7 @@ var paths = {
         './src/js/vendor/underscore-min.js',
         './bower_components/Swiper/dist/js/swiper.min.js',
         './bower_components/angular-swiper/dist/angular-swiper.js',
+        './bower_components/angular-socialshare/dist/angular-socialshare.min.js',
         './src/js/bootstrap.min.js',
         './src/config.js', './src/index.js', './src/states/**/*.js', './src/filters/**/*.js', './src/blocks/**/*.js', './src/services/**/*.js'],
     styles: ['./src/css/bootstrap.css',

@@ -1,7 +1,7 @@
 (function() {
     angular
         .module('app')
-        .directive('spdProjectItem', ['$location', 'dataService', function ($location, dataService) {
+        .directive('spdProjectItem', ['$location', 'dataService', function ($location) {
 
             return {
                 restrict: "E",
@@ -12,10 +12,9 @@
                 link: link
             };
 
-            function link(scope, element, attributes) {
+            function link(scope) {
                 scope.goto = (id) => {
-                    console.log($location.path());
-                    console.log($location.path(`/project/${scope.project._id}`));
+                    $location.path(`/project/${id}`);
                 }
             }
         }

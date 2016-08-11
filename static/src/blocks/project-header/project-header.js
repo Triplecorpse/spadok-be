@@ -8,14 +8,14 @@
         return {
             restrict: "E",
             templateUrl: "./blocks/project-header/project-header.html",
-            scope: {
-                title: '='
-            },
-            controller: ["$scope", controller],
+            controller: ["$scope", "$location", "dataService", controller],
             link: link
         };
 
-        function controller($scope) {
+        function controller($scope, $location, dataService) {
+            $scope.href = $location.absUrl();
+            $scope.absPicture = dataService.origin + '/' + $scope.project.project.picture;
+
         }
 
         function link() {

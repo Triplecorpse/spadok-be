@@ -1,4 +1,4 @@
-angular.module('app', ['ksSwiper', 'ui.router']);
+angular.module('app', ['ksSwiper', 'ui.router', '720kb.socialshare']);
 
 angular.module('app').config(['$stateProvider', '$urlRouterProvider', function($stateProvider, $urlRouterProvider) {
     var states = ['contacts', 'about', 'partners', 'projects', 'e404'];

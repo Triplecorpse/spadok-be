@@ -1,26 +1,29 @@
 (function() {
     angular
         .module('app')
-        .directive('spdProjectCarousel', ['$timeout', 'dataService', projectCarousel]);
+        .directive('spdProjectCarousel', [projectCarousel]);
 
-    function projectCarousel ($timeout, dataService) {
+    function projectCarousel () {
 
         return {
             restrict: "E",
             templateUrl: "./blocks/project-carousel/project-carousel.html",
-            controller: ['$scope', '$http', projectCarouselController],
+            controller: ['$scope', '$location', 'dataService', projectCarouselController],
             controllerAs: "projects"
         };
 
-        function projectCarouselController($scope, $http) {
+        function projectCarouselController($scope, $location, dataService) {
             var vm = this;
             vm.projects = dataService.projects;
-            $timeout(() => {
-                console.log(vm.projects, dataService);
-            }, 2000);
+            var projectId = vm.projects[0]._id;
+
             vm.iconOptions = {
                 textes: [' средства', ' осталось собрать', ' до начала проекта'],
                 simpleText: false
+            };
+
+            $scope.goto = () => {
+                $location.path(`/project/${projectId}`)
             };
 
             $scope.onReadyProjectSwiper = (swiper) => {vm.prev = swiper.slidePrev;
@@ -34,10 +37,18 @@
                     $('.project-carousel-bullet').removeClass('project-carousel-bullet-active');
                     if(swiper.activeIndex === swiper.slides.length - 1) {
                         $('.project-carousel-bullet').eq(0).addClass('project-carousel-bullet-active');
+                        projectId = vm.projects[0]._id;
+                        // console.log(vm.projects[0].rusName);
+
                     } else if(swiper.activeIndex === 0) {
                         $('.project-carousel-bullet').eq(swiper.slides.length - 3).addClass('project-carousel-bullet-active');
+                        projectId = vm.projects[vm.projects.length - 1]._id;
+                        // console.log(vm.projects[vm.projects.length - 1].rusName);
+
                     } else {
                         $('.project-carousel-bullet').eq(swiper.activeIndex - 1).addClass('project-carousel-bullet-active');
+                        projectId = vm.projects[swiper.activeIndex - 1]._id;
+                        // console.log(vm.projects[swiper.activeIndex - 1].rusName);
                     }
 
                 });

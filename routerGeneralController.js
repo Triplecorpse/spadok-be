@@ -5,12 +5,6 @@ var routerController = (app) => {
 
     const dbGetters = require('./services/dbGetters');
 
-    app.get('/api/language', (req, res) => {
-        var al = req.get('Accept-Language');
-        res.set('Content-Language', lang(al));
-        res.sendStatus(200);
-    });
-
     app.get('/adminium/getall', (req, res) => {
         if(req.session.isLoggedIn){
             Promise.all([dbGetters.getPage(),
@@ -36,6 +30,8 @@ var routerController = (app) => {
             dbGetters.getUsers({isInTeam: true}),
             dbGetters.getVideos({isPublished: true})])
             .then((response) => {
+                var al = req.get('Accept-Language');
+                res.header('Content-Language', lang(al));
                 res.header('Cache-Control', 'private, no-cache, no-store, must-revalidate');
                 res.json(response)
             }, (response) => {

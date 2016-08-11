@@ -10,10 +10,6 @@
   color: #fff;
   height: 355px;
   width: 100%;
-  &-wrapper {
-    width: 25%;
-    margin: auto;
-  }
   &-header {
     @include block-header(#fff)
   }

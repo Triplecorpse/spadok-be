@@ -1,3 +1,17 @@
+@mixin share-button($color) {
+  width: 50px;
+  height: 20px;
+  color: #fff;
+  font-weight: bold;
+  font-size: .8rem;
+  text-align: right;
+  background-color: $color;
+  position: relative;
+  padding-right: 5px;
+  cursor: pointer;
+  margin: 0;
+  display: inline-block;
+}
 .project-header {
   &-image {
     width: 100%;
@@ -5,6 +19,13 @@
     background-size: cover;
     height: 472px;
     position: relative;
+    &-layer {
+      background-color: #000;
+      opacity: .65;
+      position: absolute;
+      width: 100%;
+      height: 472px;
+    }
     &-header {
       @include block-header(#fff);
       font-weight: 100;
@@ -29,9 +50,71 @@
     }
   }
   &-stats {
+    width: 100%;
+    height: 140px;
+    &-info {
+      &-icon {
+        width: 190px;
+        &-digit {
+          text-align: center;
+          color: #2963b9;
+          font-size: 4.8rem;
+          font-weight: 100;
+          margin-top: 30px;
+        }
+        &-text {
+          text-align: center;
+          font-size: 1.6rem;
+          line-height: 0;
+        }
+        &-currency {
+          font-size: 60%;
+        }
+      }
+      &-button {
+        @include button-donate();
+        margin-top: 45px;
+      }
+      &-wrapper {
 
+      }
+    }
   }
   &-info {
-
+    background-color: #f7f7f7;
+    width: 100%;
+    position: relative;
+    height: 240px;
+    &-text {
+      width: 65%;
+      position: absolute;
+      transform: translate(-50%, -50%);
+      left: 50%;
+      top: 30%;
+      font-size: 1.8rem;
+      text-align: center;
+      &-share {
+        &-wrapper {
+          width: 125px;
+          height: 20px;
+          position: absolute;
+          transform: translate(-50%, -50%);
+          left: 50%;
+          bottom: 40px;
+        }
+        &-text {
+          position: absolute;
+          transform: translate(-101%, -50%);
+          top: 50%;
+        }
+        &-vk {
+          @include share-button(#507299)
+        }
+        &-fb {
+          @include share-button(#3b5998);
+          margin-right: 20px;
+        }
+      }
+    }
   }
 }

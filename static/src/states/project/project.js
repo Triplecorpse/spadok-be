@@ -4,5 +4,5 @@ angular.module('app').controller('projectController', ['$stateParams', 'dataServ
         return element._id === $stateParams.projectId;
     });
     console.log(vm.project);
-    document.title = `${vm.project.name} - Спадок`;
+    document.title = `${vm.project.rusName} - Спадок`;
 }]);
