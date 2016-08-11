@@ -1,0 +1,50 @@
+<div class="project-header-image" style="background-image: url('{{project.project.picture}}')">
+    <div class="project-header-image-layer"></div>
+    <h1 class="project-header-image-header">{{project.project.rusName}}</h1>
+    <div class="project-header-image-play-button"></div>
+    <div class="project-header-image-text">Посмотреть видео</div>
+</div>
+<div class="project-header-stats">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-1 col-md-offset-2">
+                <div class="project-header-stats-info-icon-digit">{{project.project.people}}</div>
+                <div class="project-header-stats-info-icon-text">волонтёров</div>
+            </div>
+            <div class="col-md-1">
+                <div class="project-header-stats-info-icon-digit">{{project.project.days}}</div>
+                <div class="project-header-stats-info-icon-text">дней осталось</div>
+            </div>
+            <div class="col-md-1">
+                <div class="project-header-stats-info-icon-digit">{{project.project.money}} <span class="project-header-stats-info-icon-currency">₴</span></div>
+                <div class="project-header-stats-info-icon-text">собрано (с 1500)</div>
+            </div>
+            <div class="col-md-1 col-md-offset-1">
+                <button type="button" class="project-header-stats-info-button">Пожертвовать</button>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="project-header-info">
+    <p class="project-header-info-text">{{project.project.rusShortDescription}}</p>
+    <div class="project-header-info-text-share-wrapper">
+        <div  class="project-header-info-text-share-fb"
+              socialshare
+              socialshare-provider="facebook"
+              socialshare-text="{{project.project.rusName}}"
+              socialshare-description="{{project.project.rusShortDescription}}"
+              socialshare-url="{{href}}"
+              socialshare-media="{{absPicture}}">
+            <span class="project-header-info-text-share-text">Share</span>
+        </div>
+        <div  class="project-header-info-text-share-vk"
+           socialshare
+           socialshare-provider="vk"
+           socialshare-text="{{project.project.rusName}}"
+           socialshare-description="{{project.project.rusShortDescription}}"
+           socialshare-url="{{href}}"
+           socialshare-media="{{absPicture}}">
+            <span class="project-header-info-text-share-text">Share</span>
+        </div>
+    </div>
+</div>

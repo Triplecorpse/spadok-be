@@ -1,0 +1,30 @@
+<div class="review-carousel">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-4 col-md-offset-2">
+                <div class="review-carousel-wrapper">
+                    <h3 class="review-carousel-header">Отзывы</h3>
+                    <div class="review-carousel-swiper-wrapper">
+                        <ks-swiper-container show-nav-buttons="false" direction="horizontal" pagination-is-active="false" loop="true" autoplay="3000"
+                                             override-parameters="{'centeredSlides':'true'}"
+                                             swiper="swiper" on-ready="onReadyReviewsSwiper(swiper)">
+                            <ks-swiper-slide class="swiper-slide" ng-repeat="review in reviews.reviews">
+                                <div class="review-carousel-slide">
+                                    <h4 class="review-carousel-slide-header">{{review.name}}</h4>
+                                    <p class="review-carousel-slide-job">{{review.position}}</p>
+                                    <p class="review-carousel-slide-text">{{review.review}}</p>
+                                </div>
+                            </ks-swiper-slide>
+                        </ks-swiper-container>
+                    </div>
+                    <div class="review-carousel-button-prev" ng-click="reviews.prev()"></div>
+                    <div class="review-carousel-button-next" ng-click="reviews.next()"></div>
+                    <div class="review-carousel-bullet-wrapper">
+                        <div ng-class="'review-carousel-bullet ' + ($index === 0 ? 'review-carousel-bullet-active' : '')" ng-repeat="bullet in reviews.reviews track by $index" ng-click="reviews.goto($index)"></div>
+                    </div>
+                    <button type="button" class="review-carousel-button">Оставить отзыв</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

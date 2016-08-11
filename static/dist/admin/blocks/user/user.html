@@ -1,0 +1,63 @@
+<form name="form" form-type="{{view}}" ng-submit="submit(form, $event)" autocomplete="off">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="form-group">
+                <label for="user-name">Name</label>
+                <input type="text" class="form-control" id="user-name" placeholder="Name" ng-model="name" autocomplete="off">
+            </div>
+            <div class="form-group">
+                <label for="user-email">Email</label>
+                <input type="email" class="form-control" id="user-email" placeholder="Email" ng-model="email" autocomplete="off">
+            </div>
+            <div class="form-group">
+                <label for="user-password">Password</label>
+                <input type="password" class="form-control" id="user-password" placeholder="Password" ng-model="password" autocomplete="off">
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-4">
+            <div class="checkbox">
+                <label>
+                    <input type="checkbox" ng-model="canHandleProjects"> can handle projects
+                </label>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="checkbox">
+                <label>
+                    <input type="checkbox" ng-model="canHandleUsers"> can handle users
+                </label>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="checkbox">
+                <label>
+                    <input type="checkbox" ng-model="isInTeam"> is a team member
+                </label>
+            </div>
+        </div>
+    </div>
+    <div class="row project-footer">
+        <div class="col-md-4">
+            <div ng-switch="view">
+                <div ng-switch-when="new">
+                    <button type="submit" class="btn btn-default project-add" value="Add" ng-disabled="isQueriing">Add</button>
+                </div>
+                <div ng-switch-when="edit">
+                    <div class="checkbox">
+                        <label>
+                            <input type="checkbox" ng-model="canDelete"> Really delete project
+                        </label>
+                    </div>
+                    <button type="button" class="btn btn-danger" value="Delete" ng-disabled="!canDelete" ng-click="delete()">Delete</button>
+                    <button type="submit" class="btn btn-default" value="Update" ng-disabled="isQueriing" ng-click="update()">Update</button>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-10">
+            <span class="label label-info" ng-if="isQueriing">Saving...</span>
+            <span ng-class="statusClassName" ng-if="!isQueriing">{{statusText}}</span>
+        </div>
+    </div>
+</form>
