@@ -5,7 +5,7 @@ var routerImagesController = (app) => {
     const fs = require('fs');
 
     app.post('/adminium/projectimg/:id/:entity', function (req, res) {
-        if(req.session.isLoggedIn){
+        if (req.session.isLoggedIn) {
             var projects = `${__dirname}/static/dist/media/projects`;
             var innerDir = `${__dirname}/static/dist/media/projects/${req.params.id}`;
             var outerDir = `${__dirname}/static/dist/media/projects/${req.params.id}/${req.params.entity}`;
@@ -23,35 +23,46 @@ var routerImagesController = (app) => {
             form.multiples = true;
             form.parse(req, function (err, fields, files) {
                 let url = files.file.path.split(`\\`);
-                if(url.length === 1) {
+                if (url.length === 1) {
                     url = files.file.path.split(`/`);
                 }
 
                 let index;
-                for(let i in url) {
-                    if(url[i] === 'media') {
+                for (let i in url) {
+                    if (url[i] === 'media') {
                         index = i;
                         break;
                     }
                 }
 
                 url = url.slice(index).join('/');
-
-                if(url) {
-                    let updatedProject = {};
-                    if (req.params.entity === 'main') {
-                        updatedProject.picture = url;
-                    } else if (req.params.entity === 'gallery') {
-                        updatedProject.pictures.push(url);
-                    }
-                    project.update({_id: req.params.id}, updatedProject, (err, project) => {
-                        if (err){
-                            res.status(500).json({e: err, up: {updatedProject}});
+                let collector = {id: req.params.id};
+                if (url) {
+                    project.findById(req.params.id, (err, foundProject) => {
+                        collector.fp = foundProject;
+                        if (err) {
+                            res.status(500).json({e: err});
                         } else {
-                            res.status(200).json(project);
+                            if (req.params.entity === 'main') {
+                                collector.p1=foundProject.picture;
+                                foundProject.picture = url;
+                                collector.p2=foundProject.picture;
+                            } else if (req.params.entity === 'gallery') {
+                                collector.ps1=foundProject.pictures;
+                                foundProject.pictures.push(url);
+                                collector.ps2=foundProject.pictures;
+                            }
+                            project.findByIdAndUpdate(req.params.id, foundProject, (err, updatedProject) => {
+                                collector.up = updatedProject;
+                                if (err) {
+                                    res.status(500).json({e: err, up: {foundProject}});
+                                } else {
+                                    res.status(200).json(collector);
+                                }
+                            });
                         }
                     });
-            } else {
+                } else {
                     res.sendStatus(304);
                 }
             });

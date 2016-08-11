@@ -14,7 +14,9 @@
 
         function projectCarouselController($scope, $location, dataService) {
             var vm = this;
-            vm.projects = dataService.projects;
+            vm.projects = _.filter(dataService.projects, (element) => {
+                return element.isCompleted === false;
+            });
             var projectId = vm.projects[0]._id;
 
             vm.iconOptions = {
@@ -38,17 +40,14 @@
                     if(swiper.activeIndex === swiper.slides.length - 1) {
                         $('.project-carousel-bullet').eq(0).addClass('project-carousel-bullet-active');
                         projectId = vm.projects[0]._id;
-                        // console.log(vm.projects[0].rusName);
 
                     } else if(swiper.activeIndex === 0) {
                         $('.project-carousel-bullet').eq(swiper.slides.length - 3).addClass('project-carousel-bullet-active');
                         projectId = vm.projects[vm.projects.length - 1]._id;
-                        // console.log(vm.projects[vm.projects.length - 1].rusName);
 
                     } else {
                         $('.project-carousel-bullet').eq(swiper.activeIndex - 1).addClass('project-carousel-bullet-active');
                         projectId = vm.projects[swiper.activeIndex - 1]._id;
-                        // console.log(vm.projects[swiper.activeIndex - 1].rusName);
                     }
 
                 });
