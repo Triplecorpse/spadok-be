@@ -1,5 +1,5 @@
 (function() {
-    angular.module('app').directive('spdProjectsHeader', [function about () {
+    angular.module('app').directive('spdProjectsHeader', [function() {
 
         return {
             restrict: "E",

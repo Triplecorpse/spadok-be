@@ -1,3 +1,5 @@
-<spd-project-header ng-if="app.isProjectsLoaded"></spd-project-header>
-<spd-subprojects ng-if="app.isProjectsLoaded"></spd-subprojects>
-<spd-project-description ng-if="app.isProjectsLoaded"></spd-project-description>
+<div  ng-if="app.isProjectsLoaded">
+    <spd-project-header></spd-project-header>
+    <spd-subprojects></spd-subprojects>
+    <spd-project-description></spd-project-description>
+</div>
