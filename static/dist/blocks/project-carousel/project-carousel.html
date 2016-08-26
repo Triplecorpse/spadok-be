@@ -1,7 +1,7 @@
 <div class="project-carousel" ng-if="app.isProjectsLoaded">
-    <ks-swiper-container loop="projects.projects.length > 1" direction="horizontal" slides-per-view="1"
+    <ks-swiper-container loop="projects.length > 1" direction="horizontal" slides-per-view="1"
                          swiper="swiper" on-ready="onReadyProjectSwiper(swiper)" class="swiper-container">
-        <ks-swiper-slide class="swiper-slide project-carousel-slide" ng-repeat="project in projects.projects track by $index">
+        <ks-swiper-slide class="swiper-slide project-carousel-slide" ng-repeat="project in projects track by $index">
             <div class="project-carousel-slide-wrapper" style="background-image: url('{{project.picture}}')">
                 <div class="project-carousel-slide-layer"></div>
                 <h3 class="project-carousel-slide-header">{{project.rusName}}</h3>
@@ -12,10 +12,10 @@
             </div>
         </ks-swiper-slide>
     </ks-swiper-container>
-    <div class="project-carousel-button-prev" ng-click="projects.prev()" ng-if="projects.projects.length > 1"></div>
-    <div class="project-carousel-button-next" ng-click="projects.next()" ng-if="projects.projects.length > 1"></div>
-    <button type="button" class="project-carousel-button" ng-click="goto()">О проекте</button>
-    <div class="project-carousel-bullet-wrapper" ng-if="projects.projects.length > 1">
-        <div ng-class="'project-carousel-bullet ' + ($index === 0 ? 'project-carousel-bullet-active' : '')" ng-repeat="bullet in projects.projects track by $index" ng-click="projects.goto($index)"></div>
+    <div class="project-carousel-button-prev" ng-click="prev()" ng-if="projects.length > 1"></div>
+    <div class="project-carousel-button-next" ng-click="next()" ng-if="projects.length > 1"></div>
+    <button type="button" class="project-carousel-button" ng-click="gotoProject()">О проекте</button>
+    <div class="project-carousel-bullet-wrapper" ng-if="projects.length > 1">
+        <div ng-class="'project-carousel-bullet ' + ($index === 0 ? 'project-carousel-bullet-active' : '')" ng-repeat="bullet in projects track by $index" ng-click="goto($index)"></div>
     </div>
 </div>

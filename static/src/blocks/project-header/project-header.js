@@ -1,24 +1,21 @@
 (function() {
     angular
         .module('app')
-        .directive('spdProjectHeader', [about]);
+        .directive('spdProjectHeader', ["dataService", function (dataService) {
 
-    function about () {
+            return {
+                restrict: "E",
+                templateUrl: "./blocks/project-header/project-header.html",
+                controller: ["$scope", "$location", controller],
+                link: link
+            };
 
-        return {
-            restrict: "E",
-            templateUrl: "./blocks/project-header/project-header.html",
-            controller: ["$scope", "$location", "dataService", controller],
-            link: link
-        };
+            function controller($scope, $location) {
+                $scope.href = $location.absUrl();
+            }
 
-        function controller($scope, $location, dataService) {
-            $scope.href = $location.absUrl();
-            $scope.absPicture = dataService.origin + '/' + $scope.project.project.picture;
-
-        }
-
-        function link() {
-        }
-    }
+            function link(scope) {
+                scope.absPicture = dataService.origin + '/' + scope.project.project.picture;
+            }
+        }]);
 })();

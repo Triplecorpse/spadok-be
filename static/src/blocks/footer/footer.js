@@ -8,8 +8,9 @@
         return {
             restrict: "E",
             templateUrl: "./blocks/footer/footer.html",
-            controller: [footerController],
-            controllerAs: 'footer'
+            controller: ['$scope', '$location', footerController],
+            controllerAs: 'footer',
+            link: link
         };
 
         function footerController() {
@@ -20,6 +21,12 @@
             } else {
                 vm.copyright = "";
             }
+
+
+        }
+
+        function link() {
+
         }
     }
 })();

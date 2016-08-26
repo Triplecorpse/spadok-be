@@ -21,7 +21,7 @@
             };
 
             vm.isActive = (path) => {
-                return $location.path() === path;
+                return $location.path().indexOf(path) > -1;
             };
         }
 
