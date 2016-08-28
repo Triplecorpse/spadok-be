@@ -3,6 +3,12 @@
         <div class="col-md-6 col-md-offset-1 project-description-wrapper">
             <h3 class="project-description-header">История и цель проекта</h3>
             <p class="project-description-text">{{project.project.rusDescription}}</p>
+        </div>
+    </div>
+</div>
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-6 col-md-offset-1 project-description-wrapper">
             <ks-swiper-container direction="horizontal"
                                  swiper="swiper" on-ready="onReadyGallerySwiper(swiper)" class="swiper-container project-description-gallery-container" ng-if="project.project.pictures.length > 0">
                 <ks-swiper-slide class="swiper-slide project-description-gallery-slide" ng-repeat="image in project.project.pictures track by $index">
