@@ -9,11 +9,11 @@
                 scope: {
                     project: "="
                 },
-                link: link
+                controller: ['$scope', '$location', controller]
             };
 
-            function link(scope) {
-                scope.goto = (id) => {
+            function controller($scope, $location) {
+                $scope.goto = (id) => {
                     $location.path(`/project/${id}`);
                 }
             }
