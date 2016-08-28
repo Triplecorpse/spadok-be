@@ -7,7 +7,7 @@
                                  swiper="swiper" on-ready="onReadyGallerySwiper(swiper)" class="swiper-container project-description-gallery-container" ng-if="project.project.pictures.length > 0">
                 <ks-swiper-slide class="swiper-slide project-description-gallery-slide" ng-repeat="image in project.project.pictures track by $index">
                     <div class="project-description-gallery-slide-image" style="background-image: url('{{image}}')"></div>
-                    <div class="project-description-gallery-bullet-wrapper" ng-if="project.project.pictures.length > 1">{{slideInfo}}</div>
+                    <div class="project-description-gallery-bullet-wrapper" ng-if="project.project.pictures.length > 1">{{$index + 1}}/{{project.project.pictures.length}}</div>
                 </ks-swiper-slide>
             </ks-swiper-container>
             <div class="project-description-gallery-button-prev" ng-click="prev()" ng-if="(project.project.pictures.length > 1) && showPrev"></div>

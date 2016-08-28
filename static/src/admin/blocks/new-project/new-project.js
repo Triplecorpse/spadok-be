@@ -156,9 +156,16 @@
                     item.url = `${window.location.origin}/adminium/projectimg/${id}/gallery`;
                 };
 
-                $scope.uploaderBatch.onCompleteAll = function () {
-                    dataService.init();
-                };
+                if($scope.uploaderBatch.queue.length) {
+                    $scope.uploaderBatch.onCompleteAll = function () {
+                        dataService.init();
+                    };
+                } else {
+                    $scope.uploaderSingle.onCompleteAll = function () {
+                        dataService.init();
+                    };
+                }
+
                 $scope.uploaderSingle.uploadAll();
                 $scope.uploaderBatch.uploadAll();
                 $scope.filesStatus = 0;
