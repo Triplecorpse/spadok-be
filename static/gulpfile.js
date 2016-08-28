@@ -35,6 +35,7 @@ var admin = {
         './src/admin/js/index.js',
         './src/admin/blocks/**/*.js', './src/admin/services/**/*.js'],
     styles: ['./src/admin/css/bootstrap.min.scss',
+        './src/admin/css/general.scss',
         './src/admin/blocks/**/*.scss']
 };
 

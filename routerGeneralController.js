@@ -11,8 +11,7 @@ var routerController = (app) => {
                 dbGetters.getPartners(),
                 dbGetters.getProjects(),
                 dbGetters.getReviews(),
-                dbGetters.getUsers(),
-                dbGetters.getVideos()])
+                dbGetters.getUsers()])
                 .then((response) => {
                     res.json(response)
                 }, (response) => {
@@ -27,8 +26,7 @@ var routerController = (app) => {
             dbGetters.getPartners({isPublished: true}),
             dbGetters.getProjects({isPublished: true}),
             dbGetters.getReviews({isPublished: true}),
-            dbGetters.getUsers({isInTeam: true}),
-            dbGetters.getVideos({isPublished: true})])
+            dbGetters.getUsers({isInTeam: true})])
             .then((response) => {
                 var al = req.get('Accept-Language');
                 res.header('Content-Language', lang(al));

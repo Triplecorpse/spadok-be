@@ -31,27 +31,58 @@
             </div>
         </div>
     </div>
-    <div class="row">
+    <div class="row top-line">
         <div class="col-md-6">
             <div class="form-group">
-                <label for="project-picture">Main Picture</label>
-                <input type="file" id="project-picture" name="images" nv-file-select uploader="uploaderSingle" option="uso">
-                <p class="help-block">Upload a picture to be considered as main for this project. It would be good to be dark and width 2 times bigger than height.</p>
+                <label for="video-url">Youtube Video URL</label>
+                <input type="url" class="form-control" id="video-url" placeholder="URL" ng-model="activeProject.videoUrl">
             </div>
         </div>
         <div class="col-md-6">
             <div class="form-group">
-                <label for="project-picture">Picture Gallery</label>
-                <input type="file" id="project-pictures" name="images" multiple nv-file-select uploader="uploaderBatch">
-                <p class="help-block">Upload picture gallery for this project. <strong>{{filesStatus}} Files added.</strong> Don't believe native display.</p>
+                <label for="video-name">Video Name</label>
+                <input type="text" class="form-control" id="video-name" placeholder="Name" ng-model="activeProject.videoName">
+            </div>
+        </div>
+        <div class="col-md-12">
+            <div class="checkbox">
+                <label>
+                    <input type="checkbox" ng-model="activeProject.isVideoOnMain"> Show video on main page
+                </label>
             </div>
         </div>
     </div>
-    <div class="row">
+    <div class="row top-line">
+        <div class="col-md-6">
+            <div class="form-group">
+                <label for="project-picture-select">Upload main picture...</label>
+                <input type="file" id="project-picture-select" name="images" nv-file-select uploader="uploaderSingle" option="uso">
+                <p class="help-block">Upload a picture to be considered as main for this project. It would be good to be dark and width 2 times bigger than height. Uploading has bigger priority than entering URL.</p>
+            </div>
+            <div class="form-group">
+                <label for="project-picture-url">...or enter its url</label>
+                <input type="text" class="form-control" id="project-picture-url" placeholder="Picture URL" ng-model="activeProject.picture">
+            </div>
+            <img ng-src="{{activeProject.picture}}" class="img-responsive project-img-preview" alt="main picture" ng-if="activeProject.picture">
+        </div>
+        <div class="col-md-6">
+            <div class="form-group">
+                <label for="project-pictures-select">Upload pictures for gallery...</label>
+                <input type="file" id="project-pictures-select" name="images" multiple nv-file-select uploader="uploaderBatch">
+                <p class="help-block">Upload picture gallery for this project. <strong>{{filesStatus}} Files added.</strong> Don't believe native display.</p>
+            </div>
+            <div class="form-group">
+                <label>...or enter its urls</label>
+                <input type="text" class="form-control" placeholder="Gallery Picture URL" ng-repeat="picture in activeProject.pictures track by $index" ng-model="picture" ng-change="updateSinglePicture($index, picture, this)" ng-focus="showSinglePicture($index)">
+            </div>
+            <img ng-src="{{activeGalleryPicture}}" class="img-responsive project-img-preview" alt="gallery picture" ng-if="activeGalleryPicture">
+        </div>
+    </div>
+    <div class="row top-line">
         <div class="col-md-12">
             <div class="form-group">
                 <div class="dropdown">
-                    <label for="parent-project">Parent Project</label>
+                    <label for="parent-project">Parent Project </label>
                     <button class="btn btn-default dropdown-toggle" type="button" id="parent-project" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
                         {{parentProject.rusName || parentProject.rusName || 'None'}}
                         <span class="caret"></span>
@@ -65,21 +96,7 @@
             </div>
         </div>
     </div>
-    <div class="row">
-        <div class="col-md-6">
-            <div class="form-group">
-                <label for="video-url">Youtube Video URL</label>
-                <input type="url" class="form-control" id="video-url" placeholder="URL" ng-model="activeProject.videoUrl">
-            </div>
-        </div>
-        <div class="col-md-6">
-            <div class="form-group">
-                <label for="video-name">Video Name</label>
-                <input type="text" class="form-control" id="video-name" placeholder="Name" ng-model="activeProject.videoName">
-            </div>
-        </div>
-    </div>
-    <div class="row">
+    <div class="row top-line">
         <div class="col-md-4">
             <div class="form-group">
                 <label for="people">People</label>
@@ -87,9 +104,16 @@
             </div>
         </div>
         <div class="col-md-4">
-            <div class="form-group">
-                <label for="money">Money</label>
-                <input type="number" id="money" class="form-control" placeholder="Money" ng-model="activeProject.money">
+            <label for="money">Money collected / total needed (UAH)</label>
+            <div class="col-md-6 no-padding">
+                <div class="form-group">
+                    <input type="number" id="money" class="form-control" placeholder="Money Collected" ng-model="activeProject.money">
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="form-group">
+                    <input type="number" class="form-control" placeholder="Money Total" ng-model="activeProject.moneyTotal">
+                </div>
             </div>
         </div>
         <div class="col-md-4">
@@ -113,7 +137,7 @@
             </div>
         </div>
     </div>
-    <div class="row project-footer">
+    <div class="row top-line">
         <div class="col-md-4">
             <div ng-switch="view">
                 <div ng-switch-when="new">

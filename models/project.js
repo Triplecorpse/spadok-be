@@ -12,9 +12,11 @@ var ProjectSchema   = new mongoose.Schema({
     videoName: String,
     people: Number,
     money: Number,
+    moneyTotal: Number,
     date: Date,
     isPublished: Boolean,
     isCompleted: Boolean,
+    isVideoOnMain: Boolean,
     parentProjectId: String
 });
 

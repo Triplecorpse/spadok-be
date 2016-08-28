@@ -20,7 +20,6 @@
         };
 
         function controller($scope, FileUploader) {
-            var vm = this;
             var action;
             $scope.filesStatus = 0;
             $scope.video = {};
@@ -47,17 +46,37 @@
                 });
             };
 
+            //filling fields
             $scope.$watch(() => $scope.init, (newVal) => {
                 if(newVal) {
                     delete $scope.activeProject;
                     $scope.activeProject = angular.copy($scope.init);
                     $scope.activeProject.date = new Date($scope.init.date);
+                    if(!$scope.activeProject.pictures) {
+                        $scope.activeProject.pictures = [];
+                        $scope.activeGalleryPicture = '';
+                    }
+                    $scope.activeProject.pictures.push('');
                     $scope.setParentProject(newVal.parentProjectId);
                 } else {
-                    $scope.activeProject = {};
+                    $scope.activeProject = {pictures:[]};
+                    $scope.activeProject.pictures.push('');
+                    $scope.activeGalleryPicture = '';
                     $scope.setParentProject();
                 }
             }, true);
+
+            $scope.updateSinglePicture = (index, url, inp) => {
+                $scope.activeProject.pictures[index] = url;
+                $scope.activeGalleryPicture = $scope.activeProject.pictures[index];
+                if(index === $scope.activeProject.pictures.length - 1 && $scope.activeProject.pictures[$scope.activeProject.pictures.length - 1]) {
+                    $scope.activeProject.pictures.push('');
+                }
+            };
+
+            $scope.showSinglePicture = (index) => {
+                $scope.activeGalleryPicture = $scope.activeProject.pictures[index];
+            };
 
             $scope.submit = (form, event) => {
                 $scope.isQueriing = true;
@@ -93,7 +112,6 @@
             function success(data) {
                 $scope.activeProject = {};
                 $scope.setParentProject();
-                dataService.init();
                 viewService.highlightAdd();
                 final();
                 if(action === 'add' || action === 'update') {
@@ -102,6 +120,7 @@
                     $scope.statusText = s200;
                     $scope.statusClassName = "label label-success";
                     $scope.isQueriing = false;
+                    dataService.init();
                 }
                 action = '';
                 return data;
@@ -135,6 +154,10 @@
                 };
                 $scope.uploaderBatch.onBeforeUploadItem = function (item) {
                     item.url = `${window.location.origin}/adminium/projectimg/${id}/gallery`;
+                };
+
+                $scope.uploaderBatch.onCompleteAll = function () {
+                    dataService.init();
                 };
                 $scope.uploaderSingle.uploadAll();
                 $scope.uploaderBatch.uploadAll();

@@ -13,7 +13,6 @@
                         this.projects = response.data[2];
                         this.reviews = response.data[3];
                         this.users = response.data[4];
-                        this.videos = response.data[5];
                         this.isLoading = false;
                         return response;
                     })
@@ -21,7 +20,6 @@
 
             return {
                 projects: [],
-                videos: [],
                 reviews: [],
                 partners: [],
                 users: [],

@@ -3,7 +3,6 @@ const partner = require('../models/partner');
 const project = require('../models/project');
 const review = require('../models/review');
 const user = require('../models/user');
-const video = require('../models/video');
 
 module.exports = {
     getPage: (query) => {
@@ -57,17 +56,6 @@ module.exports = {
                     reject(err);
                 } else {
                     resolve(users);
-                }
-            });
-        });
-    },
-    getVideos: (query) => {
-        return new Promise((resolve, reject) => {
-            video.find(query, (err, videos) => {
-                if (err) {
-                    reject(err);
-                } else {
-                    resolve(videos);
                 }
             });
         });

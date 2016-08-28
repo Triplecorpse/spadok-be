@@ -1,39 +1,68 @@
 <form name="form" form-type="{{view}}" ng-submit="submit(form, $event)" autocomplete="off">
     <div class="row">
+        <div class="col-md-6">
+            <h3>Russian</h3>
+            <div class="form-group">
+                <label for="user-name-rus">Name</label>
+                <input type="text" class="form-control" id="user-name-rus" placeholder="Name" ng-model="activeUser.name" autocomplete="off">
+            </div>
+        </div>
+        <div class="col-md-6">
+            <h3>English</h3>
+            <div class="form-group">
+                <label for="user-name-eng">Name</label>
+                <input type="text" class="form-control" id="user-name-eng" placeholder="Name" ng-model="activeUser.name" autocomplete="off">
+            </div>
+        </div>
         <div class="col-md-12">
             <div class="form-group">
-                <label for="user-name">Name</label>
-                <input type="text" class="form-control" id="user-name" placeholder="Name" ng-model="name" autocomplete="off">
-            </div>
-            <div class="form-group">
                 <label for="user-email">Email</label>
-                <input type="email" class="form-control" id="user-email" placeholder="Email" ng-model="email" autocomplete="off">
+                <input type="email" class="form-control" id="user-email" placeholder="Email" ng-model="activeUser.email" autocomplete="off">
             </div>
             <div class="form-group">
                 <label for="user-password">Password</label>
-                <input type="password" class="form-control" id="user-password" placeholder="Password" ng-model="password" autocomplete="off">
+                <input type="password" class="form-control" id="user-password" placeholder="Password" ng-model="activeUser.password" autocomplete="off">
             </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-mg-12">
+            <div class="media">
+                <div class="media-left media-middle">
+                    <a href="">
+                        <img class="media-object img-circle user-img" src="https://pp.vk.me/c630718/v630718062/3c6b2/VW5FLLbuBMY.jpg" alt="avatar">
+                    </a>
+                </div>
+                <div class="media-body">
+                    <div class="form-group">
+                        <label for="project-picture">Avatar</label>
+                        <input type="file" id="project-picture" name="images" nv-file-select uploader="uploaderAvatar">
+                        <p class="help-block">Upload a picture to be considered as avatar.</p>
+                    </div>
+                </div>
+            </div>
+
         </div>
     </div>
     <div class="row">
         <div class="col-md-4">
             <div class="checkbox">
                 <label>
-                    <input type="checkbox" ng-model="canHandleProjects"> can handle projects
+                    <input type="checkbox" ng-model="activeUser.canHandleProjects"> can handle projects
                 </label>
             </div>
         </div>
         <div class="col-md-4">
             <div class="checkbox">
                 <label>
-                    <input type="checkbox" ng-model="canHandleUsers"> can handle users
+                    <input type="checkbox" ng-model="activeUser.canHandleUsers"> can handle users
                 </label>
             </div>
         </div>
         <div class="col-md-4">
             <div class="checkbox">
                 <label>
-                    <input type="checkbox" ng-model="isInTeam"> is a team member
+                    <input type="checkbox" ng-model="activeUser.isInTeam"> is team member
                 </label>
             </div>
         </div>
@@ -47,7 +76,7 @@
                 <div ng-switch-when="edit">
                     <div class="checkbox">
                         <label>
-                            <input type="checkbox" ng-model="canDelete"> Really delete project
+                            <input type="checkbox" ng-model="activeUser.canDelete"> Really delete project
                         </label>
                     </div>
                     <button type="button" class="btn btn-danger" value="Delete" ng-disabled="!canDelete" ng-click="delete()">Delete</button>
