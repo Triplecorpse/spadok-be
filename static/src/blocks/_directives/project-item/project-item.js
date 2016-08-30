@@ -1,7 +1,5 @@
 (function() {
-    angular
-        .module('app')
-        .directive('spdProjectItem', ['$location', 'dataService', function ($location) {
+    angular.module('app').directive('spdProjectItem', [function() {
 
             return {
                 restrict: "E",

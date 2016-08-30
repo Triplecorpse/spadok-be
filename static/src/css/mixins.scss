@@ -116,3 +116,10 @@
   top: 50%;
   transform: translateY(-50%);
 }
+
+@mixin placeholder-feedback($opacity) {
+  font-size: 1.3rem;
+  color: #000;
+  opacity: $opacity;
+  transition: opacity 0.3s ease;
+}

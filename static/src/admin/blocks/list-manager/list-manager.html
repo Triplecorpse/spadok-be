@@ -4,10 +4,13 @@
     </div>
 </div>
 <div class="row">
-    <div class="col-md-6">
+    <!--<div class="col-md-12" ng-if="entity === 'page'">-->
+        <spda-page ng-if="entity === 'page'"></spda-page>
+    <!--</div>-->
+    <div class="col-md-6" ng-if="entity !== 'page'">
         <spda-list model="model" entity="entity"></spda-list>
     </div>
-    <div class="col-md-6">
+    <div class="col-md-6" ng-if="entity !== 'page'">
         <div ng-switch="entity">
             <div ng-switch-when="projects">
                 <spda-new-project init="active" view="view"></spda-new-project>
@@ -15,8 +18,6 @@
             <div ng-switch-when="reviews">
             </div>
             <div ng-switch-when="files">
-            </div>
-            <div ng-switch-when="page">
             </div>
             <div ng-switch-when="users">
                 <spda-user view="view"></spda-user>

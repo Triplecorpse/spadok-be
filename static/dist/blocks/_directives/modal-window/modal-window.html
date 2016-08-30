@@ -1,0 +1,13 @@
+<div class="modal-bg" ng-click="dismissModal($event)" ng-keyup="dismissModalByKey($event)"></div>
+<div class="modal-window" ng-keyup="dismissModalByKey($event)">
+    <h3 class="modal-window-header">{{header}}</h3>
+    <div class="modal-window-close" ng-click="dismissModal($event)">
+        <div class="modal-window-close-diag modal-window-close-diag1"></div>
+        <div class="modal-window-close-diag modal-window-close-diag2"></div>
+    </div>
+    <form name="modal-window" class="modal-window-input-group" ng-submit="feedback.submit()">
+        <input type="{{input.type}}" class="modal-window-input" placeholder="{{input.placeholder}}" ng-repeat="input in placeholders track by $index" ng-if="!$last" autofocus>
+        <textarea class="modal-window-input modal-window-input-textarea" placeholder="Ваши вопросы и предложения"></textarea>
+        <button type="submit" class="modal-window-submit">{{action}}</button>
+    </form>
+</div>

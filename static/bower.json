@@ -24,6 +24,7 @@
     "angular-swiper": "^0.4.0",
     "underscore": "^1.8.3",
     "angular-file-upload": "^2.3.4",
-    "angular-socialshare": "angularjs-socialshare#^2.2.5"
+    "angular-socialshare": "angularjs-socialshare#^2.2.5",
+    "angular-modal-service": "^0.10.1"
   }
 }
