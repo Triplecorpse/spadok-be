@@ -12,6 +12,7 @@
 
             function controller($scope, $location) {
                 $scope.goto = (id) => {
+                    // window.scrollTo(0, 0);
                     $location.path(`/project/${id}`);
                 }
             }

@@ -49,9 +49,9 @@ angular.module('app').controller('appController', ['$window', '$scope', 'dataSer
         }
     };
 
-    $scope.$on('$locationChangeSuccess', () => {
-        window.scrollTo(0, 0);
-    });
+    // $scope.$on('$locationChangeSuccess', () => {
+    //     window.scrollTo(0, 0);
+    // });
 
     String.prototype.splice = function(start, delCount, newSubStr) {
         return this.slice(0, start) + newSubStr + this.slice(start + Math.abs(delCount));
