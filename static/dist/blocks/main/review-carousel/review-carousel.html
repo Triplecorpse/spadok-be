@@ -22,7 +22,7 @@
                     <div class="review-carousel-bullet-wrapper">
                         <div ng-class="'review-carousel-bullet ' + ($index === 0 ? 'review-carousel-bullet-active' : '')" ng-repeat="bullet in reviews.reviews track by $index" ng-click="reviews.goto($index)"></div>
                     </div>
-                    <button type="button" class="review-carousel-button">Оставить отзыв</button>
+                    <spd-modal-caller-button options="options" button-type="'review-carousel-button'"></spd-modal-caller-button>
                 </div>
             </div>
         </div>
