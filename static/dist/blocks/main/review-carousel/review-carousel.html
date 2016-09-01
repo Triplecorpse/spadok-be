@@ -10,8 +10,8 @@
                                              swiper="swiper" on-ready="onReadyReviewsSwiper(swiper)">
                             <ks-swiper-slide class="swiper-slide" ng-repeat="review in reviews.reviews">
                                 <div class="review-carousel-slide">
-                                    <h4 class="review-carousel-slide-header">{{review.name}}</h4>
-                                    <p class="review-carousel-slide-job">{{review.position}}</p>
+                                    <h4 class="review-carousel-slide-header" ng-bind-html="review.name || 'No Name'"></h4>
+                                    <p class="review-carousel-slide-job" ng-bind-html="review.position"></p>
                                     <p class="review-carousel-slide-text" ng-bind-html="review.review"></p>
                                 </div>
                             </ks-swiper-slide>

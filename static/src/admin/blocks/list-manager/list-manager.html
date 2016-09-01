@@ -1,21 +1,30 @@
 <div class="row">
     <div class="col-md-12">
-        <h3>Manager - {{entity}}</h3>
+        <h3>Manager - {{state}}</h3>
     </div>
 </div>
 <div class="row">
-    <!--<div class="col-md-12" ng-if="entity === 'page'">-->
-        <spda-page ng-if="entity === 'page'"></spda-page>
-    <!--</div>-->
-    <div class="col-md-6" ng-if="entity !== 'page'">
-        <spda-list model="model" entity="entity"></spda-list>
+    <spda-page ng-if="state === 'page'"></spda-page>
+    <div class="col-md-6" ng-if="state !== 'page'">
+        <div class="list-group" ng-if="state == 'projects' || state == 'users'">
+            <a href="#" id="new" class="list-group-item active" ng-click="add($event, state)">
+                <h4 class="list-group-item-heading">Add new...</h4>
+            </a>
+        </div>
+        <div class="list-group" ng-if="!isLoading">
+            <a href="#" class="list-group-item" ng-click="edit($event, $index, object)" ng-repeat="object in model track by $index">
+                <h4 class="list-group-item-heading">{{object.rusName || object.name || 'No name'}} {{!object.isPublished ? '(not published)' : ''}}</h4>
+                <p class="list-group-item-text">{{object.rusShortDescription || object.review || object.email || 'No description'}}</p>
+            </a>
+        </div>
     </div>
-    <div class="col-md-6" ng-if="entity !== 'page'">
-        <div ng-switch="entity">
+    <div class="col-md-6" ng-if="state !== 'page'">
+        <div ng-switch="state">
             <div ng-switch-when="projects">
                 <spda-new-project init="active" view="view"></spda-new-project>
             </div>
             <div ng-switch-when="reviews">
+                <spda-review init="active" view="view"></spda-review>
             </div>
             <div ng-switch-when="files">
             </div>

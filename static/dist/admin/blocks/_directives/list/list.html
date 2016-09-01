@@ -1,11 +1,11 @@
-<div class="list-group" ng-if="entity == 'projects' || entity == 'videos' || entity == 'users'">
-    <a href="#" id="new" class="list-group-item active" ng-click="add($event, entity)">
-        <h4 class="list-group-item-heading">Add new...</h4>
-    </a>
-</div>
-<div class="list-group" ng-if="!isLoading">
-    <a href="#" class="list-group-item" ng-click="edit($event, $index, object)" ng-repeat="object in model track by $index">
-        <h4 class="list-group-item-heading">{{object.rusName || 'No name'}}</h4>
-        <p class="list-group-item-text">{{object.rusShortDescription || object.email || 'No description'}}</p>
-    </a>
-</div>
+<!--<div class="list-group" ng-if="entity == 'projects' || entity == 'users'">-->
+    <!--<a href="#" id="new" class="list-group-item active" ng-click="add($event, entity)">-->
+        <!--<h4 class="list-group-item-heading">Add new...</h4>-->
+    <!--</a>-->
+<!--</div>-->
+<!--<div class="list-group" ng-if="!isLoading">-->
+    <!--<a href="#" class="list-group-item" ng-click="edit($event, $index, object)" ng-repeat="object in model track by $index">-->
+        <!--<h4 class="list-group-item-heading">{{object.rusName || object.name || 'No name'}}</h4>-->
+        <!--<p class="list-group-item-text">{{object.rusShortDescription || object.review || object.email || 'No description'}}</p>-->
+    <!--</a>-->
+<!--</div>-->

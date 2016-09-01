@@ -2,58 +2,53 @@ var routerReviewController = (app) => {
     const review = require('./models/review');
     const parseReview = require('./services/parseReview');
 
+    //TODO: remove mongoose promises
     app.post('/api/addreview', function (req, res) {
         if(req.session.isApiAvailable){
             var newReview = new review(parseReview(req.body));
             console.log(newReview);
-            newReview.save(req.body)
-                .then(onSuccess(res), onFail(res));
+            newReview.save((err, review) => {
+                if (err) {
+                    res.send(err);
+                } else {
+                    res.json(review);
+                }
+            })
+
         } else {
             res.sendStatus(401);
         }
     });
 
-    app.get('/adminium/getreviews', (req, res) => {
+    app.delete('/adminium/removereview/:id', (req, res) => {
         if(req.session.isLoggedIn){
-            review.find()
-                .then(onSuccess(res), onFail(res));
+            review.find({_id: req.params.id}).remove((err, review) => {
+                if (err) {
+                    res.send(err);
+                } else {
+                    res.json(review);
+                }
+            })
         } else {
             res.sendStatus(401);
         }
     });
 
-    app.post('/adminium/removereview', (req, res) => {
+    app.put('/adminium/updatereview', (req, res) => {
         if(req.session.isLoggedIn){
-            review.remove(req.body)
-                .then(onSuccess(res), onFail(res));
+            let id = req.body._id;
+            let updatedReview = parseReview(req.body);
+            review.findByIdAndUpdate(id, updatedReview, (err, review) => {
+                if (err) {
+                    res.status(500).json({ur: updatedReview, e: err});
+                } else {
+                    res.json(review);
+                }
+            });
         } else {
             res.sendStatus(401);
         }
     });
-
-    app.post('/adminium/updatereview', (req, res) => {
-        if(req.session.isLoggedIn){
-            review.update(req.body)
-                .then(onSuccess(res), onFail(res));
-        } else {
-            res.sendStatus(401);
-        }
-    });
-
-    function onSuccess(res) {
-        return (result, msg) => {
-            console.log("Success!", msg);
-            res.status(200).json(result);
-        }
-    }
-
-    function onFail(res) {
-        return (reason, msg) => {
-            console.log("Fail!", msg);
-            res.status(500).json(reason);
-        }
-    }
-
 };
 
 module.exports = routerReviewController;

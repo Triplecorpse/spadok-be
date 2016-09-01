@@ -1,0 +1,38 @@
+<div ng-if="review.showWindow">
+    <div class="row">
+        <div class="col-md-2"><h3>Name</h3></div>
+        <div class="col-md-10"><h3>{{init.name || 'No Name'}}</h3></div>
+    </div>
+    <div class="row">
+        <div class="col-md-2"><h3>Occupation</h3></div>
+        <div class="col-md-10"><h3>{{init.occupation || 'No Occupation'}}</h3></div>
+    </div>
+    <div class="row">
+        <div class="col-md-2"><h3>Email</h3></div>
+        <div class="col-md-10"><h3>{{init.email || 'No Email'}}</h3></div>
+    </div>
+    <div class="row top-line">
+        <div class="col-md-2"><h3>Review</h3></div>
+        <div class="col-md-10"><p>{{init.review || 'No Review Body'}}</p></div>
+    </div>
+    <div class="row top-line">
+        <div class="col-md-12">
+            <div class="checkbox">
+                <label>
+                    <input type="checkbox" ng-model="init.isPublished"> Publish Review
+                </label>
+            </div>
+        </div>
+    </div>
+    <div class="row top-line">
+        <div class="col-md-4">
+            <div class="checkbox">
+                <label>
+                    <input type="checkbox" ng-model="review.canDelete"> Really delete review
+                </label>
+            </div>
+            <button type="button" class="btn btn-danger" value="Delete" ng-disabled="!review.canDelete" ng-click="delete()">Delete</button>
+            <button type="submit" class="btn btn-default" value="Update" ng-disabled="isQueriing" ng-click="update()">Update</button>
+        </div>
+    </div>
+</div>

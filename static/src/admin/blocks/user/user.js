@@ -1,7 +1,5 @@
 (function() {
-    angular
-        .module('app')
-        .directive('spdaUser', ['$http', 'viewService', '$interval', '$timeout', 'dataService', directive]);
+    angular.module('app').directive('spdaUser', ['$http', 'viewService', '$interval', '$timeout', 'dataService', directive]);
 
     function directive ($http, viewService, $interval, $timeout, dataService) {
         const s200 = "Congrats! Your operation was successfully completed! :)";

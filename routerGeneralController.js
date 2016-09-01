@@ -25,7 +25,6 @@ var routerController = (app) => {
     });
 
     app.get('/api/getall', (req, res) => {
-        // console.log('got getall');
         Promise.all([dbGetters.getPage(),
             dbGetters.getPartners({isPublished: true}),
             dbGetters.getProjects({isPublished: true}),
@@ -33,12 +32,9 @@ var routerController = (app) => {
             dbGetters.getUsers({isInTeam: true})])
             .then((response) => {
                 console.log('all resolved');
-                // var al = req.get('Accept-Language');
-                // res.header('Content-Language', lang(al));
                 res.header('Cache-Control', 'private, no-cache, no-store, must-revalidate');
                 res.json(response)
             }, (reason) => {
-                // console.log('smth rejected');
                 res.json(reason)
             });
     });

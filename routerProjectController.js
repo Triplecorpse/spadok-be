@@ -7,8 +7,11 @@ var routerProjectController = (app) => {
             let currentProject = parseProject(req.body);
             let newProject = new project(currentProject);
             newProject.save(currentProject, (err, project) => {
-                if (err) res.send(err);
-                res.json(project);
+                if (err) {
+                    res.send(err);
+                } else {
+                    res.json(project);
+                }
             });
         } else {
             res.sendStatus(401)

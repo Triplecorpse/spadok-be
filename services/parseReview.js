@@ -6,6 +6,6 @@ module.exports = (data) => {
             }
         }
     }
-    data.isPublished = true;
+    data.isPublished = data.isPublished || false;
     return data;
 };
