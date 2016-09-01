@@ -6,8 +6,8 @@
         <div class="modal-window-close-diag modal-window-close-diag2"></div>
     </div>
     <form name="modal-window" class="modal-window-input-group" ng-submit="feedback.submit()">
-        <input type="{{input.type}}" class="modal-window-input" placeholder="{{input.placeholder}}" ng-repeat="input in placeholders track by $index" ng-if="!$last">
-        <textarea class="modal-window-input modal-window-input-textarea" placeholder="Ваши вопросы и предложения"></textarea>
-        <button type="submit" class="modal-window-submit">{{action}}</button>
+        <input type="{{input.type}}" class="modal-window-input" placeholder="{{input.placeholder}}" ng-repeat="input in placeholders track by $index" ng-if="!$last" ng-model="input.value">
+        <textarea class="modal-window-input modal-window-input-textarea" placeholder="{{placeholders[placeholders.length - 1].placeholder}}" ng-model="placeholders[placeholders.length - 1].value"></textarea>
+        <button type="submit" class="modal-window-submit" ng-click="submit()">{{action}}</button>
     </form>
 </div>

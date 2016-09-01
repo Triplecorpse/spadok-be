@@ -13,7 +13,8 @@
             var date = new Date();
 
             function parsePage(list) {
-
+                data.page = list;
+                console.log(":::: DATASERVICE PAGE DATA ::::", data.page);
             }
 
             function parsePartners(list) {
@@ -32,32 +33,26 @@
             }
 
             function parseReviews(list) {
-
+                data.reviews = list;
+                console.log(":::: DATASERVICE REVIEWS ::::", data.reviews);
             }
 
             function parseUsers(list) {
 
             }
 
-            function parseVideos(list) {
-
-            }
-
-            dataQ = $http.get(`${origin}/api/getall`)
+            return $http.get(`${origin}/api/getall`)
                 .then((response) => {
                     parsePage(response.data[0]);
                     parsePartners(response.data[1]);
                     parseProjects(response.data[2]);
                     parseReviews(response.data[3]);
                     parseUsers(response.data[4]);
-                    parseVideos(response.data[5]);
-                    // dataQ.promise.resolve(response);
+                    dataQ.resolve(response);
                     return response;
                 }, (reason) => {
                     return reason;
                 });
-
-            return dataQ;
 
         }
 

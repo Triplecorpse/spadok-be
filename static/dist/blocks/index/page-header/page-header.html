@@ -5,7 +5,7 @@
                 <div class="pull-left page-header-logo" ng-click="header.gotoIndex()">
                     <img src="media/logo_image.png" class="page-header-logo-image" />
                     <div class="page-header-logo-text-wrapper">
-                        <p class="page-header-logo-text-wrapper-text">Благотворительный Фонд "Спадок"</p>
+                        <p class="page-header-logo-text-wrapper-text" translate="interface.header.logo"></p>
                     </div>
                 </div>
             </div>
@@ -14,16 +14,16 @@
                     <nav class="page-header-main-navigation">
                         <ul class="page-header-main-navigation-list">
                             <li class="page-header-main-navigation-list-item" ng-class="{active: header.isActive('/about')}">
-                                <a href="#/about" class="page-header-main-navigation-list-item-link">О нас</a>
+                                <a href="#/about" translate="interface.header.nav.about"></a>
                             </li>
                             <li class="page-header-main-navigation-list-item" ng-class="{active: header.isActive('/project')}">
-                                <a href="#/projects">Проекты</a>
+                                <a href="#/projects" translate="interface.header.nav.projects"></a>
                             </li>
                             <li class="page-header-main-navigation-list-item" ng-class="{active: header.isActive('/partners')}">
-                                <a href="#/partners">Партнёры</a>
+                                <a href="#/partners" translate="interface.header.nav.partners"></a>
                             </li>
                             <li class="page-header-main-navigation-list-item" ng-class="{active: header.isActive('/contacts')}">
-                                <a href="#/contacts">Контакты</a>
+                                <a href="#/contacts" translate="interface.header.nav.contacts"></a>
                             </li>
                             <li class="page-header-main-navigation-list-item" ng-click="app.showLang = !app.showLang">
                                 <span class="lang-list-current">рус</span>

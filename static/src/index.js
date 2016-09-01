@@ -1,6 +1,6 @@
-angular.module('app', ['ksSwiper', 'ui.router', '720kb.socialshare', 'angularModalService']);
+angular.module('app', ['ksSwiper', 'ui.router', '720kb.socialshare', 'angularModalService', 'pascalprecht.translate', 'ngCookies', 'ngSanitize']);
 
-angular.module('app').config(['$stateProvider', '$urlRouterProvider', function($stateProvider, $urlRouterProvider) {
+angular.module('app').config(['$stateProvider', '$urlRouterProvider', '$translateProvider', function($stateProvider, $urlRouterProvider, $translateProvider) {
     var states = ['contacts', 'about', 'partners', 'projects'];
 
     $urlRouterProvider.otherwise("/");
@@ -25,6 +25,17 @@ angular.module('app').config(['$stateProvider', '$urlRouterProvider', function($
             controllerAs: `${element}`
         })
     });
+
+    $translateProvider.fallbackLanguage('ru');
+    $translateProvider.usePostCompiling(true);
+    $translateProvider.registerAvailableLanguageKeys(['en', 'ru'], {
+        'en_*': 'en',
+        'ru_*': 'ru'
+    });
+    $translateProvider.determinePreferredLanguage();
+    $translateProvider.useLocalStorage();
+    $translateProvider.preferredLanguage('ru');
+    $translateProvider.useLoader('i18nFactory');
 }]);
 
 angular.module('app').controller('appController', ['$window', '$scope', 'dataService', function($window, $scope, dataService) {
@@ -33,7 +44,7 @@ angular.module('app').controller('appController', ['$window', '$scope', 'dataSer
     vm.title = "Спадок";
     dataService.init()
         .then(() => {
-            vm.isProjectsLoaded = true;
+            vm.isDataLoaded = true;
     });
 
     $(window).scroll(() => {
@@ -49,9 +60,9 @@ angular.module('app').controller('appController', ['$window', '$scope', 'dataSer
         }
     };
 
-    // $scope.$on('$locationChangeSuccess', () => {
-    //     window.scrollTo(0, 0);
-    // });
+    $scope.$on('$locationChangeSuccess', () => {
+        window.scrollTo(0, 0);
+    });
 
     String.prototype.splice = function(start, delCount, newSubStr) {
         return this.slice(0, start) + newSubStr + this.slice(start + Math.abs(delCount));

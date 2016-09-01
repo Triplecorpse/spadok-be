@@ -9,8 +9,11 @@ module.exports = {
         return new Promise((resolve, reject) => {
             page.find(query, (err, page) => {
                 if (err) {
+                    console.log(err);
                     reject(err);
                 } else {
+                    // console.log(page);
+                    // console.log("got page");
                     resolve(page);
                 }
             });
@@ -20,8 +23,12 @@ module.exports = {
         return new Promise((resolve, reject) => {
             partner.find(query, (err, partners) => {
                 if (err) {
+                    console.log(err);
+
                     reject(err);
                 } else {
+                    // console.log(partners);
+                    // console.log("got partners");
                     resolve(partners);
                 }
             });
@@ -31,8 +38,12 @@ module.exports = {
         return new Promise((resolve, reject) => {
             project.find(query, (err, projects) => {
                 if (err) {
+                    console.log(err);
+
                     reject(err);
                 } else {
+                    // console.log(projects);
+                    // console.log("got projects");
                     resolve(projects);
                 }
             });
@@ -42,8 +53,12 @@ module.exports = {
         return new Promise((resolve, reject) => {
             review.find(query, (err, reviews) => {
                 if (err) {
+                    console.log(err);
+
                     reject(err);
                 } else {
+                    // console.log(reviews);
+                    // console.log("got reviews");
                     resolve(reviews);
                 }
             });
@@ -53,8 +68,13 @@ module.exports = {
         return new Promise((resolve, reject) => {
             user.find(query, (err, users) => {
                 if (err) {
+                    console.log(err);
+
                     reject(err);
+
                 } else {
+                    // console.log(users);
+                    // console.log("got users");
                     resolve(users);
                 }
             });

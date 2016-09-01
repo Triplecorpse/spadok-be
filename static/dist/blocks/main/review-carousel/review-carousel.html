@@ -12,14 +12,14 @@
                                 <div class="review-carousel-slide">
                                     <h4 class="review-carousel-slide-header">{{review.name}}</h4>
                                     <p class="review-carousel-slide-job">{{review.position}}</p>
-                                    <p class="review-carousel-slide-text">{{review.review}}</p>
+                                    <p class="review-carousel-slide-text" ng-bind-html="review.review"></p>
                                 </div>
                             </ks-swiper-slide>
                         </ks-swiper-container>
                     </div>
-                    <div class="review-carousel-button-prev" ng-click="reviews.prev()"></div>
-                    <div class="review-carousel-button-next" ng-click="reviews.next()"></div>
-                    <div class="review-carousel-bullet-wrapper">
+                    <div class="review-carousel-button-prev" ng-click="reviews.prev()" ng-if="reviews.reviews.length > 1"></div>
+                    <div class="review-carousel-button-next" ng-click="reviews.next()" ng-if="reviews.reviews.length > 1"></div>
+                    <div class="review-carousel-bullet-wrapper" ng-if="reviews.reviews.length > 1">
                         <div ng-class="'review-carousel-bullet ' + ($index === 0 ? 'review-carousel-bullet-active' : '')" ng-repeat="bullet in reviews.reviews track by $index" ng-click="reviews.goto($index)"></div>
                     </div>
                     <spd-modal-caller-button options="options" button-type="'review-carousel-button'"></spd-modal-caller-button>

@@ -6,9 +6,6 @@ module.exports = (project) => {
             if(typeof project[key] === 'string') {
                 temp[key] = project[key].replace(/(>)/g, '&gt;').replace(/(<)/g, '&lt;');
             }
-            // if (key === 'picture' && temp[key].indexOf('http') !== 0 && temp[key].indexOf('D') !== 0) {
-            //     // temp[key] = `${__dirname}/static/dist/${project[key]}`;
-            // }
         }
     }
 
@@ -19,14 +16,6 @@ module.exports = (project) => {
                     return Boolean(element);
                 });
             }
-            // if (key === 'pictures') {
-            //     temp[key] = temp[key].map((element) => {
-            //         if(element.indexOf('http') !== 0 && element.indexOf('D') !== 0) {
-            //             // element = `${__dirname}/static/dist/${element}`;
-            //         }
-            //         return element
-            //     });
-            // }
         }
     }
 

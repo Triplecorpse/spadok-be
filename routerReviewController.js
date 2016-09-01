@@ -1,8 +1,12 @@
 var routerReviewController = (app) => {
+    const review = require('./models/review');
+    const parseReview = require('./services/parseReview');
 
-    app.post('/adminium/addreview', function (req, res) {
-        if(req.session.isLoggedIn){
-            databaseReviewController().save(req.body)
+    app.post('/api/addreview', function (req, res) {
+        if(req.session.isApiAvailable){
+            var newReview = new review(parseReview(req.body));
+            console.log(newReview);
+            newReview.save(req.body)
                 .then(onSuccess(res), onFail(res));
         } else {
             res.sendStatus(401);
@@ -11,7 +15,7 @@ var routerReviewController = (app) => {
 
     app.get('/adminium/getreviews', (req, res) => {
         if(req.session.isLoggedIn){
-            databaseReviewController().find()
+            review.find()
                 .then(onSuccess(res), onFail(res));
         } else {
             res.sendStatus(401);
@@ -20,7 +24,7 @@ var routerReviewController = (app) => {
 
     app.post('/adminium/removereview', (req, res) => {
         if(req.session.isLoggedIn){
-            databaseReviewController().remove(req.body)
+            review.remove(req.body)
                 .then(onSuccess(res), onFail(res));
         } else {
             res.sendStatus(401);
@@ -29,7 +33,7 @@ var routerReviewController = (app) => {
 
     app.post('/adminium/updatereview', (req, res) => {
         if(req.session.isLoggedIn){
-            databaseReviewController().update(req.body)
+            review.update(req.body)
                 .then(onSuccess(res), onFail(res));
         } else {
             res.sendStatus(401);

@@ -25,6 +25,10 @@
     "underscore": "^1.8.3",
     "angular-file-upload": "^2.3.4",
     "angular-socialshare": "angularjs-socialshare#^2.2.5",
-    "angular-modal-service": "^0.10.1"
+    "angular-modal-service": "^0.10.1",
+    "angular-translate": "^2.11.1",
+    "angular-translate-storage-local": "^2.11.1",
+    "angular-cookies": "^1.5.8",
+    "angular-sanitize": "^1.5.8"
   }
 }

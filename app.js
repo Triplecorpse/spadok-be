@@ -11,6 +11,7 @@ const routerGeneralController = require('./routerGeneralController.js');
 const routerUserController = require('./routerUserController.js');
 const routerProjectController = require('./routerProjectController.js');
 const routerImagesController = require('./routerImagesController.js');
+const routerReviewController = require('./routerReviewController.js');
 
 mongoose.connect(env.OPENSHIFT_MONGODB_DB_URL || local);
 
@@ -22,6 +23,7 @@ routerUserController(app);
 routerProjectController(app);
 routerGeneralController(app);
 routerImagesController(app);
+routerReviewController(app);
 
 app.listen(env.NODE_PORT || 3000, env.NODE_IP || 'localhost', () => {
   console.log(`Application worker ${process.pid} started...`);
