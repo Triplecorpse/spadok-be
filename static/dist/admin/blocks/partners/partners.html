@@ -1,0 +1,75 @@
+<form name="form" form-type="{{view}}" ng-submit="submit(form, $event)" autocomplete="off">
+    <div class="row">
+        <div class="col-mg-12">
+            <div class="media">
+                <div class="media-left media-middle">
+                    <a href="">
+                        <img class="media-object img-circle user-img" src="{{activeUser.picture}}" alt="avatar">
+                    </a>
+                </div>
+                <div class="media-body">
+                    <div class="form-group">
+                        <label for="partner-picture">Upload Logo</label>
+                        <input type="file" id="partner-picture" name="images" nv-file-select uploader="uploaderLogo">
+                        <p class="help-block">Upload a picture to be considered as logo. Picture MUST be square (200x200px recommended) and have white matte</p>
+                    </div>
+                    <div class="form-group">
+                        <label for="project-picture-url">...or enter its url</label>
+                        <input type="text" class="form-control" id="project-picture-url" placeholder="Picture URL" ng-model="activePartner.picture">
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="form-group">
+                <label for="partner-name">Company Name</label>
+                <input type="text" class="form-control" id="partner-name" placeholder="Name" ng-model="activeUser.rusName" autocomplete="off">
+            </div>
+        </div>
+        <div class="col-md-6">
+            <h3>Russian</h3>
+            <div class="form-group">
+                <label for="user-name-rus">Achievments</label>
+                <input type="text" class="form-control" id="user-name-rus" placeholder="Name" ng-model="activeUser.rusName" autocomplete="off">
+            </div>
+        </div>
+        <div class="col-md-6">
+            <h3>English</h3>
+            <div class="form-group">
+                <label for="user-name-eng">Achievments</label>
+                <input type="text" class="form-control" id="user-name-eng" placeholder="Name" ng-model="activeUser.engName" autocomplete="off">
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-6">
+            <div class="checkbox">
+                <label>
+                    <input type="checkbox" ng-model="activePartner.isInTeam"> is published
+                </label>
+            </div>
+        </div>
+    </div>
+    <div class="row top-line>
+        <div class="col-md-4">
+    <div ng-switch="view">
+        <div ng-switch-when="new">
+            <button type="submit" class="btn btn-default project-add" value="Add" ng-disabled="isQueriing">Add</button>
+        </div>
+        <div ng-switch-when="edit">
+            <div class="checkbox">
+                <label>
+                    <input type="checkbox" ng-model="canDelete"> Really delete user
+                </label>
+            </div>
+            <button type="button" class="btn btn-danger" value="Delete" ng-disabled="!canDelete" ng-click="delete()">Delete</button>
+            <button type="submit" class="btn btn-default" value="Update" ng-disabled="isQueriing">Update</button>
+        </div>
+    </div>
+    </div>
+    </div>
+</form>

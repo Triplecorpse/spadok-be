@@ -1,11 +1,9 @@
 var mongoose = require('mongoose');
 var PartnerSchema = new mongoose.Schema({
     name: String,
-    gLogo: String,
-    cLogo: String,
-    site: String,
-    description: String,
-    projectsHelped: Number,
+    picture: String,
+    rusAchievements: Array,
+    engAchievements: Array,
     isPublished: Boolean
 });
 

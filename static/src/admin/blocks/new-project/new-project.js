@@ -59,8 +59,7 @@
                     $scope.activeProject.pictures.push('');
                     $scope.setParentProject(newVal.parentProjectId);
                 } else {
-                    $scope.activeProject = {pictures:[]};
-                    $scope.activeProject.pictures.push('');
+                    $scope.activeProject = {pictures:['']};
                     $scope.activeGalleryPicture = '';
                     $scope.setParentProject();
                 }
@@ -69,6 +68,7 @@
             $scope.updateSinglePicture = (index, url, inp) => {
                 $scope.activeProject.pictures[index] = url;
                 $scope.activeGalleryPicture = $scope.activeProject.pictures[index];
+                //is last and has text
                 if(index === $scope.activeProject.pictures.length - 1 && $scope.activeProject.pictures[$scope.activeProject.pictures.length - 1]) {
                     $scope.activeProject.pictures.push('');
                 }

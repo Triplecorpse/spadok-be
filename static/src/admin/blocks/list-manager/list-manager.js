@@ -23,6 +23,7 @@
             $scope.$watch(() => viewService.state, (newVal) => {
                 $scope.state = newVal;
                 $scope.model = dataService[newVal];
+                console.log(newVal);
             });
 
             $scope.$watch(() => dataService, () => {
@@ -42,7 +43,6 @@
                 event.currentTarget.classList.add('active');
                 $scope.view = 'edit';
                 $scope.active = entity;
-                console.log(entity);
             };
 
             $scope.add = (event, entity) => {

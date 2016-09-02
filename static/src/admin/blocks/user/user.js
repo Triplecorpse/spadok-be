@@ -67,9 +67,9 @@
                 $http.put('/adminium/updateuser', $scope.activeUser)
                     .then((response) => {
                         success(response);
-                        dataService.reviews = _.map(dataService.reviews, (element) => {
+                        dataService.users = _.map(dataService.users, (element) => {
                             if(element._id === $scope.init._id) {
-                                element.isPublished = $scope.init.isPublished;
+                                element = $scope.init;
                             }
                             return element;
                         });
@@ -82,7 +82,6 @@
                 $scope.activeUser = {};
                 $scope.isQueriing = false;
                 $scope.canDelete = false;
-                viewService.updateProjects();
                 final();
                 if(action === 'add' || action === 'update') {
                     uploadFiles(data.data._id);
