@@ -5,7 +5,7 @@
                 <div class="review-carousel-wrapper">
                     <h3 class="review-carousel-header">Отзывы</h3>
                     <div class="review-carousel-swiper-wrapper">
-                        <ks-swiper-container show-nav-buttons="false" direction="horizontal" pagination-is-active="false" loop="true" autoplay="3000"
+                        <ks-swiper-container show-nav-buttons="false" direction="horizontal" pagination-is-active="false" loop="reviews.reviews.length > 1" autoplay="3000"
                                              override-parameters="{'centeredSlides':'true'}"
                                              swiper="swiper" on-ready="onReadyReviewsSwiper(swiper)">
                             <ks-swiper-slide class="swiper-slide" ng-repeat="review in reviews.reviews">

@@ -1,8 +1,8 @@
 var routerLoginController = (app) => {
     const fs = require('fs');
-    // const express = require('express');
     const session = require('express-session');
     const user = require('./models/user');
+    const parseUser = require('./services/parseUser');
 
     var newSession = session({
         secret: 'spadokproject',
@@ -75,13 +75,58 @@ var routerLoginController = (app) => {
         }
     });
 
-    app.post('/adminium/newuser', function (req, res) {
-        user.save({
-            name: req.body.name,
-            email: req.body.email,
-            dateRegistered: new Date(),
-            password: req.body.password
-        })
+    app.post('/adminium/adduser', function (req, res) {
+        if(req.session.isLoggedIn) {
+            var parsedUser = parseUser(req.body);
+            user.findOne({$or: [{name: parsedUser.name}, {email: parsedUser.email}]}, (err, foundUser) => {
+                if(err) {
+                    res.sendStatus(500)
+                } else {
+                    if(!foundUser) {
+                        let newUser = new user(parsedUser);
+                        newUser.save(parsedUser, (err, createdUser) => {
+                            if(err) {
+                                res.sendStatus(500);
+                            } else {
+                                res.json(createdUser);
+                            }
+                        })
+                    } else {
+                        res.status(403).json({message: "User with such login or email exists"});
+                    }
+                }
+            });
+
+        } else {
+            res.sendStatus(401);
+        }
+    });
+
+    app.delete('/adminium/removeuser/:id', (req, res) => {
+        if(req.session.isLoggedIn){
+            user.find({_id: req.params.id}).remove((err, user) => {
+                if (err) res.send(err);
+                res.json(user);
+            })
+        } else {
+            res.sendStatus(401)
+        }
+    });
+
+    app.put('/adminium/updateuser', (req, res) => {
+        if(req.session.isLoggedIn) {
+            let id = req.body._id;
+            let updatedUser = parseUser(req.body);
+            user.findByIdAndUpdate(id, updatedUser, (err, user) => {
+                if (err) {
+                    res.status(500).json({up: updatedUser, e: err});
+                } else {
+                    res.json(user);
+                }
+            });
+        } else {
+            res.sendStatus(401)
+        }
     });
 
     app.get('/adminium/logout', (req, res) => {
@@ -102,14 +147,18 @@ var routerLoginController = (app) => {
         function decide(err, data) {
             if (err) throw err;
             if (!data.length) {
-                console.log("not data");
                 let newUser = new user({
                     name: 'admin',
+                    rusName: 'admin',
+                    engName: 'admin',
                     email: 'eldar.khaitov@gmail.com',
+                    rusPosition: 'admin',
+                    engPosition: 'admin',
                     dateRegistered: new Date(),
                     password: 'admin',
                     canHandleProjects: true,
-                    canHandleUsers: true
+                    canHandleUsers: true,
+                    isInTeam: false
                 });
                 newUser.save((err) => {
                     if(err) throw err;

@@ -31,7 +31,6 @@ var routerController = (app) => {
             dbGetters.getReviews({isPublished: true}),
             dbGetters.getUsers({isInTeam: true})])
             .then((response) => {
-                console.log('all resolved');
                 res.header('Cache-Control', 'private, no-cache, no-store, must-revalidate');
                 res.json(response)
             }, (reason) => {

@@ -13,7 +13,7 @@
         </div>
         <div class="list-group" ng-if="!isLoading">
             <a href="#" class="list-group-item" ng-click="edit($event, $index, object)" ng-repeat="object in model track by $index">
-                <h4 class="list-group-item-heading">{{object.rusName || object.name || 'No name'}} {{!object.isPublished ? '(not published)' : ''}}</h4>
+                <h4 class="list-group-item-heading">{{object.rusName || object.name || 'No name'}} {{(!object.isPublished && state !== 'users') ? '(not published)' : ''}}</h4>
                 <p class="list-group-item-text">{{object.rusShortDescription || object.review || object.email || 'No description'}}</p>
             </a>
         </div>
@@ -29,7 +29,7 @@
             <div ng-switch-when="files">
             </div>
             <div ng-switch-when="users">
-                <spda-user view="view"></spda-user>
+                <spda-user view="view" init="active"></spda-user>
             </div>
         </div>
     </div>

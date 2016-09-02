@@ -42,6 +42,7 @@
                 event.currentTarget.classList.add('active');
                 $scope.view = 'edit';
                 $scope.active = entity;
+                console.log(entity);
             };
 
             $scope.add = (event, entity) => {

@@ -38,7 +38,8 @@
             }
 
             function parseUsers(list) {
-
+                data.users = list;
+                console.log(":::: DATASERVICE USERS ::::", data.users);
             }
 
             return $http.get(`${origin}/api/getall`)

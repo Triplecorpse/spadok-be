@@ -1,0 +1,16 @@
+<div class="container-fluid no-padding">
+    <div class="row">
+        <div class="col-md-6 col-md-offset-1">
+            <div class="about-team-members-wrapper">
+                <div class="about-team-members-item" ng-repeat="member in teamMembers track by $index">
+                    <div class="about-team-members-item-picture" style="background-image: url('{{member.picture}}')"></div>
+                    <h4 class="about-team-members-item-header">{{member.rusName}}</h4>
+                    <h5 class="about-team-members-item-position">{{member.rusPosition}}</h5>
+                </div>
+            </div>
+            <div class="about-team-members-button-wrapper">
+                <spd-modal-caller-button options="options" button-type="'about-team-members-button'"></spd-modal-caller-button>
+            </div>
+        </div>
+    </div>
+</div>
