@@ -1,8 +1,8 @@
 <div class="project-header-image" style="background-image: url('{{project.project.picture}}')">
     <div class="project-header-image-layer"></div>
     <h1 class="project-header-image-header">{{project.project.rusName}}</h1>
-    <div class="project-header-image-play-button"></div>
-    <div class="project-header-image-text">Посмотреть видео</div>
+    <div class="project-header-image-play-button" ng-if="video"></div>
+    <div class="project-header-image-text" ng-if="video" ng-click="gotoVideo()">Посмотреть видео</div>
 </div>
 <div class="project-header-stats">
     <div class="container-fluid">

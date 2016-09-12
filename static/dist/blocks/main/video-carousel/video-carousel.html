@@ -1,16 +1,16 @@
-<div class="video-carousel" ng-if="video.if">
+<div class="video-carousel" ng-if="videos.length > 0">
     <div class="container-fluid">
         <div class="row">
             <div class="col-md-8 no-padding">
                 <h3 class="video-carousel-header">Видео с проектов</h3>
                 <div class="video-carousel-container">
-                    <ks-swiper-container id="video-swiper" direction="horizontal" slides-per-view="video.spw" space-between="0" initial-slide="1"
+                    <ks-swiper-container id="video-swiper" direction="horizontal" slides-per-view="spw" space-between="0" initial-slide="1"
                                          override-parameters="{'centeredSlides':vm.centeredSlides}"
                                          swiper="swiper" on-ready="onReadyVideoSwiper(swiper)">
                         <ks-swiper-slide class="swiper-slide video-carousel-slide" ng-repeat="slide in videos track by $index">
                                 <figure class="video-carousel-slide">
-                                    <div class="video-carousel-slide-preview">
-                                        <img ng-src="{{slide.url}}" class="video-carousel-slide-preview-image" />
+                                    <div class="video-carousel-slide-preview" ng-click="gotoVideo(slide.id)">
+                                        <img ng-src="{{slide.picture}}" class="video-carousel-slide-preview-image" />
                                         <span class="video-carousel-slide-preview-play-button"></span>
                                     </div>
                                     <figcaption class="video-carousel-slide-header">{{slide.header}}</figcaption>
@@ -19,10 +19,10 @@
                             </ks-swiper-slide>
                     </ks-swiper-container>
                 </div>
-                <div class="video-carousel-button-prev" ng-click="video.prev()"></div>
-                <div class="video-carousel-button-next" ng-click="video.next()"></div>
-                <div class="video-carousel-bullet-wrapper">
-                    <div ng-class="'video-carousel-bullet ' + ($index === 1 ? 'video-carousel-bullet-active' : '')" ng-repeat="bullet in videos track by $index" ng-click="video.goto($index)"></div>
+                <div class="video-carousel-button-prev" ng-click="prev()" ng-if="videos.length > 1"></div>
+                <div class="video-carousel-button-next" ng-click="next()" ng-if="videos.length > 1"></div>
+                <div class="video-carousel-bullet-wrapper" ng-if="videos.length > 1">
+                    <div ng-class="'video-carousel-bullet ' + ($index === 1 ? 'video-carousel-bullet-active' : '')" ng-repeat="bullet in videos track by $index" ng-click="goto($index)"></div>
                 </div>
             </div>
         </div>

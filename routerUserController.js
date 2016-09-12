@@ -1,13 +1,19 @@
 var routerLoginController = (app) => {
     const fs = require('fs');
     const session = require('express-session');
+    const env = process.env;
+    const local = 'mongodb://localhost/spadok';
     const user = require('./models/user');
     const parseUser = require('./services/parseUser');
+    const MongoStore = require('connect-mongo')(session);
 
     var newSession = session({
         secret: 'spadokproject',
         resave: true,
         saveUninitialized: true,
+        store: new MongoStore({
+           url: env.OPENSHIFT_MONGODB_DB_URL || local
+        }),
         cookie: {
             secure: false,
             maxAge: 86400000,
