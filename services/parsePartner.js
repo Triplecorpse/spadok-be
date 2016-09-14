@@ -16,7 +16,6 @@ module.exports = (data) => {
                     }
                     return element;
                 });
-                data[key] = data[key].replace(/(>)/g, '&gt;').replace(/(<)/g, '&lt;');
             }
         }
     }
