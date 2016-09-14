@@ -40,6 +40,8 @@ var routerImagesController = (app) => {
                         } else {
                             foundPartner.picture = url;
                             delete foundPartner._id;
+                            delete foundPartner.id;
+
                             partner.findByIdAndUpdate(req.params.id, foundPartner, (err, updatedUser) => {
                                 collector.up = updatedUser;
                                 if (err) {
@@ -94,6 +96,7 @@ var routerImagesController = (app) => {
                         } else {
                             foundUser.picture = url;
                             delete foundUser._id;
+                            delete foundUser.id;
 
                             user.findByIdAndUpdate(req.params.id, foundUser, (err, updatedUser) => {
                                 collector.up = updatedUser;
