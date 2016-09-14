@@ -31,19 +31,19 @@ var routerImagesController = (app) => {
                 }
 
                 url = url.slice(index).join('/');
-                let collector = {id: req.params.id};
+                let collector = {id: req.params.id, fileUrl: files.file.path, url: url};
                 if (url) {
                     partner.findById(req.params.id, (err, foundPartner) => {
                         collector.fp = foundPartner;
                         if (err) {
-                            res.status(500).json({e: err});
+                            res.status(500).json({e: err, c: collector});
                         } else {
                             foundPartner.picture = url;
 
                             partner.findByIdAndUpdate(req.params.id, foundPartner, (err, updatedUser) => {
                                 collector.up = updatedUser;
                                 if (err) {
-                                    res.status(500).json({e: err, up: {foundPartner}});
+                                    res.status(500).json({e: err, c: collector, up: {foundPartner}});
                                 } else {
                                     res.status(200).json(collector);
                                 }
@@ -51,7 +51,7 @@ var routerImagesController = (app) => {
                         }
                     });
                 } else {
-                    res.sendStatus(304);
+                    res.status(304).json(collector);
                 }
             })
 
