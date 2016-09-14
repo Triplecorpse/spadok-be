@@ -7,5 +7,7 @@ module.exports = (data) => {
         }
     }
     data.isPublished = data.isPublished || false;
+    delete data._id;
+
     return data;
 };

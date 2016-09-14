@@ -10,5 +10,6 @@ module.exports = (data) => {
     data.canHandleProjects = data.canHandleProjects || false;
     data.canHandleUsers = data.canHandleUsers || false;
     data.isInTeam = data.isInTeam || false;
+    delete data._id;
     return data;
 };

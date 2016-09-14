@@ -14,5 +14,7 @@ module.exports = (data) => {
             }
         }
     }
+    delete data._id;
+
     return data;
 };
