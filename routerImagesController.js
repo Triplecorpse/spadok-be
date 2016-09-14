@@ -39,7 +39,7 @@ var routerImagesController = (app) => {
                             res.status(500).json({e: err, c: collector});
                         } else {
                             foundPartner.picture = url;
-
+                            delete foundPartner._id;
                             partner.findByIdAndUpdate(req.params.id, foundPartner, (err, updatedUser) => {
                                 collector.up = updatedUser;
                                 if (err) {
@@ -93,6 +93,7 @@ var routerImagesController = (app) => {
                             res.status(500).json({e: err});
                         } else {
                             foundUser.picture = url;
+                            delete foundUser._id;
 
                             user.findByIdAndUpdate(req.params.id, foundUser, (err, updatedUser) => {
                                 collector.up = updatedUser;
