@@ -18,7 +18,8 @@
             }
 
             function parsePartners(list) {
-
+                data.partners = list;
+                console.log(":::: DATASERVICE PARTNERS ::::", data.partners);
             }
 
             function parseProjects(list) {

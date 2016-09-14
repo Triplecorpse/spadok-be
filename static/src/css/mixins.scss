@@ -92,11 +92,14 @@
   }
 }
 
-@mixin button-type-2() {
+@mixin button-type-2($brdColor: rgba(255, 255, 255, 0.4), $fontColor: #fff, $hvBrd: false) {
   background-color: transparent;
-  border: 1px solid rgba(255, 255, 255, 0.4);
+  border: 1px solid $brdColor;
+  color: $fontColor;
   &:hover {
-    border: none;
+    @if $hvBrd == false {
+      border: none;
+    }
     background-color: #eaeef5;
     color: #245598;
   }
