@@ -2,18 +2,15 @@
     <div class="partner-item-logo-wrapper">
         <img ng-src="{{options.picture}}" alt="{{options.name}}" class="partner-item-logo">
     </div>
-    <div class="partner-item-info-wrapper">
-        <div class="partner-item-name-wrapper">
-            <div class="partner-item-name">
-                <h4 class="partner-item-name-header">{{options.name}}</h4>
-                <div class="partner-item-brief-info">Помогли <span class="partner-item-brief-info-qty">{{items.length}}</span> проектам</div>
-            </div>
+    <div class="partner-item-name-wrapper">
+        <div class="partner-item-name">
+            <h4 class="partner-item-name-header">{{options.name}}</h4>
+            <div class="partner-item-brief-info">Помогли <span class="partner-item-brief-info-qty">{{items.length}}</span> проектам</div>
         </div>
+    </div>
+    <div class="partner-item-info-wrapper">
         <div class="partner-item-detailed-info" ng-repeat="item in items track by $index">
-            <div class="partner-item-detailed-info-index">
-                <span class="partner-item-detailed-info-index-digit">{{$index + 1}}</span>
-            </div>
-            <div class="partner-item-detailed-info-text" ng-bind-html="item"></div>
+            <span class="partner-item-detailed-info-index">{{$index + 1}}</span><span class="partner-item-detailed-info-text" ng-bind-html="item"></span>
         </div>
         <button class="partner-item-detailed-info-button" ng-click="toggle($event)">{{buttonHeader}}</button>
     </div>
