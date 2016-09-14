@@ -41,6 +41,7 @@ var routerImagesController = (app) => {
                             foundPartner.picture = url;
                             delete foundPartner._id;
                             delete foundPartner.id;
+                            collector.delfp = foundPartner;
 
                             partner.findByIdAndUpdate(req.params.id, foundPartner, (err, updatedUser) => {
                                 collector.up = updatedUser;
