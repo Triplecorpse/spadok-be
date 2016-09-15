@@ -26,11 +26,11 @@
                                 <a href="#/contacts" translate="interface.header.nav.contacts"></a>
                             </li>
                             <li class="page-header-main-navigation-list-item" ng-click="app.showLang = !app.showLang">
-                                <span class="lang-list-current">рус</span>
+                                <span class="lang-list-current">{{app.activeLang}}</span>
                                 <div ng-if="app.showLang" class="lang-list-wrapper">
                                     <ul class="lang-list-menu">
-                                        <li class="lang-list-item">рус</li>
-                                        <li class="lang-list-item">eng</li>
+                                        <li class="lang-list-item" code="ru">рус</li>
+                                        <li class="lang-list-item" code="en">eng</li>
                                     </ul>
                                 </div>
                             </li>

@@ -27,6 +27,7 @@
                     let days = new Date(element.date) - date;
                     element.days = Math.ceil(days / 86400000);
                     element.bucks = Math.round(element.money / 26);
+                    element.collected = element.moneyTotal - element.money;
                     return element;
                 });
 

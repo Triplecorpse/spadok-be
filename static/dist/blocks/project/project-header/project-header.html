@@ -2,7 +2,7 @@
     <div class="project-header-image-layer"></div>
     <h1 class="project-header-image-header">{{project.project.rusName}}</h1>
     <div class="project-header-image-play-button" ng-if="video"></div>
-    <div class="project-header-image-text" ng-if="video" ng-click="gotoVideo()">Посмотреть видео</div>
+    <div class="project-header-image-text" ng-if="video" ng-click="gotoVideo()" translate="interface.pages.project.lookVideo"></div>
 </div>
 <div class="project-header-stats">
     <div class="container-fluid">
@@ -16,11 +16,11 @@
                 <div class="project-header-stats-info-icon-text">дней осталось</div>
             </div>
             <div class="col-md-1">
-                <div class="project-header-stats-info-icon-digit">{{project.project.money}} <span class="project-header-stats-info-icon-currency">₴</span></div>
-                <div class="project-header-stats-info-icon-text">собрано (с 1500)</div>
+                <div class="project-header-stats-info-icon-digit">{{project.project.collected}} <span class="project-header-stats-info-icon-currency">₴</span></div>
+                <div class="project-header-stats-info-icon-text">собрано (с {{project.project.moneyTotal}})</div>
             </div>
             <div class="col-md-1 col-md-offset-1">
-                <button type="button" class="project-header-stats-info-button">Пожертвовать</button>
+                <button type="button" class="project-header-stats-info-button" translate="interface.pages.project.donate"></button>
             </div>
         </div>
     </div>

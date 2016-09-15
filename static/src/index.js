@@ -38,10 +38,16 @@ angular.module('app').config(['$stateProvider', '$urlRouterProvider', '$translat
     $translateProvider.useLoader('i18nFactory');
 }]);
 
-angular.module('app').controller('appController', ['$window', '$scope', 'dataService', function($window, $scope, dataService) {
+angular.module('app').controller('appController', ['$window', '$scope', 'dataService', '$translate', function($window, $scope, dataService, $translate) {
 
+    var active = {
+        ru: 'рус',
+        en: 'eng'
+    };
     var vm = this;
     vm.title = "Спадок";
+    vm.activeLang = active[localStorage.NG_TRANSLATE_LANG_KEY] || active.ru;
+
     dataService.init()
         .then(() => {
             vm.isDataLoaded = true;
@@ -55,8 +61,12 @@ angular.module('app').controller('appController', ['$window', '$scope', 'dataSer
     });
 
     vm.hideLangMenu = (event) => {
-        if (!event.target.classList.contains('lang-list-current')) {
+        if(!event.target.classList.contains('lang-list-current')) {
             vm.showLang = false;
+            if (event.target.classList.contains('lang-list-item')) {
+                $translate.use(event.target.getAttribute('code'));
+                vm.activeLang = active[event.target.getAttribute('code')];
+            }
         }
     };
 

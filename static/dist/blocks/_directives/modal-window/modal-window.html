@@ -6,8 +6,14 @@
         <div class="modal-window-close-diag modal-window-close-diag2"></div>
     </div>
     <form name="form" class="modal-window-input-group" ng-submit="submit()">
-        <input type="{{input.type}}" class="modal-window-input" placeholder="{{input.placeholder}}" ng-repeat="input in placeholders track by $index" ng-if="!$last" ng-model="input.value">
-        <textarea class="modal-window-input modal-window-input-textarea" placeholder="{{placeholders[placeholders.length - 1].placeholder}}" ng-model="placeholders[placeholders.length - 1].value" required></textarea>
+        <div class="input-group modal-window-input-group" ng-repeat="input in placeholders track by $index" ng-if="!$last" ng-model="input.value">
+            <label class="modal-window-label" for="inp{{$index}}">{{input.placeholder}}</label>
+            <input id="inp{{$index}}" type="{{input.type}}" class="modal-window-input" placeholder="{{input.placeholder}}">
+        </div>
+        <div class="input-group modal-window-input-group">
+            <label class="modal-window-label" for="inp-last">{{placeholders[placeholders.length - 1].placeholder}}</label>
+            <textarea id="inp-last" class="modal-window-input modal-window-input-textarea" placeholder="{{placeholders[placeholders.length - 1].placeholder}}" ng-model="placeholders[placeholders.length - 1].value" required></textarea>
+        </div>
         <button type="submit" class="modal-window-submit">{{action}}</button>
     </form>
 </div>
