@@ -4,10 +4,10 @@
         <ks-swiper-slide class="swiper-slide project-carousel-slide" ng-repeat="project in projects track by $index">
             <div class="project-carousel-slide-wrapper" style="background-image: url('{{project.picture}}')">
                 <div class="project-carousel-slide-layer"></div>
-                <h3 class="project-carousel-slide-header">{{project.rusName}}</h3>
-                <p class="project-carousel-slide-description">{{project.rusShortDescription}}</p>
+                <h3 class="project-carousel-slide-header" translate="{{'projects.project' + project._id + '.name'}}"></h3>
+                <p class="project-carousel-slide-description" translate="{{'projects.project' + project._id + '.shortDescription'}}"></p>
                 <div class="project-carousel-slide-icons">
-                    <spd-stats people="project.people" money="project.money" days="project.days" options="projects.iconOptions"></spd-stats>
+                    <spd-stats people="project.people" money="project.money" days="project.days" options="iconOptions"></spd-stats>
                 </div>
             </div>
         </ks-swiper-slide>
