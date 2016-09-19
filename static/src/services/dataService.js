@@ -18,6 +18,7 @@
             }
 
             function parsePartners(list) {
+                // _.map(list.)
                 data.partners = list;
                 console.log(":::: DATASERVICE PARTNERS ::::", data.partners);
             }

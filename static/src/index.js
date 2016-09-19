@@ -38,7 +38,7 @@ angular.module('app').config(['$stateProvider', '$urlRouterProvider', '$translat
     $translateProvider.useLoader('i18nFactory');
 }]);
 
-angular.module('app').controller('appController', ['$window', '$scope', 'dataService', '$translate', function($window, $scope, dataService, $translate) {
+angular.module('app').controller('appController', ['$window', '$scope', 'dataService', '$translate', 'i18nService', function($window, $scope, dataService, $translate, i18nService) {
 
     var langDic = {
         ru: 'рус',
@@ -51,6 +51,7 @@ angular.module('app').controller('appController', ['$window', '$scope', 'dataSer
     dataService.init()
         .then(() => {
             vm.isDataLoaded = true;
+            i18nService.setLanguage(localStorage.NG_TRANSLATE_LANG_KEY);
         });
 
     $(window).scroll(() => {
@@ -66,6 +67,8 @@ angular.module('app').controller('appController', ['$window', '$scope', 'dataSer
             if (event.target.classList.contains('lang-list-item')) {
                 $translate.use(event.target.getAttribute('code'));
                 vm.activeLang = langDic[event.target.getAttribute('code')];
+                i18nService.setLanguage(event.target.getAttribute('code'));
+                // location.reload();
             }
         }
     };
