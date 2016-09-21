@@ -1,27 +1,27 @@
 <div class="modal-bg" ng-click="dismissModal($event)" ng-keyup="dismissModalByKey($event)"></div>
 <div class="modal-window" ng-keyup="dismissModalByKey($event)" ng-if="showMain && type !== 'video'">
-    <h3 class="modal-window-header">{{header}}</h3>
+    <h3 class="modal-window-header">{{headers.header}}</h3>
     <div class="modal-window-close" ng-click="dismissModal($event)">
         <div class="modal-window-close-diag modal-window-close-diag1"></div>
         <div class="modal-window-close-diag modal-window-close-diag2"></div>
     </div>
     <form name="form" class="modal-window-input-group" ng-submit="submit()">
-        <div class="input-group modal-window-input-group" ng-repeat="input in placeholders track by $index" ng-if="!$last" ng-model="input.value">
+        <div class="input-group modal-window-input-group" ng-repeat="input in headers.placeholders track by $index" ng-if="!$last" ng-model="input.value">
             <label class="modal-window-label" for="inp{{$index}}">{{input.placeholder}}</label>
             <input id="inp{{$index}}" type="{{input.type}}" class="modal-window-input" placeholder="{{input.placeholder}}">
         </div>
         <div class="input-group modal-window-input-group">
-            <label class="modal-window-label" for="inp-last">{{placeholders[placeholders.length - 1].placeholder}}</label>
-            <textarea id="inp-last" class="modal-window-input modal-window-input-textarea" placeholder="{{placeholders[placeholders.length - 1].placeholder}}" ng-model="placeholders[placeholders.length - 1].value" required></textarea>
+            <label class="modal-window-label" for="inp-last">{{headers.placeholders[headers.placeholders.length - 1].placeholder}}</label>
+            <textarea id="inp-last" class="modal-window-input modal-window-input-textarea" placeholder="{{headers.placeholders[headers.placeholders.length - 1].placeholder}}" ng-model="placeholders[placeholders.length - 1].value" required></textarea>
         </div>
-        <button type="submit" class="modal-window-submit">{{action}}</button>
+        <button type="submit" class="modal-window-submit">{{headers.action}}</button>
     </form>
 </div>
 <div class="modal-window" ng-keyup="dismissModalByKey($event)" ng-if="showConfirmation">
-    <p class="modal-window-confirmation-text" >Message was successfully sent. Please, wait for review.</p>
+    <p class="modal-window-confirmation-text">{{headers.message}}</p>
     <button type="button" class="modal-window-submit confirmation" ng-click="dismissModal()">OK</button>
 </div>
 <div class="modal-window video" ng-keyup="dismissModalByKey($event)" ng-if="showMain && type === 'video'">
     <iframe frameborder="0" width="800" height="600" src="{{videoUrl}}"></iframe>
-    <p class="modal-window-video-title">{{init.name}}</p>
+    <p class="modal-window-video-title">{{initVideo.name}}</p>
 </div>

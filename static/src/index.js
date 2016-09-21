@@ -68,7 +68,7 @@ angular.module('app').controller('appController', ['$window', '$scope', 'dataSer
                 $translate.use(event.target.getAttribute('code'));
                 vm.activeLang = langDic[event.target.getAttribute('code')];
                 i18nService.setLanguage(event.target.getAttribute('code'));
-                // location.reload();
+                location.reload();
             }
         }
     };
