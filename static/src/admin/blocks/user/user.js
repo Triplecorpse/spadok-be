@@ -30,6 +30,20 @@
                 }
             }, true);
 
+            //translate
+            $scope.translate = (source, destination) => {
+                if(!$scope.activeProject[destination]) {
+                    $scope.isTranslationQuerying = true;
+                    let translateKey = 'trnsl.1.1.20160717T115748Z.066b542dcedc588c.a7897a46c5abbcd39336bf34ae21a6ca70534fdd';
+                    let translationQuery = `https://translate.yandex.net/api/v1.5/tr.json/translate?key=${translateKey}&lang=ru-en&text=${source}`;
+                    $http.get(translationQuery)
+                        .then((response) => {
+                            $scope.activeProject[destination] = response.data.text[0];
+                            $scope.isTranslationQuerying = false;
+                        });
+                }
+            };
+
             $scope.submit = (form, event) => {
                 $scope.isQueriing = true;
                 if(event.target.getAttribute('form-type') === "new") {

@@ -2,7 +2,7 @@ module.exports = (data) => {
     for(let key in data) {
         if(data.hasOwnProperty(key)) {
             if((key === 'rusStats') || (key === 'engStats')) {
-                data[key] = data[key].replace('<strong>', '||strong||').replace('</strong>', '||/strong||');
+                data[key] = data[key].replace(/(<strong>)/g, '||strong||').replace(/(<\/strong>)/g, '||/strong||');
             }
 
             if(typeof data[key] === 'string') {
@@ -10,7 +10,7 @@ module.exports = (data) => {
             }
 
             if((key === 'rusStats') || (key === 'engStats')) {
-                data[key] = data[key].replace('||strong||', '<strong>').replace('||/strong||', '</strong>');
+                data[key] = data[key].split('||strong||').join('<strong>').split('||/strong||').join('</strong>');
             }
         }
     }

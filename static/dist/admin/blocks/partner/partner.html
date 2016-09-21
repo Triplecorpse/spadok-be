@@ -29,19 +29,46 @@
                 <input type="text" class="form-control" id="partner-name" placeholder="Name" ng-model="activePartner.name" autocomplete="off">
             </div>
         </div>
+    </div>
+    <div class="row top-line">
+        <div class="col-md-12">
+            <div class="form-group">
+                <div class="dropdown">
+                    <label for="parent-project">Project selector </label>
+                    <button class="btn btn-default dropdown-toggle" type="button" id="parent-project" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                        Select a project
+                        <span class="caret"></span>
+                    </button>
+                    <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+                        <li ng-repeat="project in projects" ng-click="setATag(project._id)"><a href="#">{{project.rusName || project.engName || 'No Name'}}</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="project-name-rus">Link</label>
+                <input type="text" class="form-control" id="project-name-rus" placeholder="Name" ng-model="link">
+            </div>
+        </div>
+    </div>
+    <div class="row top-line">
         <div class="col-md-6">
             <h3>Russian</h3>
             <div class="form-group">
                 <label for="user-name-rus">Achievments</label>
-                <input type="text" class="form-control" id="user-name-rus" placeholder="Name" ng-model="achievement" ng-change="updateAchievement($index, achievement, 'rus')" ng-repeat="achievement in activePartner.rusAchievements track by $index">
+                <input type="text" class="form-control" id="user-name-rus" placeholder="Name" ng-model="achievement" ng-change="updateAchievement($index, achievement, 'rus')" ng-blur="translate(achievement, $index)" ng-repeat="achievement in activePartner.rusAchievements track by $index">
             </div>
         </div>
         <div class="col-md-6">
             <h3>English</h3>
             <div class="form-group">
                 <label for="user-name-eng">Achievments</label>
-                <input type="text" class="form-control" id="user-name-eng" placeholder="Name" ng-model="achievement" ng-change="updateAchievement($index, achievement, 'eng')" ng-repeat="achievement in activePartner.engAchievements track by $index">
+                <input type="text" class="form-control" id="user-name-eng" placeholder="Name" ng-model="achievement" ng-change="updateAchievement($index, achievement, 'eng')" ng-disabled="isTranslationQuerying" ng-repeat="achievement in activePartner.engAchievements track by $index">
             </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <p>Translated with <a href="https://translate.yandex.com/">Yandex Translate</a></p>
         </div>
     </div>
 

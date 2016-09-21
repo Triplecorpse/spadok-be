@@ -4,31 +4,36 @@
             <h3>Russian</h3>
             <div class="form-group">
                 <label for="project-name-rus">Name</label>
-                <input type="text" class="form-control" id="project-name-rus" placeholder="Name" ng-model="activeProject.rusName" required>
+                <input type="text" class="form-control" id="project-name-rus" placeholder="Name" ng-model="activeProject.rusName" ng-blur="translate(activeProject.rusName, 'engName')" required>
             </div>
             <div class="form-group">
                 <label for="project-short-description-rus">Short Description (max 300 sym)</label>
-                <textarea class="form-control" rows="2" id="project-short-description-rus" placeholder="Short Description" ng-model="activeProject.rusShortDescription" maxlength="300"></textarea>
+                <textarea class="form-control" rows="2" id="project-short-description-rus" placeholder="Short Description" ng-model="activeProject.rusShortDescription" maxlength="300" ng-blur="translate(activeProject.rusShortDescription, 'engShortDescription')"></textarea>
             </div>
             <div class="form-group">
                 <label for="project-description-rus">Description</label>
-                <textarea class="form-control" rows="5" id="project-description-rus" placeholder="Description" ng-model="activeProject.rusDescription"></textarea>
+                <textarea class="form-control" rows="5" id="project-description-rus" placeholder="Description" ng-model="activeProject.rusDescription" ng-blur="translate(activeProject.rusDescription, 'engDescription')"></textarea>
             </div>
         </div>
         <div class="col-md-6">
             <h3>English</h3>
             <div class="form-group">
                 <label for="project-name-eng">Name</label>
-                <input type="text" class="form-control" id="project-name-eng" placeholder="Name" ng-model="activeProject.engName">
+                <input type="text" class="form-control" id="project-name-eng" placeholder="Name" ng-model="activeProject.engName" ng-disabled="isTranslationQuerying">
             </div>
             <div class="form-group">
                 <label for="project-short-description-eng">Short Description (max 300 sym)</label>
-                <textarea class="form-control" rows="2" id="project-short-description-eng" placeholder="Short Description" ng-model="activeProject.engShortDescription" maxlength="300"></textarea>
+                <textarea class="form-control" rows="2" id="project-short-description-eng" placeholder="Short Description" ng-model="activeProject.engShortDescription" maxlength="300" ng-disabled="isTranslationQuerying"></textarea>
             </div>
             <div class="form-group">
                 <label for="project-description-eng">Description</label>
-                <textarea class="form-control" rows="5" id="project-description-eng" placeholder="Description" ng-model="activeProject.engDescription"></textarea>
+                <textarea class="form-control" rows="5" id="project-description-eng" placeholder="Description" ng-model="activeProject.engDescription" ng-disabled="isTranslationQuerying"></textarea>
             </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <p>Translated with <a href="https://translate.yandex.com/">Yandex Translate</a></p>
         </div>
     </div>
     <div class="row top-line">
@@ -84,7 +89,7 @@
                 <div class="dropdown">
                     <label for="parent-project">Parent Project </label>
                     <button class="btn btn-default dropdown-toggle" type="button" id="parent-project" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-                        {{parentProject.rusName || parentProject.rusName || 'None'}}
+                        {{parentProject.rusName || parentProject.engName || 'None'}}
                         <span class="caret"></span>
                     </button>
                     <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">

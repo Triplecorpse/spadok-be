@@ -84,6 +84,7 @@
 }
 
 @mixin button-donate() {
+  display: none;
   background-color: #62c46b;
   &:hover {
     border: 1px solid #62c46b;

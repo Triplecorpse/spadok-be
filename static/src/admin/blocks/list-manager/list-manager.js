@@ -23,7 +23,6 @@
             $scope.$watch(() => viewService.state, (newVal) => {
                 $scope.state = newVal;
                 $scope.model = dataService[newVal];
-                console.log(newVal);
             });
 
             $scope.$watch(() => dataService, () => {

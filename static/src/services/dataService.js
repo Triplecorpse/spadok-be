@@ -13,7 +13,7 @@
             var date = new Date();
 
             function parsePage(list) {
-                data.page = list;
+                data.page = list[0];
                 console.log(":::: DATASERVICE PAGE DATA ::::", data.page);
             }
 

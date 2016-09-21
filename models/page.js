@@ -13,7 +13,7 @@ var PageSchema = new mongoose.Schema({
     engRegion: String,
     engStats: String,
     engTeam: String,
-    phone: Number,
+    phone: String,
     rusAddress: String,
     rusArea: String,
     rusAuthor: String,
@@ -26,7 +26,8 @@ var PageSchema = new mongoose.Schema({
     rusRegion: String,
     rusStats: String,
     rusTeam: String,
-    type: String
+    type: String,
+    videoID: String
 });
 
 module.exports = mongoose.model('Page', PageSchema);

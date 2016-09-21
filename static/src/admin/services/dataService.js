@@ -8,7 +8,7 @@
                 this.isLoading = true;
                 return $http.get(`${origin}/adminium/getall`)
                     .then((response) => {
-                        this.page = response.data[0];
+                        this.page = response.data[0][0];
                         this.partners = response.data[1];
                         this.projects = response.data[2];
                         this.reviews = response.data[3];
