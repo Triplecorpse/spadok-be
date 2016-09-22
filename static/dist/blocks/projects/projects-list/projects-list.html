@@ -2,8 +2,9 @@
     <div class="row">
         <div class="col-md-8">
             <div class="projects-list-button-wrapper" ng-click="setProjectsCategory($event)">
-                <button type="button" class="projects-list-button active" name="actual" translate="interface.pages.projects.selectButtons.active">актуальные</button>
-                <button type="button" class="projects-list-button" name="completed" translate="interface.pages.projects.selectButtons.completed">реализованные</button>
+                <!-- Sorry, performance, but it is nesessary to use filter here. Unclickable area when using attribute. -->
+                <button type="button" class="projects-list-button active" name="actual">{{'interface.pages.projects.selectButtons.active' | translate}}</button>
+                <button type="button" class="projects-list-button" name="completed">{{'interface.pages.projects.selectButtons.completed' | translate}}</button>
             </div>
         </div>
     </div>

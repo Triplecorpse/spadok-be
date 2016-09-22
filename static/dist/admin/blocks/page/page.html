@@ -200,6 +200,22 @@
                 </div>
             </div>
         </div>
+        <div class="row top-line">
+            <div class="col-md-2">
+                <h2>Setup</h2>
+            </div>
+        </div>
+        <div class="row top-line">
+            <div class="col-md-2">
+                <h3>UAH/EUR rate</h3>
+                <p>1 EUR = xx.xx UAH</p>
+            </div>
+            <div class="col-md-5">
+                <div class="form-group">
+                    <input type="number" class="form-control" id="page-setup-uah-usd" placeholder="UAH-EUR" ng-model="page.currencyRate">
+                </div>
+            </div>
+        </div>
         <button type="submit" class="btn btn-success project-add" ng-disabled="isQueriing">Save</button>
     </div>
 </form>

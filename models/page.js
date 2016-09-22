@@ -27,7 +27,8 @@ var PageSchema = new mongoose.Schema({
     rusStats: String,
     rusTeam: String,
     type: String,
-    videoID: String
+    videoID: String,
+    currencyRate: Number
 });
 
 module.exports = mongoose.model('Page', PageSchema);

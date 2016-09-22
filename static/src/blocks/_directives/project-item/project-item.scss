@@ -20,9 +20,10 @@
     font-weight: normal;
     margin-left: 20px;
     margin-right: 20px;
-    height: 30px;
+    //height: 35px;
     text-overflow: ellipsis;
     overflow: hidden;
+    white-space: nowrap;
   }
   &-text {
     font-size: 1.4rem;

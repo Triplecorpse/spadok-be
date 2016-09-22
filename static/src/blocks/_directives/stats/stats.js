@@ -1,7 +1,7 @@
 (function() {
     angular
         .module('app')
-        .directive('spdStats', ['$timeout', function () {
+        .directive('spdStats', [function () {
 
             return {
                 restrict: "E",
@@ -9,10 +9,19 @@
                 scope: {
                     people: "=",
                     money: "=",
-                    days: "=",
-                    options: "="
-                }
+                    days: "="
+                },
+                controller: ["$scope", controller]
             };
+
+            function controller($scope) {
+                let ruHandler = [
+                    {
+                        ends: '1',
+                        handler: () => {}
+                    }
+                ]
+            }
         }
     ]);
 })();

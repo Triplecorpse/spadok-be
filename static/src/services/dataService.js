@@ -27,7 +27,8 @@
                 data.projects = _.map(list, (element) => {
                     let days = new Date(element.date) - date;
                     element.days = Math.ceil(days / 86400000);
-                    element.bucks = Math.round(element.money / 26);
+                    element.eur = Math.round(element.money / data.page.currencyRate);
+                    element.uah = Math.round(element.money);
                     element.collected = element.moneyTotal - element.money;
                     return element;
                 });

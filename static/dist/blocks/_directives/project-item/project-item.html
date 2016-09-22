@@ -6,17 +6,19 @@
     <div class="project-item-stats">
         <div class="project-item-stats-icon-wrapper">
             <div class="project-item-stats-icon-people"></div>
-            <div class="project-item-stats-icon-text">{{project.people}} волонтёров</div>
+            <div class="project-item-stats-icon-text">{{project.people}}</div>
+            <div class="project-item-stats-icon-text">{{project.people | spdEnding : 'volunteer'}}</div>
         </div>
         <div class="project-item-stats-icon-wrapper">
             <div class="project-item-stats-icon-money"></div>
-            <div class="project-item-stats-icon-text">{{project.money | spdCurrency : ' ' : 'грн.'}} необходимо</div>
+            <div class="project-item-stats-icon-text">{{project.money}} {{'interface.currency' | translate}} {{'interface.directives.projectItem.money' | translate}}</div>
         </div>
         <div class="project-item-stats-icon-wrapper">
             <div class="project-item-stats-icon-calendar">
                 <div class="project-item-stats-icon-calendar-days">{{project.days}}</div>
             </div>
-            <div class="project-item-stats-icon-text">{{project.days | spdDays}} осталось</div>
+            <div class="project-item-stats-icon-text">{{project.days}}</div>
+            <div class="project-item-stats-icon-text">{{project.days | spdEnding : 'day'}}</div>
         </div>
     </div>
 </div>
