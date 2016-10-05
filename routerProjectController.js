@@ -1,6 +1,6 @@
 var routerProjectController = (app) => {
     const project = require('./models/project');
-    const parseProject = require('./services/project');
+    const parseProject = require('./services/parseProject');
 
     app.post('/adminium/addproject', function (req, res) {
         if(req.session.isLoggedIn){

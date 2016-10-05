@@ -8,9 +8,9 @@
     <link rel="stylesheet" href="./styles/styles.css">
     <script src="./scripts/script.js"></script>
 </head>
-<body ng-mousedown="app.handleLangMenu($event)">
+<body ng-mousedown="app.handleLangMenu($event)" ng-if="app.isDataLoaded">
     <spd-page-header></spd-page-header>
-    <main ui-view class="main-content" ng-if="app.isDataLoaded"></main>
+    <main ui-view class="main-content"></main>
     <spd-footer></spd-footer>
 </body>
 </html>

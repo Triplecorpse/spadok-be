@@ -1,6 +1,9 @@
 var mongoose = require('mongoose');
 var PageSchema = new mongoose.Schema({
     email: String,
+    fb: String,
+    vk: String,
+    instagram: String,
     engAddress: String,
     engArea: String,
     engAuthor: String,

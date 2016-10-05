@@ -2,7 +2,7 @@ var routerImagesController = (app) => {
     const project = require('./models/project');
     const user = require('./models/user');
     const partner = require('./models/partner');
-    const parseProject = require('./services/project');
+    const parseProject = require('./services/parseProject');
     const formidable = require('formidable');
     const fs = require('fs');
 

@@ -2,17 +2,17 @@
     <div class="stats-icons-item">
         <div class="people"></div>
         <p class="stats-icons-item-text-header">{{people | spdEnding : 'man' : people}}</p>
-        <p class="stats-icons-item-text">{{people | spdPeopleDonated : options.simpleText}}{{options.textes[0]}}</p>
+        <p class="stats-icons-item-text">{{people | spdEnding : 'donated'}}</p>
     </div>
     <div class="stats-icons-item">
         <div class="money"></div>
         <p class="stats-icons-item-text-header">{{money}} {{'interface.currency' | translate}}</p>
-        <p class="stats-icons-item-text">{{options.textes[1]}}</p>
+        <p class="stats-icons-item-text" translate="interface.directives.stats.left"></p>
     </div>
     <div class="stats-icons-item">
         <div class="calendar">
             <div class="calendar-days">{{days}}</div>
         </div>
-        <p class="stats-icons-item-text-header">{{days | spdEnding : 'day' : days}}<span class="stats-icons-item-text">{{options.textes[2]}}</span></p>
+        <p class="stats-icons-item-text-header">{{days | spdEnding : 'day' : days}} <span class="stats-icons-item-text" translate="interface.directives.stats.toBeginning"></span></p>
     </div>
 </div>
