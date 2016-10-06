@@ -18,7 +18,6 @@
             }
 
             function parsePartners(list) {
-                // _.map(list.)
                 data.partners = list;
                 console.log(":::: DATASERVICE PARTNERS ::::", data.partners);
             }
@@ -27,12 +26,18 @@
                 data.projects = _.map(list, (element) => {
                     let days = new Date(element.date) - date;
                     element.days = Math.ceil(days / 86400000);
+
                     element.eur = Math.round(element.money / data.page.currencyRate);
                     element.uah = Math.round(element.money);
-                    element.collected = element.moneyTotal - element.money;
+
+                    element.moneyTotalUah = Math.round(element.moneyTotal);
+                    element.moneyTotalEur = Math.round(element.moneyTotal  / data.page.currencyRate);
+
+                    element.collectedUah = element.moneyTotalUah - element.uah;
+                    element.collectedEur = element.moneyTotalEur - element.eur;
+
                     return element;
                 });
-
                 console.log(":::: DATASERVICE PROJECTS ::::", data.projects);
             }
 

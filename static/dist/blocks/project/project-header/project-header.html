@@ -9,15 +9,15 @@
         <div class="row">
             <div class="col-md-1 col-md-offset-2">
                 <div class="project-header-stats-info-icon-digit">{{project.project.people}}</div>
-                <div class="project-header-stats-info-icon-text">волонтёров</div>
+                <div class="project-header-stats-info-icon-text">{{project.project.people | spdEnding : 'volunteer'}}</div>
             </div>
             <div class="col-md-1">
                 <div class="project-header-stats-info-icon-digit">{{project.project.days}}</div>
-                <div class="project-header-stats-info-icon-text">дней осталось</div>
+                <div class="project-header-stats-info-icon-text">{{project.project.days | spdEnding : 'day'}} {{'interface.directives.stats.toBeginning' | translate}}</div>
             </div>
             <div class="col-md-1">
-                <div class="project-header-stats-info-icon-digit">{{project.project.collected}} <span class="project-header-stats-info-icon-currency">₴</span></div>
-                <div class="project-header-stats-info-icon-text">собрано (с {{project.project.moneyTotal}})</div>
+                <div class="project-header-stats-info-icon-digit">{{project.project.collected}} <span class="project-header-stats-info-icon-currency" translate="interface.currency"></span></div>
+                <div class="project-header-stats-info-icon-text" translate-values='{ total: {{project.project.moneyTotal}} }' translate="interface.pages.project.collected"></div>
             </div>
             <div class="col-md-1 col-md-offset-1">
                 <button type="button" class="project-header-stats-info-button" translate="interface.pages.project.donate"></button>
