@@ -3,7 +3,7 @@ var routerProjectController = (app) => {
     const parseProject = require('./services/parseProject');
 
     app.post('/adminium/addproject', function (req, res) {
-        if(req.session.isLoggedIn){
+        if (req.session.isLoggedIn && req.session.canHandleProjects) {
             let currentProject = parseProject(req.body);
             let newProject = new project(currentProject);
             newProject.save(currentProject, (err, project) => {
@@ -13,6 +13,8 @@ var routerProjectController = (app) => {
                     res.json(project);
                 }
             });
+        } else if (req.session.isLoggedIn && !req.session.canHandleProjects) {
+            res.sendStatus(403)
         } else {
             res.sendStatus(401)
         }
@@ -20,18 +22,20 @@ var routerProjectController = (app) => {
 
 
     app.delete('/adminium/removeproject/:id', (req, res) => {
-        if(req.session.isLoggedIn){
+        if (req.session.isLoggedIn && req.session.canHandleProjects) {
             project.find({_id: req.params.id}).remove((err, project) => {
                 if (err) res.send(err);
                 res.json(project);
             })
+        } else if (req.session.isLoggedIn && !req.session.canHandleProjects) {
+            res.sendStatus(403)
         } else {
             res.sendStatus(401)
         }
     });
 
     app.put('/adminium/updateproject', (req, res) => {
-        if(req.session.isLoggedIn) {
+        if (req.session.isLoggedIn && req.session.canHandleProjects) {
             let id = req.body._id;
             let updatedProject = parseProject(req.body);
             project.findByIdAndUpdate(id, updatedProject, (err, project) => {
@@ -41,6 +45,8 @@ var routerProjectController = (app) => {
                     res.json(project);
                 }
             });
+        } else if (req.session.isLoggedIn && !req.session.canHandleProjects) {
+            res.sendStatus(403)
         } else {
             res.sendStatus(401)
         }

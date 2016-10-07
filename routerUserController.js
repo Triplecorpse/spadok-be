@@ -41,7 +41,7 @@ var routerLoginController = (app) => {
                     console.log(err);
                 }
             });
-            res.status(401).json({});
+            res.sendStatus(401);
         }
     });
 
@@ -69,6 +69,8 @@ var routerLoginController = (app) => {
             if (req.body.password === user.password) {
                 user.password = undefined;
                 req.session.isLoggedIn = true;
+                req.session.canHandleUsers = user.canHandleUsers;
+                req.session.canHandleProjects = user.canHandleProjects;
 
                 res.status(200).json(user);
             } else {
@@ -77,12 +79,12 @@ var routerLoginController = (app) => {
         }
 
         function fail() {
-            res.status(401).json({message: "Not Authorized"});
+            res.sendStatus(401);
         }
     });
 
     app.post('/adminium/adduser', function (req, res) {
-        if(req.session.isLoggedIn) {
+        if (req.session.isLoggedIn && req.session.canHandleUsers) {
             var parsedUser = parseUser(req.body);
             user.findOne({$or: [{name: parsedUser.name}, {email: parsedUser.email}]}, (err, foundUser) => {
                 if(err) {
@@ -103,24 +105,28 @@ var routerLoginController = (app) => {
                 }
             });
 
+        } else if (req.session.isLoggedIn && !req.session.canHandleUsers) {
+            res.sendStatus(403)
         } else {
             res.sendStatus(401);
         }
     });
 
     app.delete('/adminium/removeuser/:id', (req, res) => {
-        if(req.session.isLoggedIn){
+        if (req.session.isLoggedIn && req.session.canHandleUsers) {
             user.find({_id: req.params.id}).remove((err, user) => {
                 if (err) res.send(err);
                 res.json(user);
             })
+        } else if (req.session.isLoggedIn && !req.session.canHandleUsers) {
+            res.sendStatus(403)
         } else {
             res.sendStatus(401)
         }
     });
 
     app.put('/adminium/updateuser', (req, res) => {
-        if(req.session.isLoggedIn) {
+        if (req.session.isLoggedIn && req.session.canHandleUsers) {
             let id = req.body._id;
             let updatedUser = parseUser(req.body);
             user.findByIdAndUpdate(id, updatedUser, (err, user) => {
@@ -130,6 +136,8 @@ var routerLoginController = (app) => {
                     res.json(user);
                 }
             });
+        } else if (req.session.isLoggedIn && !req.session.canHandleUsers) {
+            res.sendStatus(403)
         } else {
             res.sendStatus(401)
         }
