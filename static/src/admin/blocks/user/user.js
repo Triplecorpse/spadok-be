@@ -104,6 +104,7 @@
                     dataService.init();
                 }
                 action = '';
+                location.reload();
                 return data;
             }
 

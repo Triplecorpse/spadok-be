@@ -107,9 +107,9 @@
             };
 
             $scope.delete = () => {
+                action = 'delete';
                 $http.delete(`/adminium/removeproject/${$scope.init._id}`)
                     .then(success, fail);
-                action = 'delete';
             };
 
             function add() {
@@ -138,6 +138,7 @@
                     dataService.init();
                 }
                 action = '';
+                location.reload();
                 return data;
             }
 
