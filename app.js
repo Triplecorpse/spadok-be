@@ -19,7 +19,7 @@ mongoose.connect(env.OPENSHIFT_MONGODB_DB_URL || local);
 app.use(bodyParser.json());
 app.use(cookieParser());
 app.use(express.static('static/dist'));
-app.use(express.static('static/media'));
+app.use(express.static('media'));
 
 routerUserController(app);
 routerProjectController(app);

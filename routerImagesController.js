@@ -7,13 +7,10 @@ var routerImagesController = (app) => {
     const fs = require('fs');
 
     app.post('/adminium/partnerimg/:id', function (req,res) {
-        if(req.session.isLoggedIn) {
-            var users = `${__dirname}/static/media/partners`;
-            if (!fs.existsSync(users)) {
-                fs.mkdirSync(users);
-            }
+        if (req.session.isLoggedIn) {
+            var partners = createFolderStructure('partner');
             var form = new formidable.IncomingForm();
-            form.uploadDir = users;
+            form.uploadDir = partners;
             form.keepExtensions = true;
             form.multiples = true;
             form.parse(req, function (err, fields, files) {
@@ -63,11 +60,8 @@ var routerImagesController = (app) => {
     });
 
     app.post('/adminium/userimg/:id', function (req,res) {
-        if(req.session.isLoggedIn) {
-            var users = `${__dirname}/static/media/users`;
-            if (!fs.existsSync(users)) {
-                fs.mkdirSync(users);
-            }
+        if (req.session.isLoggedIn) {
+            var users = createFolderStructure('user')
             var form = new formidable.IncomingForm();
             form.uploadDir = users;
             form.keepExtensions = true;
@@ -120,17 +114,7 @@ var routerImagesController = (app) => {
 
     app.post('/adminium/projectimg/:id/:entity', function (req, res) {
         if (req.session.isLoggedIn) {
-            var projects = `${__dirname}/static/media/projects`;
-            var innerDir = `${__dirname}/static/media/projects/${req.params.id}`;
-            var outerDir = `${__dirname}/static/media/projects/${req.params.id}/${req.params.entity}`;
-            if (!fs.existsSync(projects)) {
-                fs.mkdirSync(projects);
-            }
-            if (!fs.existsSync(innerDir)) {
-                fs.mkdirSync(innerDir);
-                fs.mkdirSync(`${innerDir}/main`);
-                fs.mkdirSync(`${innerDir}/gallery`);
-            }
+            var outerDir = createFolderStructure('project', req.params.id, req.params.entity)
             var form = new formidable.IncomingForm();
             form.uploadDir = outerDir;
             form.keepExtensions = true;
@@ -184,6 +168,43 @@ var routerImagesController = (app) => {
             res.sendStatus(401)
         }
     });
+
+    function createFolderStructure(type, id, pictureEntity) {
+        var workingFolder;
+
+        if (type === 'project') {
+            let projects = `${__dirname}/media/projects`;
+            let innerDir = `${projects}/${id}`;
+            workingFolder = `${innerDir}/${pictureEntity}`;
+            if (!fs.existsSync(projects)) {
+                fs.mkdirSync(projects);
+            }
+            if (!fs.existsSync(innerDir)) {
+                fs.mkdirSync(innerDir);
+                fs.mkdirSync(`${innerDir}/main`);
+                fs.mkdirSync(`${innerDir}/gallery`);
+            }
+        } else if (type === 'user') {
+            let users = `${__dirname}/media/users`;
+            if (!fs.existsSync(users)) {
+                fs.mkdirSync(users);
+            }
+            workingFolder = users;
+        } else if (type === 'partner') {
+            var partners = `${__dirname}/media/partners`;
+            if (!fs.existsSync(partners)) {
+                fs.mkdirSync(partners);
+            }
+            workingFolder = partners
+        }
+
+        return workingFolder;
+    }
+
+    // Create folder /media
+    if (!fs.existsSync(`${__dirname}/media`)) {
+        fs.mkdirSync(`${__dirname}/media`)
+    }
 };
 
 module.exports = routerImagesController;

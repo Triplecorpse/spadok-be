@@ -3,7 +3,6 @@
 /static/node_modules
 /static/bower_components
 /design
-#/static/
 /static/*.*
 /static/src
-/static/media/
+/media/
