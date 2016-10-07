@@ -5,8 +5,5 @@
 /design
 #/static/
 /static/*.*
-/static/dist/media/projects
-/static/dist/media/partners
-/static/dist/media/users
 /static/src
-/static/media
+/static/media/
