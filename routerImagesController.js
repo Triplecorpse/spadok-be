@@ -150,6 +150,7 @@ var routerImagesController = (app) => {
                                 foundProject.pictures.push(url);
                                 collector.ps2=foundProject.pictures;
                             }
+                            foundProject._id = undefined;
                             project.findByIdAndUpdate(req.params.id, foundProject, (err, updatedProject) => {
                                 collector.up = updatedProject;
                                 if (err) {
