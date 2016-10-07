@@ -9,4 +9,4 @@
 /static/dist/media/partners
 /static/dist/media/users
 /static/src
-/static/dist/media/projects/**/*.*
+/static/media

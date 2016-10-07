@@ -8,7 +8,7 @@ var routerImagesController = (app) => {
 
     app.post('/adminium/partnerimg/:id', function (req,res) {
         if(req.session.isLoggedIn) {
-            var users = `${__dirname}/static/dist/media/partners`;
+            var users = `${__dirname}/static/media/partners`;
             if (!fs.existsSync(users)) {
                 fs.mkdirSync(users);
             }
@@ -24,7 +24,7 @@ var routerImagesController = (app) => {
 
                 let index;
                 for (let i in url) {
-                    if (url[i] === 'media') {
+                    if (url[i] === 'partners') {
                         index = i;
                         break;
                     }
@@ -64,7 +64,7 @@ var routerImagesController = (app) => {
 
     app.post('/adminium/userimg/:id', function (req,res) {
         if(req.session.isLoggedIn) {
-            var users = `${__dirname}/static/dist/media/users`;
+            var users = `${__dirname}/static/media/users`;
             if (!fs.existsSync(users)) {
                 fs.mkdirSync(users);
             }
@@ -80,7 +80,7 @@ var routerImagesController = (app) => {
 
                 let index;
                 for (let i in url) {
-                    if (url[i] === 'media') {
+                    if (url[i] === 'users') {
                         index = i;
                         break;
                     }
@@ -120,9 +120,9 @@ var routerImagesController = (app) => {
 
     app.post('/adminium/projectimg/:id/:entity', function (req, res) {
         if (req.session.isLoggedIn) {
-            var projects = `${__dirname}/static/dist/media/projects`;
-            var innerDir = `${__dirname}/static/dist/media/projects/${req.params.id}`;
-            var outerDir = `${__dirname}/static/dist/media/projects/${req.params.id}/${req.params.entity}`;
+            var projects = `${__dirname}/static/media/projects`;
+            var innerDir = `${__dirname}/static/media/projects/${req.params.id}`;
+            var outerDir = `${__dirname}/static/media/projects/${req.params.id}/${req.params.entity}`;
             if (!fs.existsSync(projects)) {
                 fs.mkdirSync(projects);
             }
@@ -143,7 +143,7 @@ var routerImagesController = (app) => {
 
                 let index;
                 for (let i in url) {
-                    if (url[i] === 'media') {
+                    if (url[i] === 'projects') {
                         index = i;
                         break;
                     }
