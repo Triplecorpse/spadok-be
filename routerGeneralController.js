@@ -3,7 +3,7 @@ var routerController = (app) => {
     // const express = require('express');
     const parsePage = require('./services/parsePage');
     const page = require('./models/page');
-    const dbGetters = require('./services/dbGetters
+    const dbGetters = require('./services/dbGetters');
 
     app.get('/adminium/getall', (req, res) => {
         if(req.session.isLoggedIn){
