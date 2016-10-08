@@ -6,6 +6,8 @@ var routerImagesController = (app) => {
     const formidable = require('formidable');
     const fs = require('fs');
 
+    var dataDir = process.env.OPENSHIFT_DATA_DIR || __dirname 
+
     app.post('/adminium/partnerimg/:id', function (req,res) {
         if (req.session.isLoggedIn) {
             var partners = createFolderStructure('partner');
@@ -174,7 +176,7 @@ var routerImagesController = (app) => {
         var workingFolder;
 
         if (type === 'project') {
-            let projects = `${__dirname}/media/projects`;
+            let projects = `${dataDir}/media/projects`;
             let innerDir = `${projects}/${id}`;
             workingFolder = `${innerDir}/${pictureEntity}`;
             if (!fs.existsSync(projects)) {
@@ -186,13 +188,13 @@ var routerImagesController = (app) => {
                 fs.mkdirSync(`${innerDir}/gallery`);
             }
         } else if (type === 'user') {
-            let users = `${__dirname}/media/users`;
+            let users = `${dataDir}/media/users`;
             if (!fs.existsSync(users)) {
                 fs.mkdirSync(users);
             }
             workingFolder = users;
         } else if (type === 'partner') {
-            var partners = `${__dirname}/media/partners`;
+            var partners = `${dataDir}/media/partners`;
             if (!fs.existsSync(partners)) {
                 fs.mkdirSync(partners);
             }
@@ -203,8 +205,8 @@ var routerImagesController = (app) => {
     }
 
     // Create folder /media
-    if (!fs.existsSync(`${__dirname}/media`)) {
-        fs.mkdirSync(`${__dirname}/media`)
+    if (!fs.existsSync(`${dataDir}/media`)) {
+        fs.mkdirSync(`${dataDir}/media`)
     }
 };
 
