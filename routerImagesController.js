@@ -135,7 +135,7 @@ var routerImagesController = (app) => {
                     }
                 }
 
-                url = '/media?path=' + url.slice(index).join('/');
+                url = '/pmedia?path=' + url.slice(index).join('/');
                 let collector = {id: req.params.id};
                 if (url) {
                     project.findById(req.params.id, (err, foundProject) => {
