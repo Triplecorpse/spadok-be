@@ -138,7 +138,7 @@
                     dataService.init();
                 }
                 action = '';
-                location.reload();
+                //location.reload();
                 return data;
             }
 
