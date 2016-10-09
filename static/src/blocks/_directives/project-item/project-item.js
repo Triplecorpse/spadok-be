@@ -14,6 +14,8 @@
                 $scope.goto = (id) => {
                     $location.path(`/project/${id}`);
                 }
+
+                $scope.projectPicture = `/pmedia?${$scope.project.picture}`;
             }
         }
         ]);

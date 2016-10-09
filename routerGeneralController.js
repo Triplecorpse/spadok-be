@@ -62,7 +62,7 @@ var routerController = (app) => {
         }
     });
 
-    app.get('/media', (req, res) => {
+    app.get('/pmedia', (req, res) => {
         var path = req.query.path;
         var dataDir = process.env.OPENSHIFT_DATA_DIR || __dirname;
         console.log('GET /media', `${dataDir}${path}`)
