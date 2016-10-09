@@ -20,12 +20,15 @@ module.exports = (project) => {
     }
 
     return {
-        rusName: temp.rusName || '',
-        rusShortDescription: temp.rusShortDescription || '',
-        rusDescription: temp.rusDescription || '',
-        engName: temp.engName || '',
-        engShortDescription: temp.engShortDescription || '',
-        engDescription: project.engDescription || '',
+        //rusName: temp.rusName || '',
+        //rusShortDescription: temp.rusShortDescription || '',
+        //rusDescription: temp.rusDescription || '',
+        //engName: temp.engName || '',
+        //engShortDescription: temp.engShortDescription || '',
+        //engDescription: project.engDescription || '',
+        name: project.name,
+        shortDescription: project.shortDescription,
+        longDescription: project.longDescription,
         picture: temp.picture || '',
         videoUrl: temp.videoUrl || '',
         videoName: temp.videoName || '',

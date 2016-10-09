@@ -1,7 +1,7 @@
 <div class="project-item-wrapper">
     <div style="background-image: url('{{project.picture}}');" class="project-item-image"></div>
-    <h3 class="project-item-header"  translate="{{'projects.project' + project._id + '.name'}}"></h3>
-    <p class="project-item-text" translate="{{'projects.project' + project._id + '.description'}}"></p>
+    <h3 class="project-item-header"  translate="{{'projects.project' + project._id + '.displayName'}}"></h3>
+    <p class="project-item-text" translate="{{'projects.project' + project._id + '.displayShortDescription'}}"></p>
     <button class="project-item-button" ng-click="goto(project._id)" translate="interface.directives.projectItem.button">о проекте</button>
     <div class="project-item-stats">
         <div class="project-item-stats-icon-wrapper">

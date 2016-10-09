@@ -1,6 +1,6 @@
 <div class="project-header-image" style="background-image: url('{{project.project.picture}}')">
     <div class="project-header-image-layer"></div>
-    <h1 class="project-header-image-header" translate="{{'projects.project' + project.project._id + '.name'}}"></h1>
+    <h1 class="project-header-image-header" translate="{{'projects.project' + project.project._id + '.displayName'}}"></h1>
     <div class="project-header-image-play-button" ng-if="video"></div>
     <div class="project-header-image-text" ng-if="video" ng-click="gotoVideo()" translate="interface.pages.project.lookVideo"></div>
 </div>
@@ -26,13 +26,13 @@
     </div>
 </div>
 <div class="project-header-info">
-    <p class="project-header-info-text" translate="{{'projects.project' + project.project._id + '.name'}}"></p>
+    <p class="project-header-info-text" translate="{{'projects.project' + project.project._id + '.displayName'}}"></p>
     <div class="project-header-info-text-share-wrapper">
         <div class="project-header-info-text-share-fb"
              socialshare
               socialshare-provider="facebook"
-              socialshare-text="{{project.project.rusName}}"
-              socialshare-description="{{project.project.rusShortDescription}}"
+              socialshare-text="{{project.project.name.ru}}"
+              socialshare-description="{{project.project.shortDescription.ru}}"
               socialshare-url="{{href}}"
               socialshare-media="{{absPicture}}">
             <span class="project-header-info-text-share-text">Share</span>
@@ -40,8 +40,8 @@
         <div  class="project-header-info-text-share-vk"
               socialshare
               socialshare-provider="vk"
-              socialshare-text="{{project.project.rusName}}"
-              socialshare-description="{{project.project.rusShortDescription}}"
+              socialshare-text="{{project.project.name.ru}}"
+              socialshare-description="{{project.project.shortDescription.ru}}"
               socialshare-url="{{href}}"
               socialshare-media="{{absPicture}}">
             <span class="project-header-info-text-share-text">Share</span>

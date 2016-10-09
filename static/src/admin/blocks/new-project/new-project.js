@@ -53,6 +53,7 @@
                     delete $scope.activeProject;
                     $scope.activeProject = angular.copy($scope.init);
                     $scope.activeProject.date = new Date($scope.init.date);
+
                     if(!$scope.activeProject.pictures) {
                         $scope.activeProject.pictures = [];
                         $scope.activeGalleryPicture = '';
@@ -60,7 +61,12 @@
                     $scope.activeProject.pictures.push('');
                     $scope.setParentProject(newVal.parentProjectId);
                 } else {
-                    $scope.activeProject = {pictures:['']};
+                    $scope.activeProject = {
+                        pictures: [''],
+                        name: {},
+                        shortDescription: {},
+                        longDescription: {}
+                    };
                     $scope.activeGalleryPicture = '';
                     $scope.setParentProject();
                 }
@@ -129,7 +135,7 @@
                 $scope.setParentProject();
                 viewService.highlightAdd();
                 final();
-                if(action === 'add' || action === 'update') {
+                if (action === 'add' || action === 'update') {
                     uploadFiles(data.data._id);
                 } else {
                     $scope.statusText = s200;

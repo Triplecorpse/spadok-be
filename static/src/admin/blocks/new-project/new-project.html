@@ -4,30 +4,30 @@
             <h3>Russian</h3>
             <div class="form-group">
                 <label for="project-name-rus">Name</label>
-                <input type="text" class="form-control" id="project-name-rus" placeholder="Name" ng-model="activeProject.rusName" ng-blur="translate(activeProject.rusName, 'engName')" required>
+                <input type="text" class="form-control" id="project-name-rus" placeholder="Name" ng-model="activeProject.name.ru" ng-blur="translate(activeProject.rusName, 'engName')" required>
             </div>
             <div class="form-group">
                 <label for="project-short-description-rus">Short Description (max 300 sym)</label>
-                <textarea class="form-control" rows="2" id="project-short-description-rus" placeholder="Short Description" ng-model="activeProject.rusShortDescription" maxlength="300" ng-blur="translate(activeProject.rusShortDescription, 'engShortDescription')"></textarea>
+                <textarea class="form-control" rows="2" id="project-short-description-rus" placeholder="Short Description" ng-model="activeProject.shortDescription.ru" maxlength="300" ng-blur="translate(activeProject.rusShortDescription, 'engShortDescription')"></textarea>
             </div>
             <div class="form-group">
                 <label for="project-description-rus">Description</label>
-                <textarea class="form-control" rows="5" id="project-description-rus" placeholder="Description" ng-model="activeProject.rusDescription" ng-blur="translate(activeProject.rusDescription, 'engDescription')"></textarea>
+                <textarea class="form-control" rows="5" id="project-description-rus" placeholder="Description" ng-model="activeProject.longDescription.ru" ng-blur="translate(activeProject.rusDescription, 'engDescription')"></textarea>
             </div>
         </div>
         <div class="col-md-6">
             <h3>English</h3>
             <div class="form-group">
                 <label for="project-name-eng">Name</label>
-                <input type="text" class="form-control" id="project-name-eng" placeholder="Name" ng-model="activeProject.engName" ng-disabled="isTranslationQuerying">
+                <input type="text" class="form-control" id="project-name-eng" placeholder="Name" ng-model="activeProject.name.en" ng-disabled="isTranslationQuerying">
             </div>
             <div class="form-group">
                 <label for="project-short-description-eng">Short Description (max 300 sym)</label>
-                <textarea class="form-control" rows="2" id="project-short-description-eng" placeholder="Short Description" ng-model="activeProject.engShortDescription" maxlength="300" ng-disabled="isTranslationQuerying"></textarea>
+                <textarea class="form-control" rows="2" id="project-short-description-eng" placeholder="Short Description" ng-model="activeProject.shortDescription.en" maxlength="300" ng-disabled="isTranslationQuerying"></textarea>
             </div>
             <div class="form-group">
                 <label for="project-description-eng">Description</label>
-                <textarea class="form-control" rows="5" id="project-description-eng" placeholder="Description" ng-model="activeProject.engDescription" ng-disabled="isTranslationQuerying"></textarea>
+                <textarea class="form-control" rows="5" id="project-description-eng" placeholder="Description" ng-model="activeProject.longDescription.en" ng-disabled="isTranslationQuerying"></textarea>
             </div>
         </div>
     </div>
