@@ -5,6 +5,7 @@ var routerImagesController = (app) => {
     const parseProject = require('./services/parseProject');
     const formidable = require('formidable');
     const fs = require('fs');
+    const path = require('path');
 
     var dataDir = process.env.OPENSHIFT_DATA_DIR || __dirname 
 

@@ -1,9 +1,9 @@
 var routerController = (app) => {
     const fs = require('fs');
-    // const express = require('express');
     const parsePage = require('./services/parsePage');
     const page = require('./models/page');
     const dbGetters = require('./services/dbGetters');
+    const path = require('path');
 
     app.get('/adminium/getall', (req, res) => {
         if(req.session.isLoggedIn){
@@ -66,7 +66,13 @@ var routerController = (app) => {
         var path = req.query.path;
         var dataDir = process.env.OPENSHIFT_DATA_DIR || __dirname;
         console.log('GET /media', `${dataDir}${path}`)
-        res.sendFile(`${dataDir}${path}`)
+        fs.stat(`${dataDir}${path}`, (err, file) => {
+            if (err) {
+                res.sendStatus(404)
+            } else {
+                res.sendFile(`${dataDir}${path}`)
+            }
+        })
     })
 
     app.get('/health', function (req, res) {
