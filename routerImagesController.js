@@ -24,7 +24,7 @@ var routerImagesController = (app) => {
 
                 let index;
                 for (let i in url) {
-                    if (url[i] === 'partners') {
+                    if (url[i] === 'media') {
                         index = i;
                         break;
                     }
@@ -77,7 +77,7 @@ var routerImagesController = (app) => {
 
                 let index;
                 for (let i in url) {
-                    if (url[i] === 'users') {
+                    if (url[i] === 'media') {
                         index = i;
                         break;
                     }
@@ -130,7 +130,7 @@ var routerImagesController = (app) => {
 
                 let index;
                 for (let i in url) {
-                    if (url[i] === 'projects') {
+                    if (url[i] === 'media') {
                         index = i;
                         break;
                     }
