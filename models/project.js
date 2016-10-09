@@ -1,5 +1,8 @@
 var mongoose = require('mongoose');
-var ProjectSchema   = new mongoose.Schema({
+var ProjectSchema = new mongoose.Schema({
+    name: Object,
+    shortDescription: Object,
+    longDescription: Object,
     rusName: String,
     rusShortDescription: String,
     rusDescription: String,

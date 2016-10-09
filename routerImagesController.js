@@ -5,7 +5,6 @@ var routerImagesController = (app) => {
     const parseProject = require('./services/parseProject');
     const formidable = require('formidable');
     const fs = require('fs');
-    const path = require('path');
 
     var dataDir = process.env.OPENSHIFT_DATA_DIR || __dirname 
 
@@ -17,20 +16,7 @@ var routerImagesController = (app) => {
             form.keepExtensions = true;
             form.multiples = true;
             form.parse(req, function (err, fields, files) {
-                let url = files.file.path.split(`\\`);
-                if (url.length === 1) {
-                    url = files.file.path.split(`/`);
-                }
-
-                let index;
-                for (let i in url) {
-                    if (url[i] === 'media') {
-                        index = i;
-                        break;
-                    }
-                }
-
-                url = url.slice(index).join('/');
+                let url = parsePath(files.file.path);
                 let collector = {id: req.params.id, fileUrl: files.file.path, url: url};
                 if (url) {
                     partner.findById(req.params.id, (err, foundPartner) => {
@@ -70,20 +56,7 @@ var routerImagesController = (app) => {
             form.keepExtensions = true;
             form.multiples = true;
             form.parse(req, function (err, fields, files) {
-                let url = files.file.path.split(`\\`);
-                if (url.length === 1) {
-                    url = files.file.path.split(`/`);
-                }
-
-                let index;
-                for (let i in url) {
-                    if (url[i] === 'media') {
-                        index = i;
-                        break;
-                    }
-                }
-
-                url = url.slice(index).join('/');
+                let url = parsePath(files.file.path);
                 let collector = {id: req.params.id};
                 if (url) {
                     user.findById(req.params.id, (err, foundUser) => {
@@ -123,20 +96,7 @@ var routerImagesController = (app) => {
             form.keepExtensions = true;
             form.multiples = true;
             form.parse(req, function (err, fields, files) {
-                let url = files.file.path.split(`\\`);
-                if (url.length === 1) {
-                    url = files.file.path.split(`/`);
-                }
-
-                let index;
-                for (let i in url) {
-                    if (url[i] === 'media') {
-                        index = i;
-                        break;
-                    }
-                }
-
-                url = '/pmedia?path=' + url.slice(index).join('/');
+                let url = parsePath(files.file.path);
                 let collector = {id: req.params.id};
                 if (url) {
                     project.findById(req.params.id, (err, foundProject) => {
@@ -203,6 +163,25 @@ var routerImagesController = (app) => {
         }
 
         return workingFolder;
+    }
+
+    function parsePath(rawPath) {
+        let cleanPath = rawPath.split(`\\`);
+        if (cleanPath.length === 1) {
+            cleanPath = rawPath.split(`/`);
+        }
+
+        let index;
+        for (let i in cleanPath) {
+            if (cleanPath[i] === 'media') {
+                index = i;
+                break;
+            }
+        }
+
+        cleanPath = '/pmedia?path=' + cleanPath.slice(index).join('/');
+
+        return cleanPath;
     }
 
     // Create folder /media
