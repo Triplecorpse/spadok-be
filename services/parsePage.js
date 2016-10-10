@@ -1,16 +1,20 @@
 module.exports = (data) => {
     for(let key in data) {
-        if(data.hasOwnProperty(key)) {
-            if((key === 'rusStats') || (key === 'engStats')) {
-                data[key] = data[key].replace(/(<strong>)/g, '||strong||').replace(/(<\/strong>)/g, '||/strong||');
-            }
+        if (data.hasOwnProperty(key)) {
+            for (let i in data[key]) {
 
-            if(typeof data[key] === 'string') {
-                data[key] = data[key].replace(/(>)/g, '&gt;').replace(/(<)/g, '&lt;');
-            }
+                if (key === 'stats') {
+                    data[key][i] = data[key][i].replace(/(<strong>)/g, '||strong||').replace(/(<\/strong>)/g, '||/strong||');
+                }
 
-            if((key === 'rusStats') || (key === 'engStats')) {
-                data[key] = data[key].split('||strong||').join('<strong>').split('||/strong||').join('</strong>');
+                if (typeof data[key][i] === 'string') {
+                    data[key][i] = data[key][i].replace(/(>)/g, '&gt;').replace(/(<)/g, '&lt;');
+                }
+
+                if (key === 'stats') {
+                    data[key][i] = data[key][i].split('||strong||').join('<strong>').split('||/strong||').join('</strong>');
+                }
+
             }
         }
     }

@@ -68,7 +68,7 @@ var routerController = (app) => {
         console.log('GET /media', `${dataDir}${path}`)
         fs.stat(`${dataDir}${path}`, (err, file) => {
             if (err) {
-                res.status(404).json({ message: `File ${dataDir}${path} was not found on server` });
+                res.status(404).json({ message: `File ${path} was not found on server` });
             } else {
                 res.sendFile(`${dataDir}${path}`)
             }

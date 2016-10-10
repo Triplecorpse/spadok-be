@@ -4,22 +4,22 @@
             <h3>Russian</h3>
             <div class="form-group">
                 <label for="user-name-rus">Display Name</label>
-                <input type="text" class="form-control" id="user-name-rus" placeholder="Name" ng-model="activeUser.rusName" autocomplete="off" ng-disabled="(activeUser.name === 'admin') && (view === 'edit')">
+                <input type="text" class="form-control" id="user-name-rus" placeholder="Name" ng-model="activeUser.name.ru" autocomplete="off" ng-disabled="(activeUser.name === 'admin') && (view === 'edit')">
             </div>
             <div class="form-group">
                 <label for="user-position-rus">Position</label>
-                <input type="text" class="form-control" id="user-position-rus" placeholder="Position" ng-model="activeUser.rusPosition" autocomplete="off" ng-disabled="(activeUser.name === 'admin') && (view === 'edit')">
+                <input type="text" class="form-control" id="user-position-rus" placeholder="Position" ng-model="activeUser.position.ru" autocomplete="off" ng-disabled="(activeUser.name === 'admin') && (view === 'edit')">
             </div>
         </div>
         <div class="col-md-6">
             <h3>English</h3>
             <div class="form-group">
                 <label for="user-name-eng">Display Name</label>
-                <input type="text" class="form-control" id="user-name-eng" placeholder="Name" ng-model="activeUser.engName" autocomplete="off" ng-disabled="(activeUser.name === 'admin') && (view === 'edit')">
+                <input type="text" class="form-control" id="user-name-eng" placeholder="Name" ng-model="activeUser.name.en" autocomplete="off" ng-disabled="(activeUser.name === 'admin') && (view === 'edit')">
             </div>
             <div class="form-group">
                 <label for="user-position-eng">Position</label>
-                <input type="text" class="form-control" id="user-position-eng" placeholder="Position" ng-model="activeUser.engPosition" autocomplete="off" ng-disabled="(activeUser.name === 'admin') && (view === 'edit')">
+                <input type="text" class="form-control" id="user-position-eng" placeholder="Position" ng-model="activeUser.position.en" autocomplete="off" ng-disabled="(activeUser.name === 'admin') && (view === 'edit')">
             </div>
         </div>
     </div>
@@ -32,7 +32,7 @@
         <div class="col-md-12">
             <div class="form-group">
                 <label for="user-login">Login</label>
-                <input type="text" class="form-control" id="user-login" placeholder="Login" ng-model="activeUser.name" autocomplete="off" ng-disabled="(((activeUser.name === 'admin') && (view === 'edit')) || (view === 'edit'))" required>
+                <input type="text" class="form-control" id="user-login" placeholder="Login" ng-model="activeUser.login" autocomplete="off" ng-disabled="view === 'edit'" required>
             </div>
             <div class="form-group">
                 <label for="user-email">Email</label>
@@ -71,21 +71,35 @@
         <div class="col-md-4">
             <div class="checkbox">
                 <label>
-                    <input type="checkbox" ng-model="activeUser.canHandleProjects" ng-disabled="(activeUser.name === 'admin') && (view === 'edit')"> can handle projects
+                    <input type="checkbox" ng-model="activeUser.canHandleProjects" ng-disabled="((activeUser.login === 'admin') && (view === 'edit')) || !loggedUser.canHandleProjects"> can handle projects
                 </label>
             </div>
         </div>
         <div class="col-md-4">
             <div class="checkbox">
                 <label>
-                    <input type="checkbox" ng-model="activeUser.canHandleUsers" ng-disabled="(activeUser.name === 'admin') && (view === 'edit')"> can handle users
+                    <input type="checkbox" ng-model="activeUser.canHandleUsers" ng-disabled="((activeUser.login === 'admin') && (view === 'edit')) || !loggedUser.canHandleUsers"> can handle users
                 </label>
             </div>
         </div>
         <div class="col-md-4">
             <div class="checkbox">
                 <label>
-                    <input type="checkbox" ng-model="activeUser.isInTeam" ng-disabled="(activeUser.name === 'admin') && (view === 'edit')"> is a team member
+                    <input type="checkbox" ng-model="activeUser.isInTeam" ng-disabled="((activeUser.login === 'admin') && (view === 'edit')) || !loggedUser.isInTeam"> is a team member
+                </label>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="checkbox">
+                <label>
+                    <input type="checkbox" ng-model="activeUser.canHandleReviews" ng-disabled="((activeUser.login === 'admin') && (view === 'edit')) || !loggedUser.canHandleReviews"> can handle reviews
+                </label>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="checkbox">
+                <label>
+                    <input type="checkbox" ng-model="activeUser.canHandlePageData" ng-disabled="((activeUser.login === 'admin') && (view === 'edit')) || !loggedUser.canHandlePageData"> can handle page data
                 </label>
             </div>
         </div>

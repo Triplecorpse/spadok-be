@@ -9,10 +9,11 @@ function appController($scope, viewService, dataService, $http) {
 
     function getall() {
         $http.get('/adminium/isloggedin')
-            .then(() => {
+            .then((response) => {
                 vm.isLoggedIn = true;
                 vm.canLogin = false;
                 viewService.state = 'projects';
+                dataService.currentUser = response.data;
                 dataService.init()
                     .finally(() => {
                         vm.isDataLoaded = true;

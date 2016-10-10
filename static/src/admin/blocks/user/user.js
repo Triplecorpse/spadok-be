@@ -17,6 +17,7 @@
             var vm = this;
             var action;
             $scope.activeUser = {};
+            $scope.loggedUser = dataService.currentUser;
 
             $scope.uploaderAvatar = new FileUploader({
                 removeAfterUpload: true
@@ -26,7 +27,10 @@
                 if(newVal) {
                     $scope.activeUser = newVal;
                 } else {
-                    $scope.activeUser = {};
+                    $scope.activeUser = {
+                        name: {},
+                        position: {}
+                    };
                 }
             }, true);
 

@@ -1,37 +1,45 @@
 module.exports = (data) => {
-    for(let key in data) {
-        if(data.hasOwnProperty(key)) {
-            if(typeof data[key] === 'string') {
+    for (let key in data) {
+        if (data.hasOwnProperty(key)) {
+            if (typeof data[key] === 'string') {
                 data[key] = data[key].replace(/(>)/g, '&gt;').replace(/(<)/g, '&lt;');
             }
-        }
-    }
 
-    for(let key in data) {
-        if(data.hasOwnProperty(key)) {
-            if(Array.isArray(data[key])) {
+            if (Array.isArray(data[key])) {
+                // Remove empty achievements
                 data[key] = data[key].filter((element) => {
-                    return Boolean(element);
+                    let isAchievementEmpty = true;
+                    for (let i in element) {
+                        if (element.hasOwnProperty(i) && element[i] != "") {
+                            isAchievementEmpty = false;
+                        }
+                    }
+                    return !isAchievementEmpty;
                 });
 
-                //construct array of a tags in achievements
-                let aTags = data[key].map((element) => {
-                    return element.match(/<a href[^\>]*>/g);
-                });
+                // escape all tags except a
+                data[key] = data[key].map((element) => {
+                    for (let i in element) {
+                        if (element.hasOwnProperty(i)) {
 
-                //replace real a tags with mocks
-                data[key] = data[key].map((element)=> {
-                    return element.replace(/<a href[^\>]*>/g, '||aTags||');
-                });
+                            let aTag = "";
+                            //store link in variable
+                            if (element[i].match(/<a href[^\>]*>/)) {
+                                aTag = element[i].match(/<a href[^\>]*>/)[0];
+                            }
 
-                //replace all other tags for security
-                data[key] = data[key].map((element)=> {
-                    return element.replace(/(>)/g, '&gt;').replace(/(<)/g, '&lt;');
-                });
+                            // replace a tags with mocks
+                            element[i] = element[i].replace(/<a href[^\>]*>/, '||aTag||');
 
-                //replace ||aTags|| with normal tags
-                data[key] = data[key].map((element, index)=> {
-                    return element.replace('||aTags||', aTags[index]).replace('&lt;/a&gt;', '</a>');
+                            // remove unsupported tags
+                            element[i] = element[i].replace(/(>)/g, '&gt;').replace(/(<)/g, '&lt;');
+
+                            // replace mocks with real a tags
+                            element[i] = element[i].replace('||aTag||', aTag).replace('&lt;/a&gt;', '</a>');
+
+                        }
+                    }
+                    return element
                 });
             }
         }

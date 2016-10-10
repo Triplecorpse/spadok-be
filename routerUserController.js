@@ -32,8 +32,16 @@ var routerLoginController = (app) => {
 
     app.get('/adminium/isloggedin', (req, res) => {
         if ((req.session.cookie._expires > new Date()) && (req.session.isLoggedIn)) {
+            let permissions = {
+                canHandleProjects: req.session.canHandleProjects,
+                canHandleUsers: req.session.canHandleUsers,
+                canHandleReviews: req.session.canHandleReviews,
+                canHandlePageDat: req.session.canHandlePageData,
+                isInTeam: req.session.isInTeam,
+                userName: req.session.userName
+            }
             req.session.touch();
-            res.sendStatus(200);
+            res.status(200).json(permissions);
         } else {
             req.session.isLoggedIn = false;
             req.session.destroy(function (err) {
@@ -46,7 +54,7 @@ var routerLoginController = (app) => {
     });
 
     app.post('/adminium/login', function (req, res) {
-        user.findOne({name: req.body.name}, (err, user) => {
+        user.findOne({login: req.body.login}, (err, user) => {
             if(err) fail();
             if(!user) {
                 findByEmail();
@@ -56,7 +64,7 @@ var routerLoginController = (app) => {
         });
 
         function findByEmail() {
-            user.findOne({email: req.body.name}, (err, user) => {
+            user.findOne({email: req.body.login}, (err, user) => {
                 if(!user || err) {
                     fail();
                 } else {
@@ -71,6 +79,9 @@ var routerLoginController = (app) => {
                 req.session.isLoggedIn = true;
                 req.session.canHandleUsers = user.canHandleUsers;
                 req.session.canHandleProjects = user.canHandleProjects;
+                req.session.canHandleReviews = user.canHandleReviews;
+                req.session.canHandlePageData = user.canHandlePageData;
+                req.session.userName = user.name && user.name.ru;
 
                 res.status(200).json(user);
             } else {
@@ -85,8 +96,8 @@ var routerLoginController = (app) => {
 
     app.post('/adminium/adduser', function (req, res) {
         if (req.session.isLoggedIn && req.session.canHandleUsers) {
-            var parsedUser = parseUser(req.body);
-            user.findOne({$or: [{name: parsedUser.name}, {email: parsedUser.email}]}, (err, foundUser) => {
+            var parsedUser = parseUser(req.body, req.session);
+            user.findOne({$or: [{login: parsedUser.login}, {email: parsedUser.email}]}, (err, foundUser) => {
                 if(err) {
                     res.sendStatus(500)
                 } else {
@@ -128,7 +139,7 @@ var routerLoginController = (app) => {
     app.put('/adminium/updateuser', (req, res) => {
         if (req.session.isLoggedIn && req.session.canHandleUsers) {
             let id = req.body._id;
-            let updatedUser = parseUser(req.body);
+            let updatedUser = parseUser(req.body, req.session);
             user.findByIdAndUpdate(id, updatedUser, (err, user) => {
                 if (err) {
                     res.status(500).json({up: updatedUser, e: err});
@@ -154,24 +165,21 @@ var routerLoginController = (app) => {
         });
     });
 
-    createAdmin();
-    function createAdmin() {
-        user.find({name: 'admin'}, decide);
+    (function createAdmin() {
+        user.find({login: 'admin'}, decide);
 
         function decide(err, data) {
             if (err) throw err;
             if (!data.length) {
                 let newUser = new user({
-                    name: 'admin',
-                    rusName: 'admin',
-                    engName: 'admin',
+                    login: 'admin',
                     email: 'eldar.khaitov@gmail.com',
-                    rusPosition: 'admin',
-                    engPosition: 'admin',
                     dateRegistered: new Date(),
                     password: 'admin',
                     canHandleProjects: true,
                     canHandleUsers: true,
+                    canHandlePageData: true,
+                    canHandleReviews: true,
                     isInTeam: false
                 });
                 newUser.save((err) => {
@@ -179,7 +187,7 @@ var routerLoginController = (app) => {
                 })
             }
         }
-    }
+    })();
 };
 
 module.exports = routerLoginController;

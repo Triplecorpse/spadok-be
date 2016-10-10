@@ -1,17 +1,19 @@
 var mongoose = require('mongoose');
 var UserSchema = new mongoose.Schema({
-    rusName: String,
-    engName: String,
-    name: String,
+    name: Object,
+    login: String,
     email: String,
     password: String,
     picture: String,
-    rusPosition: String,
-    engPosition: String,
+    position: Object,
     date: Date,
     canHandleProjects: Boolean,
+    canHandleReviews: Boolean,
+    canHandlePartners: Boolean,
+    canHandlePageData: Boolean,
     canHandleUsers: Boolean,
-    isInTeam: Boolean
+    isInTeam: Boolean,
+    contacts: Object
 });
 
 module.exports = mongoose.model('User', UserSchema);

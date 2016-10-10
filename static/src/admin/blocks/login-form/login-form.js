@@ -18,7 +18,7 @@
                 scope.status = 'Searching...';
                 scope.queriing = true;
                 $http.post('/adminium/login', {
-                        name: scope.name,
+                        login: scope.login,
                         password: scope.password
                     })
                     .then((response) => {

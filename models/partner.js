@@ -2,8 +2,7 @@ var mongoose = require('mongoose');
 var PartnerSchema = new mongoose.Schema({
     name: String,
     picture: String,
-    rusAchievements: Array,
-    engAchievements: Array,
+    achievements: Array,
     isPublished: Boolean
 });
 
