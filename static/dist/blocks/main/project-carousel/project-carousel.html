@@ -14,7 +14,7 @@
     </ks-swiper-container>
     <div class="project-carousel-button-prev" ng-click="prev()" ng-if="projects.length > 1"></div>
     <div class="project-carousel-button-next" ng-click="next()" ng-if="projects.length > 1"></div>
-    <button type="button" class="project-carousel-button" ng-click="gotoProject()">О проекте</button>
+    <button type="button" class="project-carousel-button" ng-click="gotoProject()" translate="interface.pages.main.projectsAbout"></button>
     <div class="project-carousel-bullet-wrapper" ng-if="projects.length > 1">
         <div ng-class="'project-carousel-bullet ' + ($index === 0 ? 'project-carousel-bullet-active' : '')" ng-repeat="bullet in projects track by $index" ng-click="goto($index)"></div>
     </div>

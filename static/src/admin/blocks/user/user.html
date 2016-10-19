@@ -85,7 +85,7 @@
         <div class="col-md-4">
             <div class="checkbox">
                 <label>
-                    <input type="checkbox" ng-model="activeUser.isInTeam" ng-disabled="((activeUser.login === 'admin') && (view === 'edit')) || !loggedUser.isInTeam"> is a team member
+                    <input type="checkbox" ng-model="activeUser.isInTeam" ng-disabled="activeUser.login === 'admin' || (!loggedUser.isInTeam && !loggedUser.login === 'admin')"> is a team member
                 </label>
             </div>
         </div>

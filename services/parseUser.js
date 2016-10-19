@@ -22,7 +22,7 @@ module.exports = (data, permissions) => {
     data.canHandleUsers = (permissions.canHandleUsers && data.canHandleUsers) || false;
     data.canHandleReviews = (permissions.canHandleReviews && data.canHandleReviews) || false;
     data.canHandlePageData = (permissions.canHandlePageData && data.canHandlePageData) || false;
-    data.isInTeam = (permissions.isInTeam && data.isInTeam) || false;
+    data.isInTeam = ((permissions.isInTeam || permissions.login === 'admin') && data.isInTeam) || false;
 
     delete data._id;
     return data;

@@ -4,8 +4,8 @@
             <div class="about-team-members-wrapper">
                 <div class="about-team-members-item" ng-repeat="member in teamMembers track by $index">
                     <div class="about-team-members-item-picture" style="background-image: url('{{member.picture}}')"></div>
-                    <h4 class="about-team-members-item-header" translate="{{'team.user' + member._id + '.name'}}"></h4>
-                    <h5 class="about-team-members-item-position" translate="{{'team.user' + member._id + '.position'}}"></h5>
+                    <h4 class="about-team-members-item-header" translate="{{'team.user' + member._id + '.displayName'}}"></h4>
+                    <h5 class="about-team-members-item-position" translate="{{'team.user' + member._id + '.displayPosition'}}"></h5>
                 </div>
             </div>
             <div class="about-team-members-button-wrapper">

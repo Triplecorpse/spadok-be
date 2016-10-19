@@ -25,7 +25,7 @@
 
             $scope.$watch(() => $scope.init, (newVal) => {
                 if(newVal) {
-                    $scope.activeUser = newVal;
+                    $scope.activeUser = angular.copy(newVal);
                 } else {
                     $scope.activeUser = {
                         name: {},

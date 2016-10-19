@@ -36,9 +36,10 @@ var routerLoginController = (app) => {
                 canHandleProjects: req.session.canHandleProjects,
                 canHandleUsers: req.session.canHandleUsers,
                 canHandleReviews: req.session.canHandleReviews,
-                canHandlePageDat: req.session.canHandlePageData,
+                canHandlePageData: req.session.canHandlePageData,
                 isInTeam: req.session.isInTeam,
-                userName: req.session.userName
+                userName: req.session.userName,
+                login: req.session.login
             }
             req.session.touch();
             res.status(200).json(permissions);
@@ -82,6 +83,7 @@ var routerLoginController = (app) => {
                 req.session.canHandleReviews = user.canHandleReviews;
                 req.session.canHandlePageData = user.canHandlePageData;
                 req.session.userName = user.name && user.name.ru;
+                req.session.login = user.login
 
                 res.status(200).json(user);
             } else {
