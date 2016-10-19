@@ -7,9 +7,7 @@ var routerController = (app) => {
 
     app.get('/adminium/getall', (req, res) => {
         if (req.session.isLoggedIn) {
-            res.set({
-                'Access-Control-Allow-Origin:': '*'
-            })
+            res.set('Access-Control-Allow-Origin:', '*')
             Promise.all([dbGetters.getPage(),
                 dbGetters.getPartners(),
                 dbGetters.getProjects(),
@@ -32,7 +30,6 @@ var routerController = (app) => {
             dbGetters.getReviews({isPublished: true}),
             dbGetters.getUsers({isInTeam: true})])
             .then((response) => {
-                res.header('Cache-Control', 'private, no-cache, no-store, must-revalidate');
                 res.json(response)
             }, (reason) => {
                 res.json(reason)
