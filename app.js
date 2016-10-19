@@ -14,6 +14,9 @@ const routerImagesController = require('./routerImagesController.js');
 const routerReviewController = require('./routerReviewController.js');
 const routerPartnerController = require('./routerPartnerController.js');
 const mongoConnectUrl = env.OPENSHIFT_MONGODB_DB_URL || env.MONGODB_URI || local
+
+console.log(mongoConnectUrl);
+
 mongoose.connect(mongoConnectUrl);
 
 app.use(bodyParser.json());
