@@ -6,7 +6,10 @@ var routerController = (app) => {
     const path = require('path');
 
     app.get('/adminium/getall', (req, res) => {
-        if(req.session.isLoggedIn){
+        if (req.session.isLoggedIn) {
+            res.set({
+                'Access-Control-Allow-Origin:': '*'
+            })
             Promise.all([dbGetters.getPage(),
                 dbGetters.getPartners(),
                 dbGetters.getProjects(),

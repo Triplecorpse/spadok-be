@@ -22,7 +22,7 @@ var paths = {
         './bower_components/angular-socialshare/dist/angular-socialshare.min.js',
         './bower_components/angular-modal-service/dst/angular-modal-service.min.js',
         './src/js/bootstrap.min.js',
-        './src/index.js', './src/config.js', './src/states/**/*.js', './src/filters/**/*.js', './src/blocks/**/*.js', './src/services/**/*.js'],
+        './src/index.js', './src/translations.js', './src/states/**/*.js', './src/filters/**/*.js', './src/blocks/**/*.js', './src/services/**/*.js'],
     styles: ['./src/css/bootstrap.css',
         './src/css/swiper.css',
         './src/css/general.scss', './src/css/variablse.scss', './src/css/mixins.scss', './src/states/**/*.scss', './src/blocks/**/*.scss'],
