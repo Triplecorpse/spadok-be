@@ -13,8 +13,8 @@ const routerProjectController = require('./routerProjectController.js');
 const routerImagesController = require('./routerImagesController.js');
 const routerReviewController = require('./routerReviewController.js');
 const routerPartnerController = require('./routerPartnerController.js');
-
-mongoose.connect(env.OPENSHIFT_MONGODB_DB_URL || env.MONGODB_URI || local);
+const mongoConnectUrl = env.OPENSHIFT_MONGODB_DB_URL || env.MONGODB_URI || local
+mongoose.connect(mongoConnectUrl);
 
 app.use(bodyParser.json());
 app.use(cookieParser());
