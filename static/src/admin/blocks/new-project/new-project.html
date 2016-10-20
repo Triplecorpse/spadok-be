@@ -1,58 +1,42 @@
 <form name="form" form-type="{{view}}" ng-submit="submit(form, $event)" autocomplete="off" ng-if="!isLoading">
     <div class="row">
-        <div class="col-md-6">
-            <h3>Russian</h3>
-            <div class="form-group">
-                <label for="project-name-rus">Name</label>
-                <input type="text" class="form-control" id="project-name-rus" placeholder="Name" ng-model="activeProject.name.ru" ng-blur="translate(activeProject.rusName, 'engName')" required>
-            </div>
-            <div class="form-group">
-                <label for="project-short-description-rus">Short Description (max 300 sym)</label>
-                <textarea class="form-control" rows="2" id="project-short-description-rus" placeholder="Short Description" ng-model="activeProject.shortDescription.ru" maxlength="300" ng-blur="translate(activeProject.rusShortDescription, 'engShortDescription')"></textarea>
-            </div>
-            <div class="form-group">
-                <label for="project-description-rus">Description</label>
-                <textarea class="form-control" rows="5" id="project-description-rus" placeholder="Description" ng-model="activeProject.longDescription.ru" ng-blur="translate(activeProject.rusDescription, 'engDescription')"></textarea>
-            </div>
-        </div>
-        <div class="col-md-6">
-            <h3>English</h3>
-            <div class="form-group">
-                <label for="project-name-eng">Name</label>
-                <input type="text" class="form-control" id="project-name-eng" placeholder="Name" ng-model="activeProject.name.en" ng-disabled="isTranslationQuerying">
-            </div>
-            <div class="form-group">
-                <label for="project-short-description-eng">Short Description (max 300 sym)</label>
-                <textarea class="form-control" rows="2" id="project-short-description-eng" placeholder="Short Description" ng-model="activeProject.shortDescription.en" maxlength="300" ng-disabled="isTranslationQuerying"></textarea>
-            </div>
-            <div class="form-group">
-                <label for="project-description-eng">Description</label>
-                <textarea class="form-control" rows="5" id="project-description-eng" placeholder="Description" ng-model="activeProject.longDescription.en" ng-disabled="isTranslationQuerying"></textarea>
-            </div>
-        </div>
-    </div>
-    <div class="row">
         <div class="col-md-12">
-            <p>Translated with <a href="https://translate.yandex.com/">Yandex Translate</a></p>
+            <spda-language-select language="activeLanguage" translation-data="activeProject", lang-keys="langKeys"></spda-language-select>
+        </div>
+        <div class="col-md-12">
+            <h3>{{activeLanguage.name}}</h3>
+            <div class="form-group">
+                <label for="project-name-rus">Название</label>
+                <input type="text" class="form-control" id="project-name-rus" placeholder="Name" ng-model="activeProject.name[activeLanguage.code]" required>
+            </div>
+            <div class="form-group">
+                <label for="project-short-description-rus">Краткое описание (до 300 символов)</label>
+                <textarea class="form-control" rows="2" id="project-short-description-rus" placeholder="Short Description" ng-model="activeProject.shortDescription[activeLanguage.code]" maxlength="300"></textarea>
+            </div>
+            <div class="form-group">
+                <label for="project-description-rus">Описание</label>
+                <textarea class="form-control" rows="5" id="project-description-rus" placeholder="Description" ng-model="activeProject.longDescription[activeLanguage.code]"></textarea>
+            </div>
         </div>
     </div>
+
     <div class="row top-line">
         <div class="col-md-6">
             <div class="form-group">
-                <label for="video-url">Youtube Video ID</label>
+                <label for="video-url">ID видео на Youtube</label>
                 <input type="text" class="form-control" id="video-url" placeholder="Video ID" ng-model="activeProject.videoUrl">
             </div>
         </div>
         <div class="col-md-6">
             <div class="form-group">
-                <label for="video-name">Video Name</label>
+                <label for="video-name">Название видео</label>
                 <input type="text" class="form-control" id="video-name" placeholder="Name" ng-model="activeProject.videoName">
             </div>
         </div>
         <div class="col-md-12">
             <div class="checkbox">
                 <label>
-                    <input type="checkbox" ng-model="activeProject.isVideoOnMain"> Show video on main page
+                    <input type="checkbox" ng-model="activeProject.isVideoOnMain"> Показывать на главной
                 </label>
             </div>
         </div>
@@ -60,24 +44,24 @@
     <div class="row top-line">
         <div class="col-md-6">
             <div class="form-group">
-                <label for="project-picture-select">Upload main picture...</label>
+                <label for="project-picture-select">Загрузите изображение проекта...</label>
                 <input type="file" id="project-picture-select" name="images" nv-file-select uploader="uploaderSingle" option="uso">
                 <p class="help-block">Upload a picture to be considered as main for this project. It would be good to be dark and width 2 times bigger than height. Uploading has bigger priority than entering URL.</p>
             </div>
             <div class="form-group">
-                <label for="project-picture-url">...or enter its url</label>
+                <label for="project-picture-url">...или введите его url</label>
                 <input type="text" class="form-control" id="project-picture-url" placeholder="Picture URL" ng-model="activeProject.picture">
             </div>
             <img ng-src="{{activeProject.picture}}" class="img-responsive project-img-preview" alt="main picture" ng-if="activeProject.picture">
         </div>
         <div class="col-md-6">
             <div class="form-group">
-                <label for="project-pictures-select">Upload pictures for gallery...</label>
+                <label for="project-pictures-select">Загрузите изображения для галереи...</label>
                 <input type="file" id="project-pictures-select" name="images" multiple nv-file-select uploader="uploaderBatch">
                 <p class="help-block">Upload picture gallery for this project. <strong>{{filesStatus}} Files added.</strong> Don't believe native display.</p>
             </div>
             <div class="form-group">
-                <label>...or enter its urls</label>
+                <label>...или введите их url-ы</label>
                 <input type="text" class="form-control" placeholder="Gallery Picture URL" ng-repeat="picture in activeProject.pictures track by $index" ng-model="picture" ng-change="updateSinglePicture($index, picture, this)" ng-focus="showSinglePicture($index)">
             </div>
             <img ng-src="{{activeGalleryPicture}}" class="img-responsive project-img-preview" alt="gallery picture" ng-if="activeGalleryPicture">
@@ -87,15 +71,15 @@
         <div class="col-md-12">
             <div class="form-group">
                 <div class="dropdown">
-                    <label for="parent-project">Parent Project </label>
+                    <label for="parent-project">Данный проект есть подпроектом </label>
                     <button class="btn btn-default dropdown-toggle" type="button" id="parent-project" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-                        {{parentProject.rusName || parentProject.engName || 'None'}}
+                        {{parentProject.name.ru || 'Это самостоятельный проект'}}
                         <span class="caret"></span>
                     </button>
                     <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
-                        <li><a href="#" ng-click="setParentProject()">None</a></li>
+                        <li><a href="#" ng-click="setParentProject()">Это самостоятельный проект</a></li>
                         <li role="separator" class="divider"></li>
-                        <li ng-repeat="project in projects" ng-click="setParentProject(project._id)"><a href="#">{{project.rusName || project.engName || 'No Name'}}</a></li>
+                        <li ng-repeat="project in projects" ng-click="setParentProject(project._id)"><a href="#">{{project.name.ru || project.name.ru || 'Без имени'}}</a></li>
                     </ul>
                 </div>
             </div>
@@ -104,12 +88,12 @@
     <div class="row top-line">
         <div class="col-md-4">
             <div class="form-group">
-                <label for="people">People</label>
+                <label for="people">Волонтёров</label>
                 <input type="number" id="people" class="form-control" placeholder="People" ng-model="activeProject.people">
             </div>
         </div>
         <div class="col-md-4">
-            <label for="money">Money collected / total needed (UAH)</label>
+            <label for="money">Собрано денег / необходимо (UAH)</label>
             <div class="col-md-6 no-padding">
                 <div class="form-group">
                     <input type="number" id="money" class="form-control" placeholder="Money Collected" ng-model="activeProject.money">
@@ -123,7 +107,7 @@
         </div>
         <div class="col-md-4">
             <div class="form-group">
-                <label for="date">Date Starting</label>
+                <label for="date">Дата проекта</label>
                 <input type="date" id="date" class="form-control" placeholder="Date Starting" ng-model="activeProject.date">
             </div>
         </div>
@@ -132,12 +116,7 @@
         <div class="col-md-12">
             <div class="checkbox">
                 <label>
-                    <input type="checkbox" ng-model="activeProject.isPublished"> Publish project
-                </label>
-            </div>
-            <div class="checkbox">
-                <label>
-                    <input type="checkbox" ng-model="activeProject.isCompleted"> Make project completed
+                    <input type="checkbox" ng-model="activeProject.isPublished"> Опубликовать проект
                 </label>
             </div>
         </div>
@@ -146,16 +125,16 @@
         <div class="col-md-4">
             <div ng-switch="view">
                 <div ng-switch-when="new">
-                    <button type="submit" class="btn btn-default project-add" value="Add" ng-disabled="isQueriing">Add</button>
+                    <button type="submit" class="btn btn-default project-add" value="Add" ng-disabled="isQueriing">Добавить</button>
                 </div>
                 <div ng-switch-when="edit">
                     <div class="checkbox">
                         <label>
-                            <input type="checkbox" ng-model="canDelete" ng-change="change()"> Really delete project
+                            <input type="checkbox" ng-model="canDelete" ng-change="change()"> Действительно удалить этот проект
                         </label>
                     </div>
-                    <button type="button" class="btn btn-danger" value="Delete" ng-disabled="!canDelete" ng-click="delete()">Delete</button>
-                    <button type="submit" class="btn btn-default" value="Update" ng-disabled="isQueriing" ng-click="update()">Update</button>
+                    <button type="button" class="btn btn-danger" value="Delete" ng-disabled="!canDelete" ng-click="delete()">Удалить</button>
+                    <button type="submit" class="btn btn-default" value="Update" ng-disabled="isQueriing" ng-click="update()">Обновить</button>
                 </div>
             </div>
         </div>

@@ -1,34 +1,26 @@
 <form ng-submit="setPage()">
     <div class="col-md-12 top-line">
-        <button type="submit" class="btn btn-success project-add" ng-disabled="isQueriing">Save</button>
         <div class="row">
-            <div class="col-md-12">
-                <p>Translated with <a href="https://translate.yandex.com/">Yandex Translate</a></p>
+            <div class="col-md-10">
+                <button type="submit" class="btn btn-success project-add" ng-disabled="isQueriing">Спаси и сохрани</button>
+                <spda-language-select language="activeLanguage" translation-data="page" , lang-keys="langKeys"></spda-language-select>    
             </div>
         </div>
         <div class="row">
             <div class="col-md-2">
                 <h2>About</h2>
             </div>
-            <div class="col-md-5">
-                <h3>Russian</h3>
-            </div>
-            <div class="col-md-5">
-                <h3>English</h3>
+            <div class="col-md-10">
+                <h3>{{activeLanguage.name}}</h3>
             </div>
         </div>
         <div class="row top-line">
             <div class="col-md-2">
                 <h3>Head</h3>
             </div>
-            <div class="col-md-5">
+            <div class="col-md-10">
                 <div class="form-group">
-                    <textarea class="form-control" rows="5" id="page-about-head-rus" placeholder="Russian Head" ng-model="page.head.ru" ng-blur="translate(page.head.ru, 'engHead')"></textarea>
-                </div>
-            </div>
-            <div class="col-md-5">
-                <div class="form-group">
-                    <textarea class="form-control" rows="5" id="page-about-head-eng" placeholder="English Head" ng-model="page.head.en" ng-disabled="isTranslationQuerying"></textarea>
+                    <textarea class="form-control" rows="5" id="page-about-head-rus" placeholder="Head" ng-model="page.head[activeLanguage.code]"></textarea>
                 </div>
             </div>
         </div>
@@ -36,14 +28,9 @@
             <div class="col-md-2">
                 <h3>Our community</h3>
             </div>
-            <div class="col-md-5">
+            <div class="col-md-10">
                 <div class="form-group">
-                    <textarea class="form-control" rows="5" id="page-about-head-our-community-rus" placeholder="Russian Community" ng-model="page.community.ru" ng-blur="translate(page.community.ru, 'engCommunity')" ></textarea>
-                </div>
-            </div>
-            <div class="col-md-5">
-                <div class="form-group">
-                    <textarea class="form-control" rows="5" id="page-about-head-our-community-eng" placeholder="English Community" ng-model="page.community.en" ng-disabled="isTranslationQuerying"></textarea>
+                    <textarea class="form-control" rows="5" id="page-about-head-our-community-rus" placeholder="Community" ng-model="page.community[activeLanguage.code]"></textarea>
                 </div>
             </div>
         </div>
@@ -51,16 +38,10 @@
             <div class="col-md-2">
                 <h3>Citation and Author</h3>
             </div>
-            <div class="col-md-5">
+            <div class="col-md-10">
                 <div class="form-group">
-                    <textarea class="form-control" rows="5" placeholder="Russian Citation" ng-model="page.citation.ru" ng-blur="translate(page.itation.ru, 'engCitation')" ></textarea>
-                    <input type="text" class="form-control" placeholder="Russian Author" ng-model="page.author.ru" ng-blur="translate(page.rusAuthor, 'engAuthor')" >
-                </div>
-            </div>
-            <div class="col-md-5">
-                <div class="form-group">
-                    <textarea class="form-control" rows="5" placeholder="English Citation" ng-model="page.citation.en" ng-disabled="isTranslationQuerying"></textarea>
-                    <input type="text" class="form-control" placeholder="English Author" ng-model="page.author.en" ng-disabled="isTranslationQuerying">
+                    <textarea class="form-control" rows="5" placeholder="Citation" ng-model="page.citation[activeLanguage.code]"></textarea>
+                    <input type="text" class="form-control" placeholder="Author" ng-model="page.author[activeLanguage.code]">
                 </div>
             </div>
         </div>
@@ -68,14 +49,9 @@
             <div class="col-md-2">
                 <h3>Our Mission</h3>
             </div>
-            <div class="col-md-5">
+            <div class="col-md-10">
                 <div class="form-group">
-                    <textarea class="form-control" rows="5" placeholder="Russian Mission" ng-model="page.mission.ru" ng-blur="translate(page.rusMission, 'engMission')"></textarea>
-                </div>
-            </div>
-            <div class="col-md-5">
-                <div class="form-group">
-                    <textarea class="form-control" rows="5" placeholder="English Mission" ng-model="page.mission.en" ng-disabled="isTranslationQuerying"></textarea>
+                    <textarea class="form-control" rows="5" placeholder="Mission" ng-model="page.mission[activeLanguage.code]"></textarea>
                 </div>
             </div>
         </div>
@@ -84,14 +60,9 @@
                 <h3>Stats.</h3>
                 <p>Can use &lt;strong&gt; tag</p>
             </div>
-            <div class="col-md-5">
+            <div class="col-md-10">
                 <div class="form-group">
-                    <textarea class="form-control" rows="5" placeholder="Russian Stats" ng-model="page.stats.ru" ng-blur="translate(page.rusStats, 'engStats')"></textarea>
-                </div>
-            </div>
-            <div class="col-md-5">
-                <div class="form-group">
-                    <textarea class="form-control" rows="5" placeholder="English Stats" ng-model="page.stats.en" ng-disabled="isTranslationQuerying"></textarea>
+                    <textarea class="form-control" rows="5" placeholder="Stats" ng-model="page.stats[activeLanguage.code]"></textarea>
                 </div>
             </div>
         </div>
@@ -99,14 +70,9 @@
             <div class="col-md-2">
                 <h3>Our Team</h3>
             </div>
-            <div class="col-md-5">
+            <div class="col-md-10">
                 <div class="form-group">
-                    <textarea class="form-control" rows="5" placeholder="Russian Team Description" ng-model="page.team.ru" ng-blur="translate(page.rusTeam, 'engTeam')"></textarea>
-                </div>
-            </div>
-            <div class="col-md-5">
-                <div class="form-group">
-                    <textarea class="form-control" rows="5" placeholder="English Team Description" ng-model="page.team.en" ng-disabled="isTranslationQuerying"></textarea>
+                    <textarea class="form-control" rows="5" placeholder="Team Description" ng-model="page.team[activeLanguage.code]"></textarea>
                 </div>
             </div>
         </div>
@@ -114,7 +80,7 @@
             <div class="col-md-2">
                 <h3>Video ID</h3>
             </div>
-            <div class="col-md-5">
+            <div class="col-md-10">
                 <div class="form-group">
                     <input type="text" class="form-control" id="page-about-video-id" placeholder="Video ID" ng-model="page.videoID">
                 </div>
@@ -124,43 +90,26 @@
             <div class="col-md-2">
                 <h2>Contacts</h2>
             </div>
-            <div class="col-md-5">
-                <h3>Russian</h3>
-            </div>
-            <div class="col-md-5">
-                <h3>English</h3>
+            <div class="col-md-10">
+                <h3>{{activeLanguage.name}}</h3>
             </div>
         </div>
         <div class="row top-line">
             <div class="col-md-2">
                 <h3>Address</h3>
             </div>
-            <div class="col-md-5">
+            <div class="col-md-10">
                 <div class="form-group">
                     <label for="page-contacts-address-1-rus">Address Line</label>
-                    <input type="text" class="form-control" id="page-contacts-address-1-rus" placeholder="Address Line" ng-model="page.address.ru" ng-blur="translate(page.rusAddress, 'engAddress')">
+                    <input type="text" class="form-control" id="page-contacts-address-1-rus" placeholder="Address Line" ng-model="page.address[activeLanguage.code]">
                 </div>
                 <div class="form-group">
                     <label for="page-contacts-city-rus">City/Town</label>
-                    <input type="text" class="form-control" id="page-contacts-city-rus" placeholder="City" ng-model="page.city.ru" ng-blur="translate(page.rusCity, 'engCity')">
+                    <input type="text" class="form-control" id="page-contacts-city-rus" placeholder="City" ng-model="page.city[activeLanguage.code]">
                 </div>
                 <div class="form-group">
                     <label for="page-contacts-region-rus">Region and Postal Code</label>
-                    <input type="text" class="form-control" id="page-contacts-region-rus" placeholder="Region" ng-model="page.region.ru" ng-blur="translate(page.rusRegion, 'engRegion')">
-                </div>
-            </div>
-            <div class="col-md-5">
-                <div class="form-group">
-                    <label for="page-contacts-address-1-eng">Address Line</label>
-                    <input type="text" class="form-control" id="page-contacts-address-1-eng" placeholder="Address Line" ng-model="page.address.en" ng-disabled="isTranslationQuerying">
-                </div>
-                <div class="form-group">
-                    <label for="page-contacts-city-eng">City/Town</label>
-                    <input type="text" class="form-control" id="page-contacts-city-eng" placeholder="City" ng-model="page.city.en" ng-disabled="isTranslationQuerying">
-                </div>
-                <div class="form-group">
-                    <label for="page-contacts-region-eng">Region and Postal Code</label>
-                    <input type="text" class="form-control" id="page-contacts-region-eng" placeholder="Region" ng-model="page.region.en" ng-disabled="isTranslationQuerying">
+                    <input type="text" class="form-control" id="page-contacts-region-rus" placeholder="Region" ng-model="page.region[activeLanguage.code]">
                 </div>
             </div>
         </div>
@@ -178,7 +127,7 @@
             <div class="col-md-2">
                 <h3>Email</h3>
             </div>
-            <div class="col-md-5">
+            <div class="col-md-10">
                 <div class="form-group">
                     <input type="email" class="form-control" id="page-contacts-email-rus" placeholder="Email" ng-model="page.email">
                 </div>
@@ -208,7 +157,7 @@
             <div class="col-md-2">
                 <h3>Instagram</h3>
             </div>
-            <div class="col-md-5">
+            <div class="col-md-10">
                 <div class="form-group">
                     <input type="text" class="form-control" id="page-contacts-instagram-rus" placeholder="Instagram" ng-model="page.instagram">
                 </div>
@@ -225,7 +174,7 @@
                 <h3>UAH/EUR rate</h3>
                 <p>1 EUR = xx.xx UAH</p>
             </div>
-            <div class="col-md-5">
+            <div class="col-md-10">
                 <div class="form-group">
                     <input type="number" class="form-control" id="page-setup-uah-usd" placeholder="UAH-EUR" ng-model="page.currencyRate">
                 </div>

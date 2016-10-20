@@ -7,7 +7,6 @@ var routerController = (app) => {
 
     app.get('/adminium/getall', (req, res) => {
         if (req.session.isLoggedIn) {
-            res.set('Access-Control-Allow-Origin:', '*')
             Promise.all([dbGetters.getPage(),
                 dbGetters.getPartners(),
                 dbGetters.getProjects(),
@@ -21,19 +20,6 @@ var routerController = (app) => {
         } else {
             res.sendStatus(401)
         }
-    });
-
-    app.get('/api/getall', (req, res) => {
-        Promise.all([dbGetters.getPage(),
-            dbGetters.getPartners({isPublished: true}),
-            dbGetters.getProjects({isPublished: true}),
-            dbGetters.getReviews({isPublished: true}),
-            dbGetters.getUsers({isInTeam: true})])
-            .then((response) => {
-                res.json(response)
-            }, (reason) => {
-                res.json(reason)
-            });
     });
 
     app.put('/adminium/setpage', (req, res) => {
@@ -80,13 +66,14 @@ var routerController = (app) => {
         res.end('1');
     });
 
-    app.get('/*', function (req, res) {
-        req.session.isApiAvailable = true;
-        fs.readFile('./static/dist/index.html', 'UTF8', (err, data) => {
-            if (err) throw err;
-            res.send(data);
-        })
-    });
+    //app.get('/*', function (req, res) {
+    //    req.session.isApiAvailable = true;
+    //    res
+    //    fs.readFile('./static/dist/index.html', 'UTF8', (err, data) => {
+    //        if (err) throw err;
+    //        res.send(data);
+    //    })
+    //});
 };
 
 module.exports = routerController;

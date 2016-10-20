@@ -1,7 +1,7 @@
 (function() {
-    angular.module('app').directive('spdaUser', ['$http', 'viewService', '$interval', '$timeout', 'dataService', directive]);
+    angular.module('app').directive('spdaUser', ['$http', 'viewService', '$interval', '$timeout', 'dataService', 'translationService', directive]);
 
-    function directive ($http, viewService, $interval, $timeout, dataService) {
+    function directive ($http, viewService, $interval, $timeout, dataService, translationService) {
 
         return {
             restrict: "E",
@@ -19,6 +19,10 @@
             $scope.activeUser = {};
             $scope.loggedUser = dataService.currentUser;
 
+            $scope.languages = translationService.languages;
+            $scope.activeLanguage = $scope.languages[0];
+            $scope.langKeys = ['name', 'position'];
+
             $scope.uploaderAvatar = new FileUploader({
                 removeAfterUpload: true
             });
@@ -34,19 +38,14 @@
                 }
             }, true);
 
-            //translate
-            $scope.translate = (source, destination) => {
-                if(!$scope.activeProject[destination]) {
-                    $scope.isTranslationQuerying = true;
-                    let translateKey = 'trnsl.1.1.20160717T115748Z.066b542dcedc588c.a7897a46c5abbcd39336bf34ae21a6ca70534fdd';
-                    let translationQuery = `https://translate.yandex.net/api/v1.5/tr.json/translate?key=${translateKey}&lang=ru-en&text=${source}`;
-                    $http.get(translationQuery)
-                        .then((response) => {
-                            $scope.activeProject[destination] = response.data.text[0];
-                            $scope.isTranslationQuerying = false;
-                        });
-                }
-            };
+            // onClick handler for language buttons
+            $scope.setLanguage = (code, event) => {
+                $scope.activeLanguage = _.find($scope.languages, (language) => {
+                    return language.code === code;
+                });
+                $('.lng-select').removeClass('active');
+                event.currentTarget.classList.add('active');
+            }
 
             $scope.submit = (form, event) => {
                 $scope.isQueriing = true;
