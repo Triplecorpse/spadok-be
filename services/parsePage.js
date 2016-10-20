@@ -8,8 +8,8 @@ module.exports = (data) => {
                 }
 
                 if (typeof data[key][i] === 'string') {
-                    console.log(data[key][i])
-                    data[key][i] = data[key][i].replace(/(>)/g, '&gt;').replace(/(<)/g, '&lt;');
+                    let asd = data[key][i].replace(/(>)/g, '&gt;').replace(/(<)/g, '&lt;');
+                    data[key][i] = asd;
                 }
 
                 if (key === 'stats') {
