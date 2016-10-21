@@ -3,12 +3,6 @@ var ProjectSchema = new mongoose.Schema({
     name: Object,
     shortDescription: Object,
     longDescription: Object,
-    //rusName: String,
-    //rusShortDescription: String,
-    //rusDescription: String,
-    //engName: String,
-    //engShortDescription: String,
-    //engDescription: String,
     picture: String,
     pictures: Array,
     videoUrl: String,
@@ -20,7 +14,8 @@ var ProjectSchema = new mongoose.Schema({
     isPublished: Boolean,
     isCompleted: Boolean,
     isVideoOnMain: Boolean,
-    parentProjectId: String
+    parentProjectId: String,
+    ownerId: String
 });
 
 module.exports = mongoose.model('Project', ProjectSchema);

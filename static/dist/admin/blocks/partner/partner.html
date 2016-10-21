@@ -14,12 +14,12 @@
                 </div>
                 <div class="media-body">
                     <div class="form-group">
-                        <label for="partner-picture">Upload Logo</label>
+                        <label for="partner-picture">Загрузите логотип...</label>
                         <input type="file" id="partner-picture" name="images" nv-file-select uploader="uploaderLogo">
                         <p class="help-block">Upload a picture to be considered as logo. Picture MUST be square and have white matte</p>
                     </div>
                     <div class="form-group">
-                        <label for="project-picture-url">...or enter its url</label>
+                        <label for="project-picture-url">...или введите его url</label>
                         <input type="text" class="form-control" id="project-picture-url" placeholder="Picture URL" ng-model="activePartner.picture">
                     </div>
                 </div>
@@ -30,7 +30,7 @@
     <div class="row">
         <div class="col-md-12">
             <div class="form-group">
-                <label for="partner-name">Company Name</label>
+                <label for="partner-name">Название компании</label>
                 <input type="text" class="form-control" id="partner-name" placeholder="Name" ng-model="activePartner.name" autocomplete="off">
             </div>
         </div>
@@ -39,7 +39,7 @@
         <div class="col-md-12">
             <div class="form-group">
                 <div class="dropdown">
-                    <label for="parent-project">Project selector </label>
+                    <label for="parent-project">Сформировать ссылку на проект </label>
                     <button class="btn btn-default dropdown-toggle" type="button" id="parent-project" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
                         Select a project
                         <span class="caret"></span>
@@ -50,33 +50,24 @@
                 </div>
             </div>
             <div class="form-group">
-                <label for="project-name-rus">Link</label>
+                <label for="project-name-rus">Ссылка</label>
                 <input type="text" class="form-control" id="project-name-rus" placeholder="Name" ng-model="link">
             </div>
         </div>
     </div>
     <div class="row top-line">
-        <div class="col-md-6">
-            <h3>Russian</h3>
+        <div class="col-md-12">
+            <h3>{{activeLanguage.name}}</h3>
             <div class="form-group">
-                <label for="user-name-rus">Achievments</label>
-            </div>
-        </div>
-        <div class="col-md-6">
-            <h3>English</h3>
-            <div class="form-group">
-                <label for="user-name-eng">Achievments</label>
+                <label for="user-name-rus">Достижения</label>
             </div>
         </div>
     </div>
     <div class="row">
         <div class="col-md-12">
             <div class="form-group" ng-repeat="achievement in activePartner.achievements track by $index">
-                <div class="col-md-6">
+                <div class="col-md-12">
                     <input type="text" class="form-control" placeholder="Achievement" ng-model="achievement[activeLanguage.code]" ng-change="updateAchievement($index, achievement[activeLanguage.code], 'ru')" ng-blur="translate(achievement, $index)">
-                </div>
-                <div class="col-md-6">
-                    <input type="text" class="form-control" placeholder="Achievement" ng-model="achievement[activeLanguage.code]" ng-change="updateAchievement($index, achievement[activeLanguage.code], 'en')" ng-disabled="isTranslationQuerying">
                 </div>
             </div>
         </div>
@@ -86,7 +77,7 @@
         <div class="col-md-6">
             <div class="checkbox">
                 <label>
-                    <input type="checkbox" ng-model="activePartner.isPublished"> is published
+                    <input type="checkbox" ng-model="activePartner.isPublished"> опубликовать партнёра
                 </label>
             </div>
         </div>
@@ -100,11 +91,11 @@
                 <div ng-switch-when="edit">
                     <div class="checkbox">
                         <label>
-                            <input type="checkbox" ng-model="canDelete"> Really delete partner
+                            <input type="checkbox" ng-model="canDelete"> Действительно удалить партнёра
                         </label>
                     </div>
-                    <button type="button" class="btn btn-danger" value="Delete" ng-disabled="!canDelete" ng-click="delete()">Delete</button>
-                    <button type="submit" class="btn btn-default" value="Update" ng-disabled="isQueriing">Update</button>
+                    <button type="button" class="btn btn-danger" value="Delete" ng-disabled="!canDelete" ng-click="delete()">Удалить</button>
+                    <button type="submit" class="btn btn-default" value="Update" ng-disabled="isQueriing">Обновить</button>
                 </div>
             </div>
         </div>

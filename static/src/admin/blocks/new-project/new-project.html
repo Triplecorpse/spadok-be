@@ -86,6 +86,24 @@
         </div>
     </div>
     <div class="row top-line">
+        <div class="col-md-12">
+            <div class="form-group">
+                <div class="dropdown">
+                    <label for="parent-project">Данный проект есть инициативой </label>
+                    <button class="btn btn-default dropdown-toggle" type="button" id="parent-project" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                        {{owner.login || 'Нет владельца'}}
+                        <span class="caret"></span>
+                    </button>
+                    <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+                        <li><a href="#" ng-click="setOwner()">Нет владельца</a></li>
+                        <li role="separator" class="divider"></li>
+                        <li ng-repeat="owner in ownerList" ng-click="setOwner(owner._id)"><a href="#">{{owner.login}} ({{owner.name.ru || 'Без имени'}})</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row top-line">
         <div class="col-md-4">
             <div class="form-group">
                 <label for="people">Волонтёров</label>

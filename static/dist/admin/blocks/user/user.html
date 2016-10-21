@@ -5,36 +5,19 @@
         </div>
     </div>
     <div class="row">
-        <div class="col-md-12">
-            <h3>{{activeLanguage.name}}</h3>
-            <div class="form-group">
-                <label for="user-name-rus">Display Name</label>
-                <input type="text" class="form-control" id="user-name-rus" placeholder="Name" ng-model="activeUser.name[activeLanguage.code]" autocomplete="off" ng-disabled="(activeUser.name === 'admin') && (view === 'edit')">
-            </div>
-            <div class="form-group">
-                <label for="user-position-rus">Position</label>
-                <input type="text" class="form-control" id="user-position-rus" placeholder="Position" ng-model="activeUser.position[activeLanguage.code]" autocomplete="off" ng-disabled="(activeUser.name === 'admin') && (view === 'edit')">
-            </div>
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-md-12">
-            <p>Translated with <a href="https://translate.yandex.com/">Yandex Translate</a></p>
-        </div>
-    </div>
-    <div class="row">
+        <h3>{{activeLanguage.name}} (для отображения на страницах сайта)</h3>
         <div class="col-md-12">
             <div class="form-group">
-                <label for="user-login">Login</label>
+                <label for="user-login">Логин</label>
                 <input type="text" class="form-control" id="user-login" placeholder="Login" ng-model="activeUser.login" autocomplete="off" ng-disabled="view === 'edit'" required>
             </div>
             <div class="form-group">
                 <label for="user-email">Email</label>
-                <input type="email" class="form-control" id="user-email" placeholder="Email" ng-model="activeUser.email" autocomplete="off">
+                <input type="email" class="form-control" id="user-email" placeholder="Email" ng-model="activeUser.email" autocomplete="off" ng-disabled="(activeUser.login === 'admin') && (loggedUser.login !== 'admin')">
             </div>
             <div class="form-group">
-                <label for="user-password">Password</label>
-                <input type="password" class="form-control" id="user-password" placeholder="Password" ng-model="activeUser.password" autocomplete="off" required>
+                <label for="user-password">Пароль</label>
+                <input type="password" class="form-control" id="user-password" placeholder="Password" ng-model="activeUser.password" autocomplete="off" required ng-disabled="(activeUser.login === 'admin') && (loggedUser.login !== 'admin')">
             </div>
         </div>
     </div>
@@ -50,10 +33,10 @@
                     <div class="form-group">
                         <label for="project-picture">Avatar</label>
                         <input type="file" id="project-picture" name="images" nv-file-select uploader="uploaderAvatar">
-                        <p class="help-block">Upload a picture to be considered as avatar.</p>
+                        <p class="help-block">Загрузите аватар...</p>
                     </div>
                     <div class="form-group">
-                        <label for="project-picture-url">...or enter its url</label>
+                        <label for="project-picture-url">...или введите его url</label>
                         <input type="text" class="form-control" id="project-picture-url" placeholder="Picture URL" ng-model="activeUser.picture">
                     </div>
                 </div>
@@ -62,56 +45,108 @@
         </div>
     </div>
     <div class="row">
-        <div class="col-md-4">
+        <div class="col-md-6">
             <div class="checkbox">
                 <label>
-                    <input type="checkbox" ng-model="activeUser.canHandleProjects" ng-disabled="((activeUser.login === 'admin') && (view === 'edit')) || !loggedUser.canHandleProjects"> can handle projects
+                    <input type="checkbox" ng-model="activeUser.canHandleProjects" ng-disabled="((activeUser.login === 'admin') && (view === 'edit')) || !loggedUser.canHandleProjects"> может управлять проектами
                 </label>
             </div>
         </div>
-        <div class="col-md-4">
+        <div class="col-md-6">
             <div class="checkbox">
                 <label>
-                    <input type="checkbox" ng-model="activeUser.canHandleUsers" ng-disabled="((activeUser.login === 'admin') && (view === 'edit')) || !loggedUser.canHandleUsers"> can handle users
+                    <input type="checkbox" ng-model="activeUser.canHandleUsers" ng-disabled="((activeUser.login === 'admin') && (view === 'edit')) || !loggedUser.canHandleUsers"> может управлять пользователями
                 </label>
             </div>
         </div>
-        <div class="col-md-4">
+        <div class="col-md-6">
             <div class="checkbox">
                 <label>
-                    <input type="checkbox" ng-model="activeUser.isInTeam" ng-disabled="activeUser.login === 'admin' || (!loggedUser.isInTeam && !loggedUser.login === 'admin')"> is a team member
+                    <input type="checkbox" ng-model="activeUser.canHandleReviews" ng-disabled="((activeUser.login === 'admin') && (view === 'edit')) || !loggedUser.canHandleReviews"> может модерировать отзывы
                 </label>
             </div>
         </div>
-        <div class="col-md-4">
+        <div class="col-md-6">
             <div class="checkbox">
                 <label>
-                    <input type="checkbox" ng-model="activeUser.canHandleReviews" ng-disabled="((activeUser.login === 'admin') && (view === 'edit')) || !loggedUser.canHandleReviews"> can handle reviews
-                </label>
-            </div>
-        </div>
-        <div class="col-md-4">
-            <div class="checkbox">
-                <label>
-                    <input type="checkbox" ng-model="activeUser.canHandlePageData" ng-disabled="((activeUser.login === 'admin') && (view === 'edit')) || !loggedUser.canHandlePageData"> can handle page data
+                    <input type="checkbox" ng-model="activeUser.canHandlePageData" ng-disabled="((activeUser.login === 'admin') && (view === 'edit')) || !loggedUser.canHandlePageData"> может изменять данные страницы
                 </label>
             </div>
         </div>
     </div>
-    <div class="row top-line>
+    <div class="row top-line">
+        <div class="col-md-12">
+            <div class="checkbox">
+                <label>
+                    <input type="checkbox" ng-model="activeUser.isInTeam" ng-disabled="activeUser.login === 'admin' || (!loggedUser.isInTeam && !loggedUser.login === 'admin')"> <strong>выводить на страницах сайта</strong>
+                </label>
+            </div>
+        </div>
+        <div class="col-md-2">
+            <label for="user-name-rus">Имя</label>
+        </div>
+        <div class="col-md-10">
+            <div class="form-group">
+                <input type="text" class="form-control" id="user-name-rus" placeholder="Name" ng-model="activeUser.name[activeLanguage.code]" autocomplete="off" ng-disabled="!activeUser.isInTeam">
+            </div>
+        </div>
+        <div class="col-md-2">
+            <label for="user-position-rus">Должность</label>
+        </div>
+        <div class="col-md-10">
+            <div class="form-group">
+                <input type="text" class="form-control" id="user-position-rus" placeholder="Position" ng-model="activeUser.position[activeLanguage.code]" autocomplete="off" ng-disabled="!activeUser.isInTeam">
+            </div>
+        </div>
+    </div>
+    <div class="row top-line">
+        <div class="col-md-2">
+            <label>Телефоны</label>
+        </div>
+        <div class="col-md-10">
+            <div class="form-group">
+                <spda-array-builder model="activeUser.contacts.phones" options="phoneArrayBuilderOptions"></spda-array-builder>
+            </div>
+        </div>
+        <div class="col-md-2">
+            <label>Email-ы</label>
+        </div>
+        <div class="col-md-10">
+            <div class="form-group">
+                <spda-array-builder model="activeUser.contacts.emails" options="emailArrayBuilderOptions"></spda-array-builder>
+            </div>
+        </div>
+        <div class="col-md-2">
+            <label>Facebook</label>
+        </div>
+        <div class="col-md-10">
+            <div class="form-group">
+                <input type="text" class="form-control" id="user-fb" placeholder="Fb" ng-model="activeUser.contacts.fb" ng-disabled="!activeUser.isInTeam">
+            </div>
+        </div>
+        <div class="col-md-2">
+            <label>Vk</label>
+        </div>
+        <div class="col-md-10">
+            <div class="form-group">
+                <input type="text" class="form-control" id="user-vk" placeholder="Vk" ng-model="activeUser.contacts.vk" ng-disabled="!activeUser.isInTeam">
+            </div>
+        </div>
+    </div>
+    <div class="row top-line">
         <div class="col-md-4">
             <div ng-switch="view">
                 <div ng-switch-when="new">
-                    <button type="submit" class="btn btn-default project-add" value="Add" ng-disabled="isQueriing">Add</button>
+                    <button type="submit" class="btn btn-default project-add" value="Add" ng-disabled="isQueriing">Добавить</button>
                 </div>
                 <div ng-switch-when="edit">
                     <div class="checkbox">
                         <label>
-                            <input type="checkbox" ng-model="canDelete" ng-disabled="(activeUser.name === 'admin') && (view === 'edit')"> Really delete user
+                            <input type="checkbox" ng-model="canDelete" ng-disabled="(activeUser.name === 'admin') && (view === 'edit')"> Действительно удалить пользователя
                         </label>
                     </div>
-                    <button type="button" class="btn btn-danger" value="Delete" ng-disabled="!canDelete" ng-click="delete()">Delete</button>
-                    <button type="submit" class="btn btn-default" value="Update" ng-disabled="isQueriing">Update</button>
+                    <button type="button" class="btn btn-danger" value="Delete" ng-disabled="!canDelete" ng-click="delete()">Удалить</button>
+                    <button type="submit" class="btn btn-default" value="Update" ng-disabled="isQueriing">Обновить</button>
                 </div>
             </div>
         </div>

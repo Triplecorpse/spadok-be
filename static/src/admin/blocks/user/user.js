@@ -23,17 +23,46 @@
             $scope.activeLanguage = $scope.languages[0];
             $scope.langKeys = ['name', 'position'];
 
+
             $scope.uploaderAvatar = new FileUploader({
                 removeAfterUpload: true
             });
 
+            $scope.$watch(() => $scope.activeUser.isInTeam, newVal => {
+                $scope.phoneArrayBuilderOptions = {
+                    isDisabled: !newVal,
+                    placeholder: 'Телефон'
+                }
+                $scope.emailArrayBuilderOptions = {
+                    isDisabled: !newVal,
+                    placeholder: 'Email'
+                }
+            })
+
+            $scope.$watch(() => $scope.activeUser.contacts, (newVal) => {
+                console.log(newVal);
+            }, true);
+
             $scope.$watch(() => $scope.init, (newVal) => {
                 if(newVal) {
                     $scope.activeUser = angular.copy(newVal);
+                    if ($scope.activeUser.contacts) {
+                        $scope.activeUser.contacts.emails = $scope.activeUser.contacts.emails || [''];
+                        $scope.activeUser.contacts.phones = $scope.activeUser.contacts.phones || [''];
+                    } else {
+                        $scope.activeUser.contacts = {
+                            phones: [''],
+                            emails: ['']
+                        };
+                    }
                 } else {
                     $scope.activeUser = {
                         name: {},
-                        position: {}
+                        position: {},
+                        contacts: {
+                            phones: [''],
+                            emails: ['']
+                        }
                     };
                 }
             }, true);
@@ -107,7 +136,7 @@
                     dataService.init();
                 }
                 action = '';
-                location.reload();
+                //location.reload();
                 return data;
             }
 

@@ -29,10 +29,14 @@
             $scope.filesStatus = 0;
             $scope.video = {};
             $scope.parentProject = { name: { ru: "None" } };
+            $scope.owner = { name: {} };
 
             $scope.$watch(() => dataService.isLoading, () => {
                 $scope.isLoading = dataService.isLoading;
                 $scope.projects = dataService.projects;
+                $scope.ownerList = _.filter(dataService.users, (user) => {
+                    return (user.login !== 'admin') && (user.isInTeam);
+                });
             });
 
             // setting file uploaders
@@ -52,6 +56,12 @@
                 });
             };
 
+            $scope.setOwner = (id) => {
+                $scope.owner = _.find($scope.ownerList, (user) => {
+                    return user._id === id;
+                });
+            };
+
             //filling fields
             $scope.$watch(() => $scope.init, (newVal) => {
                 if(newVal) {
@@ -65,6 +75,7 @@
                     }
                     $scope.activeProject.pictures.push('');
                     $scope.setParentProject(newVal.parentProjectId);
+                    $scope.setOwner(newVal.ownerId);
                 } else {
                     $scope.activeProject = {
                         pictures: [''],
@@ -111,12 +122,14 @@
 
             function add() {
                 $scope.activeProject.parentProjectId = $scope.parentProject && $scope.parentProject._id;
+                $scope.activeProject.ownerId = $scope.owner && $scope.owner._id;
                 $http.post('/adminium/addproject', $scope.activeProject)
                     .then(success, fail);
             }
 
             function update()  {
                 $scope.activeProject.parentProjectId = $scope.parentProject && $scope.parentProject._id;
+                $scope.activeProject.ownerId = $scope.owner && $scope.owner._id;
                 $http.put('/adminium/updateproject', $scope.activeProject)
                     .then(success, fail);
             }

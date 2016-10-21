@@ -20,12 +20,6 @@ module.exports = (project) => {
     }
 
     return {
-        //rusName: temp.rusName || '',
-        //rusShortDescription: temp.rusShortDescription || '',
-        //rusDescription: temp.rusDescription || '',
-        //engName: temp.engName || '',
-        //engShortDescription: temp.engShortDescription || '',
-        //engDescription: project.engDescription || '',
         name: project.name,
         shortDescription: project.shortDescription,
         longDescription: project.longDescription,
@@ -33,6 +27,7 @@ module.exports = (project) => {
         videoUrl: temp.videoUrl || '',
         videoName: temp.videoName || '',
         parentProjectId: temp.parentProjectId || '',
+        ownerId: temp.ownerId || '',
 
         pictures: temp.pictures || [],
 

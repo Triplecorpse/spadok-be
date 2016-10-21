@@ -1,4 +1,9 @@
 module.exports = (data, permissions) => {
+
+    if ((permissions.login !== 'admin') && (data.login === 'admin')) {
+        return data;
+    }
+
     for (let key in data) {
 
         if (data.hasOwnProperty(key)) {
@@ -15,6 +20,19 @@ module.exports = (data, permissions) => {
                     }
                 }
             }
+        }
+    }
+
+    if (data.contacts) {
+        if (typeof data.contacts.phones === 'object') {
+            data.contacts.phones = data.contacts.phones.filter((element) => {
+                return element;
+            });
+        }
+        if (typeof data.contacts.emails === 'object') {
+            data.contacts.emails = data.contacts.emails.filter((element) => {
+                return element;
+            });
         }
     }
     

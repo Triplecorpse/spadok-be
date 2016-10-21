@@ -1,1 +1,1 @@
-<div class=""></div>
+<input type="text" class="form-control" placeholder="{{options.placeholder + ' ' + ($index + 1)}}" ng-model="element" ng-change="addRow($index, element)" ng-disabled="options.isDisabled" ng-repeat="element in model track by $index">

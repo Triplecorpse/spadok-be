@@ -14,6 +14,7 @@ function appController($scope, viewService, dataService, $http) {
                 vm.canLogin = false;
                 viewService.state = 'projects';
                 dataService.currentUser = response.data;
+                vm.currentUser = dataService.currentUser;
                 dataService.init()
                     .finally(() => {
                         vm.isDataLoaded = true;
