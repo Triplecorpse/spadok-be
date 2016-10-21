@@ -22,6 +22,19 @@ var routerController = (app) => {
         }
     });
 
+    app.get('/api/getall', (req, res) => {
+        Promise.all([dbGetters.getPage(),
+            dbGetters.getPartners({ isPublished: true }),
+            dbGetters.getProjects({ isPublished: true }),
+            dbGetters.getReviews({ isPublished: true }),
+            dbGetters.getUsers({ isInTeam: true })])
+            .then((response) => {
+                res.json(response)
+            }, (reason) => {
+                res.json(reason)
+            });
+    });
+
     app.put('/adminium/setpage', (req, res) => {
         if(req.session.isLoggedIn) {
             var pageData = parsePage(req.body);
