@@ -1,10 +1,11 @@
 var routerReviewController = (app) => {
     const review = require('./models/review');
     const parseReview = require('./services/parseReview');
+    const isConnectionAllowed = require('./services/checkOriginService');
 
     //TODO: remove mongoose promises
     app.post('/api/addreview', function (req, res) {
-        if(req.session.isApiAvailable){
+        if (isConnectionAllowed(req)) {
             var newReview = new review(parseReview(req.body));
             console.log(newReview);
             newReview.save((err, review) => {
@@ -14,7 +15,6 @@ var routerReviewController = (app) => {
                     res.json(review);
                 }
             })
-
         } else {
             res.sendStatus(401);
         }

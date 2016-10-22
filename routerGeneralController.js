@@ -79,14 +79,6 @@ var routerController = (app) => {
         res.end('1');
     });
 
-    //app.get('/*', function (req, res) {
-    //    req.session.isApiAvailable = true;
-    //    res
-    //    fs.readFile('./static/dist/index.html', 'UTF8', (err, data) => {
-    //        if (err) throw err;
-    //        res.send(data);
-    //    })
-    //});
 };
 
 module.exports = routerController;

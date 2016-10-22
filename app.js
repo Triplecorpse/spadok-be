@@ -36,6 +36,6 @@ routerImagesController(app);
 routerReviewController(app);
 routerPartnerController(app);
 
-app.listen(env.NODE_PORT || 3000, env.NODE_IP || 'localhost', () => {
+app.listen(env.NODE_PORT || 8000, env.NODE_IP || 'localhost', () => {
   console.log(`Application worker ${process.pid} started...`);
 });

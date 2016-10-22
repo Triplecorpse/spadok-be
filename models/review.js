@@ -3,7 +3,7 @@ var ReviewSchema   = new mongoose.Schema({
     name: String,
     occupation: String,
     email: String,
-    review: String,
+    message: String,
     isPublished: Boolean
 });
 
