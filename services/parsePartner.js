@@ -7,36 +7,40 @@ module.exports = (data) => {
 
             if (Array.isArray(data[key])) {
                 // Remove empty achievements
-                data[key] = data[key].filter((element) => {
+                data[key] = data[key].filter((achievement) => {
+                    console.log(achievement);
                     let isAchievementEmpty = true;
-                    for (let i in element) {
-                        if (element.hasOwnProperty(i) && element[i] != "") {
+                    for (let lang in achievement) {
+                        console.log('    ', lang);
+                        if (achievement.hasOwnProperty(lang) && achievement[lang] !== "") {
                             isAchievementEmpty = false;
                         }
                     }
                     return !isAchievementEmpty;
                 });
 
+
                 // escape all tags except a
                 data[key] = data[key].map((element) => {
                     for (let i in element) {
                         if (element.hasOwnProperty(i)) {
 
-                            let aTag = "";
-                            //store link in variable
-                            if (element[i].match(/<a href[^\>]*>/)) {
-                                aTag = element[i].match(/<a href[^\>]*>/)[0];
+                            for (let lang in element[i]) {
+                                let aTag = "";
+                                //store link in variable
+                                if (element[i][lang].match(/<a href[^\>]*>/)) {
+                                    aTag = element[i][lang].match(/<a href[^\>]*>/)[0];
+                                }
+
+                                // replace a tags with mocks
+                                element[i][lang] = element[i][lang].replace(/<a href[^\>]*>/, '||aTag||');
+
+                                // remove unsupported tags
+                                element[i][lang] = element[i][lang].replace(/(>)/g, '&gt;').replace(/(<)/g, '&lt;');
+
+                                // replace mocks with real a tags
+                                element[i][lang] = element[i][lang].replace('||aTag||', aTag).replace('&lt;/a&gt;', '</a>');
                             }
-
-                            // replace a tags with mocks
-                            element[i] = element[i].replace(/<a href[^\>]*>/, '||aTag||');
-
-                            // remove unsupported tags
-                            element[i] = element[i].replace(/(>)/g, '&gt;').replace(/(<)/g, '&lt;');
-
-                            // replace mocks with real a tags
-                            element[i] = element[i].replace('||aTag||', aTag).replace('&lt;/a&gt;', '</a>');
-
                         }
                     }
                     return element
