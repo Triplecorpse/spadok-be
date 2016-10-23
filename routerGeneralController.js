@@ -23,12 +23,22 @@ var routerController = (app) => {
     });
 
     app.get('/api/getall', (req, res) => {
-        Promise.all([dbGetters.getPage(),
+        Promise.all([
+            dbGetters.getPage(),
             dbGetters.getPartners({ isPublished: true }),
             dbGetters.getProjects({ isPublished: true }),
             dbGetters.getReviews({ isPublished: true }),
-            dbGetters.getUsers({ isInTeam: true })])
+            dbGetters.getUsers({ login: { $ne: 'admin' } })
+        ])
             .then((response) => {
+                response[4].forEach((element) => {
+                    element.password = undefined;
+                    element.login = undefined;
+                    element.canHandlePageData = undefined;
+                    element.canHandleProjects = undefined;
+                    element.canHandleUsers = undefined;
+                    element.canHandleReviews = undefined;
+                });
                 res.json(response)
             }, (reason) => {
                 res.json(reason)
