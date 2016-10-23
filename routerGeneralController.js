@@ -7,12 +7,17 @@ var routerController = (app) => {
 
     app.get('/adminium/getall', (req, res) => {
         if (req.session.isLoggedIn) {
-            Promise.all([dbGetters.getPage(),
+            Promise.all([
+                dbGetters.getPage(),
                 dbGetters.getPartners(),
                 dbGetters.getProjects(),
                 dbGetters.getReviews(),
-                dbGetters.getUsers()])
+                dbGetters.getUsers()
+            ])
                 .then((response) => {
+                    response[4].forEach((element) => {
+                        element.password = undefined;
+                    });
                     res.json(response)
                 }, (response) => {
                     res.json(response)
