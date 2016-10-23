@@ -28,16 +28,15 @@
                 removeAfterUpload: true
             });
 
-            $scope.$watch(() => $scope.activeUser.isInTeam, newVal => {
-                $scope.phoneArrayBuilderOptions = {
-                    isDisabled: !newVal,
-                    placeholder: 'Телефон'
-                }
-                $scope.emailArrayBuilderOptions = {
-                    isDisabled: !newVal,
-                    placeholder: 'Email'
-                }
-            })
+            //$scope.$watch(() => $scope.activeUser.isInTeam, newVal => {
+            $scope.phoneArrayBuilderOptions = {
+                placeholder: 'Телефон'
+            }
+                //$scope.emailArrayBuilderOptions = {
+                //    isDisabled: !newVal,
+                //    placeholder: 'Email'
+                //}
+            //})
 
             $scope.$watch(() => $scope.activeUser.contacts, (newVal) => {
                 console.log(newVal);

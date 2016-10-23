@@ -11,10 +11,10 @@
                 <label for="user-login">Логин</label>
                 <input type="text" class="form-control" id="user-login" placeholder="Login" ng-model="activeUser.login" autocomplete="off" ng-disabled="view === 'edit'" required>
             </div>
-            <!--<div class="form-group">
+            <div class="form-group">
                 <label for="user-email">Email</label>
                 <input type="email" class="form-control" id="user-email" placeholder="Email" ng-model="activeUser.email" autocomplete="off" ng-disabled="(activeUser.login === 'admin') && (loggedUser.login !== 'admin')">
-            </div>-->
+            </div>
             <div class="form-group">
                 <label for="user-password">Пароль</label>
                 <input type="password" class="form-control" id="user-password" placeholder="Password" ng-model="activeUser.password" autocomplete="off" required ng-disabled="(activeUser.login === 'admin') && (loggedUser.login !== 'admin')">
@@ -78,7 +78,8 @@
         <div class="col-md-12">
             <div class="checkbox">
                 <label>
-                    <input type="checkbox" ng-model="activeUser.isInTeam" ng-disabled="activeUser.login === 'admin' || (!loggedUser.isInTeam && !loggedUser.login === 'admin')"> <strong>выводить на страницах сайта</strong>
+                    <input type="checkbox" ng-model="activeUser.isInTeam" ng-disabled="activeUser.login === 'admin' || (!loggedUser.isInTeam && !loggedUser.login === 'admin')"> <strong>выводить в списке команды</strong>
+                    <p class="help-block">Даная опция не влияет на отображение пользователя, как ответственного лица, на странице проекта</p>
                 </label>
             </div>
         </div>
@@ -108,14 +109,14 @@
                 <spda-array-builder model="activeUser.contacts.phones" options="phoneArrayBuilderOptions"></spda-array-builder>
             </div>
         </div>
-        <div class="col-md-2">
+        <!--<div class="col-md-2">
             <label>Email-ы</label>
         </div>
         <div class="col-md-10">
             <div class="form-group">
                 <spda-array-builder model="activeUser.contacts.emails" options="emailArrayBuilderOptions"></spda-array-builder>
             </div>
-        </div>
+        </div>-->
         <div class="col-md-2">
             <label>Facebook</label>
         </div>
