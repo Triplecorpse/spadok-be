@@ -18,7 +18,7 @@
                 <!--<li ng-class="{active: app.isActive('files')}" ng-click="app.setActive('files')"><a href="#">Files</a></li>-->
                 <li ng-class="{active: app.isActive('partners')}" ng-click="app.setActive('partners')"><a href="#">Partners</a></li>
                 <li ng-class="{active: app.isActive('page')}" ng-click="app.setActive('page')"><a href="#">Page Setup</a></li>
-                <li ng-class="{active: app.isActive('users')}" ng-click="app.setActive('users')"><a href="#">Users</a></li>
+                <li ng-class="{active: app.isActive('users')}" ng-click="app.setActive('users')" ng-if="app.currentUser.login === 'admin'"><a href="#">Users</a></li>
             </ul>
         <ul class="nav navbar-nav navbar-right">
             <li><a>Welcome, {{app.currentUser.login}}</a></li>
