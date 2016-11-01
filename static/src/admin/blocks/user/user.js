@@ -46,12 +46,12 @@
                 if(newVal) {
                     $scope.activeUser = angular.copy(newVal);
                     if ($scope.activeUser.contacts) {
-                        $scope.activeUser.contacts.emails = $scope.activeUser.contacts.emails || [''];
+                        //$scope.activeUser.contacts.emails = $scope.activeUser.contacts.emails || [''];
                         $scope.activeUser.contacts.phones = $scope.activeUser.contacts.phones || [''];
                     } else {
                         $scope.activeUser.contacts = {
                             phones: [''],
-                            emails: ['']
+                            //emails: ['']
                         };
                     }
                 } else {
@@ -60,7 +60,7 @@
                         position: {},
                         contacts: {
                             phones: [''],
-                            emails: ['']
+                            //emails: ['']
                         }
                     };
                 }

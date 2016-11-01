@@ -13,6 +13,7 @@ const routerProjectController = require('./routerProjectController.js');
 const routerImagesController = require('./routerImagesController.js');
 const routerReviewController = require('./routerReviewController.js');
 const routerPartnerController = require('./routerPartnerController.js');
+const routerEmailController = require('./routerEmailController.js');
 const mongoConnectUrl = env.OPENSHIFT_MONGODB_DB_URL || env.MONGODB_URI || local
 
 console.log(mongoConnectUrl);
@@ -35,6 +36,7 @@ routerGeneralController(app);
 routerImagesController(app);
 routerReviewController(app);
 routerPartnerController(app);
+routerEmailController(app);
 
 app.listen(env.NODE_PORT || 8000, env.NODE_IP || 'localhost', () => {
   console.log(`Application worker ${process.pid} started...`);

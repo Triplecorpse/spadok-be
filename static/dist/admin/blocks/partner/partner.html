@@ -67,7 +67,7 @@
         <div class="col-md-12">
             <div class="form-group" ng-repeat="achievement in activePartner.achievements track by $index">
                 <div class="col-md-12">
-                    <input type="text" class="form-control" placeholder="Achievement" ng-model="achievement[activeLanguage.code]" ng-change="updateAchievement($index, achievement[activeLanguage.code], 'ru')" ng-blur="translate(achievement, $index)">
+                    <input type="text" class="form-control" placeholder="Achievement" ng-model="achievement[activeLanguage.code]" ng-change="updateAchievement($index, achievement[activeLanguage.code], activeLanguage.code)">
                 </div>
             </div>
         </div>

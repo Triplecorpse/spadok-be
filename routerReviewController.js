@@ -1,6 +1,6 @@
 var routerReviewController = (app) => {
     const review = require('./models/review');
-    const parseReview = require('./services/parseReview');
+    const parseReview = require('./services/parseDataObjectService');
     const isConnectionAllowed = require('./services/checkOriginService');
 
     //TODO: remove mongoose promises

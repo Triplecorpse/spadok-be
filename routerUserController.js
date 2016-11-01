@@ -4,8 +4,15 @@ var routerLoginController = (app) => {
     const env = process.env;
     const local = 'mongodb://localhost/spadok';
     const user = require('./models/user');
-    const parseUser = require('./services/parseUser');
+    const parseUser = require('./services/parseDataObjectService');
     const MongoStore = require('connect-mongo')(session);
+    const jwt = require('jsonwebtoken');
+    const userService = require('./services/userService');
+    const crypt = require('./services/cryptoStringService.js');
+    let parseUserOptions = {
+        encryptArray: 'phones',
+        permissions: {}
+    }
 
     var newSession = session({
         secret: 'spadokproject',
@@ -27,6 +34,57 @@ var routerLoginController = (app) => {
         fs.readFile('./static/dist/admin/index.html', 'UTF8', (err, data) => {
             if (err) throw err;
             res.send(data);
+        });
+    });
+
+    app.post('/api2/adminium/init', (req, res) => {
+
+        function success(data) {
+            jwt.sign(data, 'spadokfoundation', { expiresIn: '1d' }, function (err, token) {
+                if (err) {
+                    res.status(500).json(err)
+                } else {
+                    data.password = undefined;
+                    res.json({ t: token, u: data });
+                }
+            });
+        }
+
+        function error(err) {
+            if (err) {
+                res.status(500).json(err);
+            } else {
+                res.sendStatus(401);
+            }
+        }
+
+        userService.findAndHandle(req.body, null, error, success);
+    });
+
+    app.post('/api2/adminium/verify', (req, res) => {
+
+        function success(data) {
+            //do some stuff
+            
+            data.password = undefined;
+            res.json(data);
+        }
+
+        function error(err) {
+            if (err) {
+                res.status(500).json(err);
+            } else {
+                res.sendStatus(401);
+            }
+        }
+
+        jwt.verify(req.body.token, 'spadokfoundation', function (err, payload) {
+            if (err) {
+                res.status(500).json(err)
+            } else {
+                console.log(payload._doc)
+                userService.findAndHandle(payload._doc, null, error, success);
+            }
         });
     });
 
@@ -75,7 +133,8 @@ var routerLoginController = (app) => {
         }
 
         function success(user) {
-            if (req.body.password === user.password) {
+            let passHash = crypt.hash(req.body.password);
+            if (passHash === user.password) {
                 user.password = undefined;
                 req.session.isLoggedIn = true;
                 req.session.canHandleUsers = user.canHandleUsers;
@@ -98,7 +157,8 @@ var routerLoginController = (app) => {
 
     app.post('/adminium/adduser', function (req, res) {
         if (req.session.isLoggedIn && req.session.canHandleUsers) {
-            var parsedUser = parseUser(req.body, req.session);
+            parseUserOptions.permissions = req.session;
+            var parsedUser = parseUser(req.body, parseUserOptions);
             user.findOne({$or: [{login: parsedUser.login}, {email: parsedUser.email}]}, (err, foundUser) => {
                 if(err) {
                     res.sendStatus(500)
@@ -141,7 +201,8 @@ var routerLoginController = (app) => {
     app.put('/adminium/updateuser', (req, res) => {
         if (req.session.isLoggedIn && req.session.canHandleUsers) {
             let id = req.body._id;
-            let updatedUser = parseUser(req.body, req.session);
+            parseUserOptions.permissions = req.session;
+            let updatedUser = parseUser(req.body, parseUserOptions);
             user.findByIdAndUpdate(id, updatedUser, (err, user) => {
                 if (err) {
                     res.status(500).json({up: updatedUser, e: err});
@@ -175,9 +236,9 @@ var routerLoginController = (app) => {
             if (!data.length) {
                 let newUser = new user({
                     login: 'admin',
-                    email: 'eldar.khaitov@gmail.com',
+                    email: crypt.encrypt('eldar.khaitov@gmail.com'),
                     dateRegistered: new Date(),
-                    password: 'admin',
+                    password: crypt.hash('admin'),
                     canHandleProjects: true,
                     canHandleUsers: true,
                     canHandlePageData: true,
